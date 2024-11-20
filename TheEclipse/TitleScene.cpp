@@ -7,6 +7,10 @@
 #include "Enemy.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "RectTransform.h"
+#include "Canvas.h"
+#include "Image.h"
+#include "Button.h"
 void TitleScene::Init()
 {
 	Object* pObj = new Enemy;
@@ -14,6 +18,21 @@ void TitleScene::Init()
 	pObj->SetSize({ 100.f,100.f });
 	pObj->SetName(L"Enemy");
 	AddObject(pObj, LAYER::ENEMY);
+
+	// 캔버스 만들어보리기...
+	Object* canvasObj = new Canvas;
+	canvasObj->SetName(L"Canvas");
+	AddObject(canvasObj, LAYER::UI);
+	Canvas* canvas = dynamic_cast<Canvas*>(canvasObj);
+	RectTransform* testUI_1 = new RectTransform();
+
+	testUI_1->SetSize({ 500, 300 });
+	testUI_1->SetPos({ 500, 300 });
+	testUI_1->AddComponent<Image>();
+	testUI_1->AddComponent<Button>();
+	canvas->AddRectPanel(testUI_1);
+
+	canvas->Initialize();
 
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });

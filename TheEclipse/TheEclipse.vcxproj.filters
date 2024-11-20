@@ -35,11 +35,11 @@
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UISystem">
+      <UniqueIdentifier>{f640a749-2651-4fa5-8edb-82e75830e8a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2024_winapigamep_framework_22.h">
-      <Filter>Default</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Default</Filter>
     </ClInclude>
@@ -127,9 +127,28 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="TheEclipse.h" />
+    <ClInclude Include="Canvas.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasComponent.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="RectTransform.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="TextPro.h">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="2024_winapigamep_framework_22.rc">
+    <ResourceCompile Include="TheEclipse.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -137,7 +156,7 @@
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="2024_winapigamep_framework_22.ico">
+    <Image Include="TheEclipse.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -210,6 +229,24 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasComponent.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="RectTransform.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TextPro.cpp">
+      <Filter>Engine\03. Object\UISystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
