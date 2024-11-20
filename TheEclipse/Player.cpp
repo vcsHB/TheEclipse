@@ -36,12 +36,29 @@ void Player::Update()
 	Vec2 vPos = GetPos();
 	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
+	{
 		vPos.x -= 100.f * fDT;
+		m_currentPos.x -= 100.f * fDT;
+	}
 	if (GET_KEY(KEY_TYPE::D))
+	{
 		vPos.x += 100.f * fDT;
+		m_currentPos.x += 100.f * fDT;
+	}
+	if (GET_KEY(KEY_TYPE::W))
+	{
+		vPos.y -= 100.f * fDT;
+		m_currentPos.y -= 100.f * fDT;
+	}
+	if (GET_KEY(KEY_TYPE::S))
+	{
+		vPos.y += 100.f * fDT;
+		m_currentPos.y += 100.f * fDT;
+	}
+
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		CreateProjectile();
-	SetPos(vPos);
+	SetWindowPos(m_hWnd, HWND_TOP, m_currentPos.x, m_currentPos.y, 500, 700, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
 }
 
 void Player::Render(HDC _hdc)
@@ -77,13 +94,13 @@ void Player::CreateProjectile()
 	Vec2 vPos = GetPos();
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
-	pProj->SetSize({30.f,30.f});
+	pProj->SetSize({ 30.f,30.f });
 	// 도 -> 라디안: PI / 180
 	//pProj->SetAngle(PI / 4 * 7.f); // 1
 	//static float angle = 0.f;
 	//pProj->SetAngle(angle * PI / 180); // 2
 	//angle += 10.f;
-	pProj->SetDir({0.f, -1.f});
+	pProj->SetDir({ 0.f, -1.f });
 	pProj->SetName(L"PlayerBullet");
 	//Vec2 a = { 10.f, 10.f };
 	//Vec2 b = { 0.f, 0.f };

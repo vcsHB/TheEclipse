@@ -25,5 +25,6 @@ private:
 	//Object m_obj;
 	//Object* m_pObj;
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+
 };
 

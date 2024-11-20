@@ -37,9 +37,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2024_winapigamep_framework_22.h">
-      <Filter>Default</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Default</Filter>
     </ClInclude>
@@ -127,9 +124,10 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="TheEclipse.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="2024_winapigamep_framework_22.rc">
+    <ResourceCompile Include="TheEclipse.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -137,7 +135,7 @@
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="2024_winapigamep_framework_22.ico">
+    <Image Include="TheEclipse.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
