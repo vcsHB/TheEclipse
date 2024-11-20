@@ -48,6 +48,8 @@ public:
 		}
 		return component;
 	}
+public : 
+	Vec2 m_currentPos = { 0,0 };
 private:
 	//POINT m_ptPos;
 	//POINT m_ptSize;
