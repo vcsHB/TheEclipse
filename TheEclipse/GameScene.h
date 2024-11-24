@@ -1,11 +1,20 @@
 #pragma once
 #include "Scene.h"
 class GameScene :
-    public Scene
+	public Scene
 {
 public:
-    // Scene을(를) 통해 상속됨
-    virtual void Init() override;
-    virtual void Update() override;
+	// Scene을(를) 통해 상속됨
+	virtual void Init() override;
+	virtual void Update() override;
+
+public:
+	Vec2 m_WorldPosition = { 0.f, 0.f };
+	///Vec2 m_WorldPosition =//WorldPos
+	//{ GetSystemMetrics(SM_CXSCREEN) / 2 - SCREEN_WIDTH / 2
+	//, GetSystemMetrics(SM_CYSCREEN) / 2 - SCREEN_HEIGHT / 2 };
+	Vec2 m_deltaPos;
+	float m_moveSpeed = 100.f;
+
 };
 
