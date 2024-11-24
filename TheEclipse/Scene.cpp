@@ -27,26 +27,28 @@ void Scene::Update()
 	{
 		for (size_t j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			if (!m_vecObj[i][j]->GetIsDead())
+			if (m_vecObj[i][j] != nullptr && !m_vecObj[i][j]->IsActive())
 				m_vecObj[i][j]->Update();
 		}
 	}
-	
+
 }
 
 void Scene::LateUpdate()
 {
 	for (size_t i = 0; i < (UINT)LAYER::END; i++)
 	{
+
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			m_vecObj[i][j]->LateUpdate();
+			if (m_vecObj[i][j] != nullptr && !m_vecObj[i][j]->IsActive())
+				m_vecObj[i][j]->LateUpdate();
 		}
 	}
 }
 
 void Scene::Render(HDC _hdc)
-{ 
+{
 	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)
 	//{
 	//	for (size_t j = 0; j < m_vecObj[i].size(); ++j)
@@ -59,7 +61,7 @@ void Scene::Render(HDC _hdc)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size();)
 		{
-			if (!m_vecObj[i][j]->GetIsDead())
+			if (m_vecObj[i][j] != nullptr && !m_vecObj[i][j]->IsActive())
 				m_vecObj[i][j++]->Render(_hdc);
 			else
 				m_vecObj[i].erase(m_vecObj[i].begin() + j);

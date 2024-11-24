@@ -1,13 +1,14 @@
 #include "pch.h"
 #include "EventManager.h"
 #include "Object.h"
+#include "HealthComponent.h"
 void EventManager::Update()
 {
 	// 이전 프레임에서 등록해둔 
 	for (Object* obj : m_vecDead)
 	{
 		if (obj != nullptr)
-			delete obj;
+ 			delete obj;
 	}
 	m_vecDead.clear();
 
@@ -18,6 +19,7 @@ void EventManager::Update()
 
 void EventManager::DeleteObject(Object* _pObj)
 {
+
 	tEvent eve = {};
 	eve.eveType = EVENT_TYPE::DELETE_OBJECT;
 	eve.obj = _pObj;
@@ -35,7 +37,7 @@ void EventManager::Excute(const tEvent& _eve)
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
 		Object* pDeadObj = _eve.obj;
-		pDeadObj->SetDead();
+		//pDeadObj-> SetDead();
 		m_vecDead.push_back(pDeadObj);
 	}
 	break;

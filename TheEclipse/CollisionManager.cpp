@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Collider.h"
+#include "HealthComponent.h"
 void CollisionManager::Update()
 {
 	for (UINT Row = 0; Row < (UINT)LAYER::END; ++Row)
@@ -66,13 +67,16 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 			continue;
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{
+
 			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
+			HealthComponent* pRightHealth = vecRightLayer[j]->GetComponent<HealthComponent>();
+
 			// 충돌체가 없거나, 자기자신과의 충돌인 경우
 			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j])
 				continue;
 
 			COLLIDER_ID colliderID; // 두 충돌체로만 만들 수 있는 ID
- 			colliderID.left_ID = pLeftCollider->GetID();
+			colliderID.left_ID = pLeftCollider->GetID();
 			colliderID.right_ID = pRightCollider->GetID();
 
 			iter = m_mapCollisionInfo.find(colliderID.ID);
@@ -85,12 +89,14 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				iter = m_mapCollisionInfo.find(colliderID.ID);
 			}
 
-			if (IsCollision(pLeftCollider, pRightCollider))
+			Object* leftOwner = pLeftCollider->GetOwner();
+			Object* rightOwner = pRightCollider->GetOwner();
+			if (IsCollision(pLeftCollider, pRightCollider) && leftOwner != nullptr && rightOwner != nullptr)
 			{
 				// 이전에도 충돌중
 				if (iter->second)
 				{
-					if (vecLeftLayer[i]->GetIsDead() || vecRightLayer[j]->GetIsDead())
+					if (leftOwner->IsActive() && rightOwner->IsActive())
 					{
 						pLeftCollider->ExitCollision(pRightCollider);
 						pRightCollider->ExitCollision(pLeftCollider);
@@ -104,7 +110,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				}
 				else // 이전에 충돌 x
 				{
-					if (!vecLeftLayer[i]->GetIsDead() && !vecRightLayer[j]->GetIsDead())
+					if (!leftOwner->IsActive() && !rightOwner->IsActive())
 					{
 						pLeftCollider->EnterCollision(pRightCollider);
 						pRightCollider->EnterCollision(pLeftCollider);

@@ -3,10 +3,10 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "Component.h"
+#include "HealthComponent.h"
 Object::Object()
 	: m_vPos{}
 	, m_vSize{}
-	, m_IsDie(false)
 {
 }
 
@@ -53,6 +53,7 @@ void Object::StayCollision(Collider* _other)
 void Object::ExitCollision(Collider* _other)
 {
 }
+
 
 //void Object::Update()
 //{
