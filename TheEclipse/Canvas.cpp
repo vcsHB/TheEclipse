@@ -51,8 +51,6 @@ void Canvas::Render(HDC _hdc)
 }
 
 
-
-
 RectTransform Canvas::GetUIInPosition(Vec2 position)
 {
 
@@ -60,12 +58,12 @@ RectTransform Canvas::GetUIInPosition(Vec2 position)
 	for (RectTransform* ui : _uiList)
 	{
 		RECT rect = ui->GetRect();
+		
 		if (position.x < rect.right && position.x > rect.left && position.y > rect.top && position.y < rect.bottom)
 		{ // RECT안의 점 조건
 			Button* button = ui->GetComponent<Button>();
 			if (button == nullptr)
 				continue;
-
 			button->OnClick();
 		}
 	}

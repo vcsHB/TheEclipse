@@ -24,7 +24,7 @@ void RectTransform::Initialize()
 		if (com != nullptr)
 			com->Initialize();
 	}
-
+	  
 }
 
 void RectTransform::Update()

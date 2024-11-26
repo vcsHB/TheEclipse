@@ -29,6 +29,7 @@ void TitleScene::Init()
 	testUI_1->SetSize({ 500, 300 });
 	testUI_1->SetPos({ 500, 300 });
 	testUI_1->AddComponent<Image>();
+	testUI_1->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"test_Panel", L"Texture\\test_Panel.bmp"));
 	testUI_1->AddComponent<Button>();
 	canvas->AddRectPanel(testUI_1);
 
