@@ -8,6 +8,13 @@ struct tAnimFrame
 	float fDuration;
 	Vec2 vOffset;
 };
+
+struct Sprite
+{
+	Texture* texture;
+	Vec2 offset;
+	Vec2 sliceSize;
+};
 class Animation
 {
 public:
@@ -27,6 +34,10 @@ public:
 	void SetFrameOffset(int _index, Vec2 _offset) { m_vecAnimFrame[_index].vOffset = _offset; }
 	const UINT GetCurFrame() const { return m_CurFrame; }
 	const size_t& GetMaxFrame() { return m_vecAnimFrame.size(); }
+	const Sprite GetCurrentSprite() 
+	{ 	
+		return {m_pTex, m_vecAnimFrame[m_CurFrame].vOffset , m_vecAnimFrame[m_CurFrame].vSlice };
+	}
 private:
 	UINT   m_CurFrame; // 현재 프레임
 	float  m_fAccTime; // 누적 시간

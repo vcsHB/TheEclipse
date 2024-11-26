@@ -3,6 +3,7 @@
 class Texture;
 class Animation;
 class Object;
+class Renderer;
 class Animator : public Component
 {
 public:
@@ -30,6 +31,7 @@ public:
 private:
 	map<wstring, Animation*> m_mapAnimations;
 	Animation* m_pCurrentAnimation;
+	Renderer* m_renderer;
 	bool	m_IsRepeat;
 	int		m_repeatcnt;
 };

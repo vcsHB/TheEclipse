@@ -11,7 +11,7 @@ public:
 public:
 	void SetOwner(Object* _owner) { m_pOwner = _owner; }
 	Object* GetOwner() const { return m_pOwner; }
-private:
+protected:
 	Object* m_pOwner;
 };
 
