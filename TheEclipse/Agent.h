@@ -8,9 +8,9 @@ class Agent :
 public:
 	virtual void Movement();
 	virtual void Shooting();
-private:
+public:
 	void CreateProjectile(Vec2 dir, GameScene* scene);
-	GameScene* currentscene;
+	GameScene* currentScene;
 	Texture* m_pTex;
 	HealthComponent* healthComponent;
 };

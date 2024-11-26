@@ -250,5 +250,6 @@
       <Filter>Engine\03. Object\UISystem</Filter>
     </ClCompile>
     <ClCompile Include="Delegate.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
   </ItemGroup>
 </Project>

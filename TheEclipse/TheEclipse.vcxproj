@@ -217,6 +217,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />

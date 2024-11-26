@@ -2,10 +2,10 @@
 #include "Enemy.h"
 #include "Collider.h"
 #include "EventManager.h"
-#include "HealthComponent.h"
 #include "SceneManager.h"
 #include "GameScene.h"
 #include "TimeManager.h"
+#include "HealthComponent.h"
 
 Enemy::Enemy(GameScene* scene)
 {
@@ -13,6 +13,7 @@ Enemy::Enemy(GameScene* scene)
 	this->AddComponent<HealthComponent>();
 	healthComponent = GetComponent<HealthComponent>();
 	currentScene = scene;
+
 }
 
 Enemy::~Enemy()
