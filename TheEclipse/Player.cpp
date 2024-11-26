@@ -76,7 +76,8 @@ void Player::Movement()
 		dirX = 1;
 	}
 
-	if (GET_KEY(KEY_TYPE::A) == false && GET_KEY(KEY_TYPE::D) == false) {
+	if (GET_KEY(KEY_TYPE::A) == false && GET_KEY(KEY_TYPE::D) == false ||
+		GET_KEY(KEY_TYPE::A) == true && GET_KEY(KEY_TYPE::D) == true) {
 		dirX = 0;
 	}
 
@@ -92,7 +93,8 @@ void Player::Movement()
 		currentScene->m_WorldPosition.y += currentScene->m_moveSpeed * fDT;
 		dirY = 1;
 	}
-	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false) {
+	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false||
+		GET_KEY(KEY_TYPE::W) == true&& GET_KEY(KEY_TYPE::S) == true) {
 		dirY = 0;
 	}
 

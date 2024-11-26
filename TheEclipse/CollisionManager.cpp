@@ -4,7 +4,6 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Collider.h"
-#include "HealthComponent.h"
 void CollisionManager::Update()
 {
 	for (UINT Row = 0; Row < (UINT)LAYER::END; ++Row)
@@ -67,10 +66,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 			continue;
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{
-
 			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
-			HealthComponent* pRightHealth = vecRightLayer[j]->GetComponent<HealthComponent>();
-
 			// 충돌체가 없거나, 자기자신과의 충돌인 경우
 			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j])
 				continue;
@@ -89,14 +85,12 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				iter = m_mapCollisionInfo.find(colliderID.ID);
 			}
 
-			Object* leftOwner = pLeftCollider->GetOwner();
-			Object* rightOwner = pRightCollider->GetOwner();
-			if (IsCollision(pLeftCollider, pRightCollider) && leftOwner != nullptr && rightOwner != nullptr)
+			if (IsCollision(pLeftCollider, pRightCollider))
 			{
 				// 이전에도 충돌중
 				if (iter->second)
 				{
-					if (leftOwner->IsActive() && rightOwner->IsActive())
+					if (vecLeftLayer[i]->GetIsDead() || vecRightLayer[j]->GetIsDead())
 					{
 						pLeftCollider->ExitCollision(pRightCollider);
 						pRightCollider->ExitCollision(pLeftCollider);
@@ -110,7 +104,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				}
 				else // 이전에 충돌 x
 				{
-					if (!leftOwner->IsActive() && !rightOwner->IsActive())
+					if (!vecLeftLayer[i]->GetIsDead() && !vecRightLayer[j]->GetIsDead())
 					{
 						pLeftCollider->EnterCollision(pRightCollider);
 						pRightCollider->EnterCollision(pLeftCollider);
@@ -130,7 +124,6 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 		}
 	}
 }
-
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
 	Vec2 vLeftPos = _left->GetLatedUpatedPos();
@@ -150,3 +143,4 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 
 	return false;*/
 }
+

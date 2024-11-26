@@ -5,7 +5,7 @@
 #include "HealthComponent.h"
 #include "SceneManager.h"
 #include "GameScene.h"
-
+#include "TimeManager.h"
 
 Enemy::Enemy(GameScene* scene)
 {
@@ -18,14 +18,14 @@ Enemy::Enemy(GameScene* scene)
 Enemy::~Enemy()
 {
 
-
 }
 
 void Enemy::Update()
 {
-	Vec2 vPos = originPos;
-	vPos -= currentScene->m_WorldPosition;
-
+	Vec2 vPos = GetPos();
+	vPos.x -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x;
+	vPos.y -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y;
+	
 	Object::SetPos(vPos);
 }
 
@@ -42,15 +42,9 @@ void Enemy::Render(HDC _hdc)
 	//DeleteObject(brush);
 }
 
-void Enemy::SetPos(Vec2 v)
-{
-	Object::SetPos(v);
-	originPos = v;
-}
-
 void Enemy::EnterCollision(Collider* _other)
 {
-	std::cout << "Enter" << std::endl;
+	std::cout << "Enemy Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
 	wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetName() == L"PlayerBullet")
@@ -67,5 +61,5 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	std::cout << "Exit" << std::endl;
+	std::cout << " Enemy Exit" << std::endl;
 }

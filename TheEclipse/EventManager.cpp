@@ -37,7 +37,7 @@ void EventManager::Excute(const tEvent& _eve)
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
 		Object* pDeadObj = _eve.obj;
-		//pDeadObj-> SetDead();
+		pDeadObj->SetDead();
 		m_vecDead.push_back(pDeadObj);
 	}
 	break;

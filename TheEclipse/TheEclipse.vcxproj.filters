@@ -131,6 +131,7 @@
     <ClInclude Include="BackGround.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Agent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -221,5 +222,6 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Agent.cpp" />
   </ItemGroup>
 </Project>

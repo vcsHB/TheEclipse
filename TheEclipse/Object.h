@@ -17,7 +17,8 @@ public:
 	void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
 	const Vec2& GetPos() const { return m_vPos; }
 	const Vec2& GetSize() const { return m_vSize; }
-	const bool& IsActive() const { return m_IsActive; }
+	const bool& GetIsDead() const { return m_IsDie; }
+	void SetDead() { m_IsDie = true; }	
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
@@ -27,6 +28,7 @@ public:
 	const wstring& GetName() const { return m_name; }
 
 private:
+	bool m_IsDie;
 	wstring m_name;
 public:
 	template<typename T>
@@ -54,6 +56,5 @@ private:
 	Vec2 m_vPos = { 0,0 };
 	Vec2 m_vSize;
 	vector<Component*> m_vecComponents;
-	bool m_IsActive;
 };
 

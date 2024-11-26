@@ -48,10 +48,10 @@ void Projectile::Update()
 	//Object::SetPos(vPos);
 
 	Vec2 vSize = GetSize();
-	/*if (SCREEN_WIDTH/2  < -vSize.y)
+	if (SCREEN_WIDTH/2  < -vSize.y)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
-	}*/
+	}
 }
 
 void Projectile::Render(HDC _hdc)
@@ -82,6 +82,7 @@ void Projectile::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Enemy")
 	{
+		std::cout << "Proj Enter" << std::endl;
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }
@@ -92,4 +93,5 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
+	std::cout << "Proj Exit" << std::endl;
 }

@@ -11,17 +11,18 @@ void GameScene::Init()
 	Object* pPlayer = new Player(this);
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
 	pPlayer->SetSize({ 100.f, 100.f });
+	pPlayer->SetName(L"Player");
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Object* pBoss = new Enemy(this);
-	pBoss->GetComponent<HealthComponent>()->SetHp(10);
+	pBoss->SetName(L"Enemy");
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	AddObject(pBoss, LAYER::ENEMY);
 
 
 	//Object* backGround = new 
-	
+
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 }
 
