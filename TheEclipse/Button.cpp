@@ -11,5 +11,6 @@ void Button::Initialize()
 
 void Button::OnClick()
 {
-	_owner->SetPos({ _owner->GetPos().x + 10, _owner->GetPos().y });
+	OnClickEvent.Invoke(true);
+	//_owner->SetPos({ _owner->GetPos().x + 10, _owner->GetPos().y });
 }
