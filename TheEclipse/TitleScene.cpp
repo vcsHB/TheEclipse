@@ -13,10 +13,11 @@
 #include "Button.h"
 void TitleScene::Init()
 {
-	Object* pObj = new Enemy;
+	/*Object* pObj = new Enemy();
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
 	pObj->SetSize({ 100.f,100.f });
 	pObj->SetName(L"Enemy");
+	pObj->GetComponent<HealthComponent>()->SetHp(10);
 	AddObject(pObj, LAYER::ENEMY);
 
 	// 캔버스 만들어보리기...
@@ -43,6 +44,7 @@ void TitleScene::Init()
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	*/
 }
 
 void TitleScene::Update()

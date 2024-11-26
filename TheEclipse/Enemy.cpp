@@ -2,22 +2,35 @@
 #include "Enemy.h"
 #include "Collider.h"
 #include "EventManager.h"
-Enemy::Enemy()
-	: m_hp(5)
+#include "HealthComponent.h"
+#include "SceneManager.h"
+#include "GameScene.h"
+
+
+Enemy::Enemy(GameScene* scene)
 {
 	this->AddComponent<Collider>();
+	this->AddComponent<HealthComponent>();
+	healthComponent = GetComponent<HealthComponent>();
+	currentScene = scene;
 }
 
 Enemy::~Enemy()
 {
+
+
 }
 
 void Enemy::Update()
 {
+	Vec2 vPos = originPos;
+	vPos -= currentScene->m_WorldPosition;
+
+	Object::SetPos(vPos);
 }
 
 void Enemy::Render(HDC _hdc)
-{	
+{
 	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
 	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
 	Vec2 vPos = GetPos();
@@ -29,6 +42,12 @@ void Enemy::Render(HDC _hdc)
 	//DeleteObject(brush);
 }
 
+void Enemy::SetPos(Vec2 v)
+{
+	Object::SetPos(v);
+	originPos = v;
+}
+
 void Enemy::EnterCollision(Collider* _other)
 {
 	std::cout << "Enter" << std::endl;
@@ -36,8 +55,7 @@ void Enemy::EnterCollision(Collider* _other)
 	wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetName() == L"PlayerBullet")
 	{
-		m_hp -= 1;
-		if(m_hp <=0)
+		if (healthComponent->DecreaseHP(1))
 			GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }
