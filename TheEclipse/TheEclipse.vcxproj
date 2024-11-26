@@ -166,6 +166,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
+    <ClInclude Include="Delegate.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="RectTransform.h" />
     <ClInclude Include="TextPro.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />

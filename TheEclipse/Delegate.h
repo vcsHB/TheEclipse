@@ -18,7 +18,7 @@ public:
         }
     }
     // 이런식으로 추가함.
-    //_collider->OnCollisionEvent.Add(std::bind(&EnemyAI::MoveTurn, this, std::placeholders::_1));
+    //_collider->델리게이트.Add(std::bind(&클래스::메서드, this, std::placeholders::_1));
 
 private:
     std::vector<FuncType> functions;
