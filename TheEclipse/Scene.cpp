@@ -83,3 +83,19 @@ void Scene::Release()
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
 }
+
+Object* Scene::FindObjectByName(wstring name)
+{
+	for (size_t i = 0; i < (UINT)LAYER::END; i++)
+	{
+		for (Object* object : m_vecObj[i])
+		{
+			if (object->GetName() == name)
+			{
+				return object;
+			}
+		}
+	}
+	std::wcout << L"Can't Found Object By Name. name:[" << name << L"]";
+	return nullptr;
+}

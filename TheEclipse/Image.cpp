@@ -19,9 +19,9 @@ void Image::Render(HDC hdc)
 	::TransparentBlt(hdc
 		, (int)(ownerPos.x - width / 2)
 		, (int)(ownerPos.y - height / 2)
-		, width, height,
+		, width * _horizontalFillAmount, height * _vertialFillAmount,
 		_texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+		, 0, 0, width * _horizontalFillAmount, height * _vertialFillAmount, RGB(255, 0, 255));
 
 
 
@@ -36,6 +36,7 @@ void Image::SetTexture(Texture* texture)
 {
 	_texture = texture;
 	_owner->SetSize(GetTextureSize());
+	
 }
 
 Vec2 Image::GetTextureSize()

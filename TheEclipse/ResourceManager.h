@@ -29,10 +29,12 @@ public:
 	void Pause(SOUND_CHANNEL _channel, bool _ispause);
 private:
 	tSoundInfo* FindSound(const wstring& _key);
+	HFONT* GetFont(const wstring& key);
 private:
 	wchar_t m_resourcePath[255] = {};
 	map<wstring, Texture*> m_mapTextures;
 	map<wstring, tSoundInfo*> m_mapSounds;
+	map<wstring, HFONT*> _fonts;
 	FMOD::System* m_pSoundSystem; // 사운드 시스템
 	FMOD::Channel* m_pChannel[(UINT)SOUND_CHANNEL::END]; // 오디오 채널
 };
