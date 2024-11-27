@@ -112,14 +112,13 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Movement()
 {
+	auto p = originPos();
 
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		if (originPos().x > 0.f)
-		{
-			currentScene->m_WorldPosition.x -= currentScene->m_moveSpeed * fDT;
+		currentScene->m_WorldPosition.x -= currentScene->m_moveSpeed * fDT;
+		if (currentScene->m_WorldPosition.x > -525.f)
 			dirX = -1;
-		}
 		else
 		{
 			dirX = 0;
@@ -127,11 +126,9 @@ void Player::Movement()
 	}
 	if (GET_KEY(KEY_TYPE::D))
 	{
-		if ()
-		{
-			currentScene->m_WorldPosition.x += currentScene->m_moveSpeed * fDT;
+		currentScene->m_WorldPosition.x += currentScene->m_moveSpeed * fDT;
+		if (currentScene->m_WorldPosition.x < 510.f)
 			dirX = 1;
-		}
 		else
 		{
 			dirX = 0;
@@ -145,15 +142,21 @@ void Player::Movement()
 
 	//A x D x 
 	//dirX = 0;
-	if (GET_KEY(KEY_TYPE::W) )
+	if (GET_KEY(KEY_TYPE::W))
 	{
 		currentScene->m_WorldPosition.y -= currentScene->m_moveSpeed * fDT;
-		dirY = -1;
+		if (currentScene->m_WorldPosition.y > -80.f)
+			dirY = -1;
+		else
+			dirY = 0;
 	}
 	if (GET_KEY(KEY_TYPE::S))
 	{
 		currentScene->m_WorldPosition.y += currentScene->m_moveSpeed * fDT;
-		dirY = 1;
+		if (currentScene->m_WorldPosition.y < 50.f)
+			dirY = 1;
+		else
+			dirY = 0;
 	}
 	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false ||
 		GET_KEY(KEY_TYPE::W) == true && GET_KEY(KEY_TYPE::S) == true) {
@@ -162,9 +165,10 @@ void Player::Movement()
 
 	currentScene->m_deltaPos = { dirX,dirY };
 
-	auto p = originPos();
+	cout << currentScene->m_WorldPosition.y << endl;
 
 	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -525.f, 510.f);
+	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -80.f, 50.f);
 	SetWindowPos(m_hWnd, HWND_TOP,
 		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
 		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
