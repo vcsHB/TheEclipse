@@ -1,11 +1,12 @@
 #pragma once
+#include <string>
 #include <vector>
 
 class CanvasComponent;
 class RectTransform
 {
 public:
-	RectTransform();
+	RectTransform(std::string name);
 	virtual ~RectTransform();
 
 private:
@@ -56,8 +57,9 @@ public:
 	const Vec2& GetPos() const { return _position; }
 	const Vec2& GetSize() const { return _size; }
 	const void SetActive(bool value) { enabled = value; }
+	const std::string GetName() { return _uiName; }
 private:
-
+	std::string _uiName;
 	Vec2 _position;
 	Vec2 _size;
 	RECT _rect;

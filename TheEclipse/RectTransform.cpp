@@ -2,8 +2,9 @@
 #include "RectTransform.h"
 #include "CanvasComponent.h"
 
-RectTransform::RectTransform()
+RectTransform::RectTransform(std::string name)
 {
+	_uiName = name;
 }
 
 RectTransform::~RectTransform()

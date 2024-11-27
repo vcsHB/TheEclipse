@@ -25,17 +25,18 @@ void Image::Render(HDC hdc)
 
 
 
-	PEN_TYPE ePen = PEN_TYPE::GREEN;
+	/*PEN_TYPE ePen = PEN_TYPE::GREEN;
 	GDISelector pen(hdc, ePen);
 	GDISelector brush(hdc, BRUSH_TYPE::HOLLOW);
 	RECT_RENDER(hdc, _owner->GetPos().x, _owner->GetPos().y,
-		_owner->GetSize().x, _owner->GetSize().y);
+		_owner->GetSize().x, _owner->GetSize().y);*/
 }
 
 void Image::SetTexture(Texture* texture)
 {
 	_texture = texture;
 	_owner->SetSize(GetTextureSize());
+	
 }
 
 Vec2 Image::GetTextureSize()

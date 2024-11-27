@@ -51,7 +51,23 @@ void Canvas::Render(HDC _hdc)
 }
 
 
-RectTransform Canvas::GetUIInPosition(Vec2 position)
+RectTransform* Canvas::Find(std::string name)
+{
+	for (RectTransform* panel : _uiList)
+	{
+		if (panel)
+		{
+			if (panel->GetName() == name)
+			{
+				return panel;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+RectTransform* Canvas::GetUIInPosition(Vec2 position)
 {
 
 	// 위치를 입력 받아 그 위치에 해당하는 RectTransform을 반환
@@ -68,5 +84,5 @@ RectTransform Canvas::GetUIInPosition(Vec2 position)
 		}
 	}
 
-	return RectTransform();
+	return nullptr;
 }
