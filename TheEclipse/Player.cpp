@@ -1,28 +1,35 @@
 #include "pch.h"
-#include "Player.h"
 #include "TimeManager.h"
+#include "Player.h"
 #include "InputManager.h"
-#include "Projectile.h"
 #include "SceneManager.h"
-#include "Scene.h"
+#include "Projectile.h"
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
-#include "HealthComponent.h"
+#include "EventManager.h"
+
+
+int dirX = 0;
+int dirY = 0;
 Player::Player(GameScene* scene)
-	: m_pTex(nullptr)
 {
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\planem.bmp";
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
+	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
+	healthComponent = GetComponent<HealthComponent>();
+	healthComponent->SetHp(10);
+	healthComponent->SetOwner(this);
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
@@ -34,21 +41,13 @@ Player::~Player()
 {
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
+
+
 }
 void Player::Update()
 {
 	Movement();
 	Shooting();
-}
-
-void Player::Shooting()
-{
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
-	{
-		Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
-		CreateProjectile(dir, currentScene);
-
-	}
 }
 
 Vec2 originPos() {
@@ -60,52 +59,6 @@ Vec2 originPos() {
 	return { Winposx, Winposy };
 }
 
-int dirX = 0;
-int dirY = 0;
-void Player::Movement()
-{
-
-	if (GET_KEY(KEY_TYPE::A))
-	{
-		currentScene->m_WorldPosition.x -= currentScene->m_moveSpeed * fDT;
-		dirX = -1;
-	}
-	if (GET_KEY(KEY_TYPE::D))
-	{
-		currentScene->m_WorldPosition.x += currentScene->m_moveSpeed * fDT;
-		dirX = 1;
-	}
-
-	if (GET_KEY(KEY_TYPE::A) == false && GET_KEY(KEY_TYPE::D) == false ||
-		GET_KEY(KEY_TYPE::A) == true && GET_KEY(KEY_TYPE::D) == true) {
-		dirX = 0;
-	}
-
-	//A x D x 
-	//dirX = 0;
-	if (GET_KEY(KEY_TYPE::W))
-	{
-		currentScene->m_WorldPosition.y -= currentScene->m_moveSpeed * fDT;
-		dirY = -1;
-	}
-	if (GET_KEY(KEY_TYPE::S))
-	{
-		currentScene->m_WorldPosition.y += currentScene->m_moveSpeed * fDT;
-		dirY = 1;
-	}
-	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false||
-		GET_KEY(KEY_TYPE::W) == true&& GET_KEY(KEY_TYPE::S) == true) {
-		dirY = 0;
-	}
-
-	currentScene->m_deltaPos = { dirX,dirY };
-
-	auto p = originPos();
-	SetWindowPos(m_hWnd, HWND_TOP,
-		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
-		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
-
-}
 
 void Player::Render(HDC _hdc)
 {
@@ -136,8 +89,17 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	HealthComponent* com;
-
+	std::cout << "Enemy Enter" << std::endl;
+	Object* pOtherObj = _other->GetOwner();
+	wstring str = pOtherObj->GetName();
+	if (pOtherObj->GetName() == L"EnemyBullet")
+	{
+		if (healthComponent->DecreaseHP(1))
+		{
+			currentScene->m_moveSpeed;
+			GET_SINGLE(EventManager)->DeleteObject(this);
+		}
+	}
 }
 
 void Player::StayCollision(Collider* _other)
@@ -146,6 +108,75 @@ void Player::StayCollision(Collider* _other)
 
 void Player::ExitCollision(Collider* _other)
 {
+}
+
+void Player::Movement()
+{
+
+	if (GET_KEY(KEY_TYPE::A))
+	{
+		if (originPos().x > 0.f)
+		{
+			currentScene->m_WorldPosition.x -= currentScene->m_moveSpeed * fDT;
+			dirX = -1;
+		}
+		else
+		{
+			dirX = 0;
+		}
+	}
+	if (GET_KEY(KEY_TYPE::D))
+	{
+		if ()
+		{
+			currentScene->m_WorldPosition.x += currentScene->m_moveSpeed * fDT;
+			dirX = 1;
+		}
+		else
+		{
+			dirX = 0;
+		}
+	}
+
+	if (GET_KEY(KEY_TYPE::A) == false && GET_KEY(KEY_TYPE::D) == false ||
+		GET_KEY(KEY_TYPE::A) == true && GET_KEY(KEY_TYPE::D) == true) {
+		dirX = 0;
+	}
+
+	//A x D x 
+	//dirX = 0;
+	if (GET_KEY(KEY_TYPE::W) )
+	{
+		currentScene->m_WorldPosition.y -= currentScene->m_moveSpeed * fDT;
+		dirY = -1;
+	}
+	if (GET_KEY(KEY_TYPE::S))
+	{
+		currentScene->m_WorldPosition.y += currentScene->m_moveSpeed * fDT;
+		dirY = 1;
+	}
+	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false ||
+		GET_KEY(KEY_TYPE::W) == true && GET_KEY(KEY_TYPE::S) == true) {
+		dirY = 0;
+	}
+
+	currentScene->m_deltaPos = { dirX,dirY };
+
+	auto p = originPos();
+
+	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -525.f, 510.f);
+	SetWindowPos(m_hWnd, HWND_TOP,
+		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
+		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
+}
+
+void Player::Shooting()
+{
+	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+	{
+		Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
+		CreateProjectile(dir, currentScene);
+	}
 }
 
 void Player::CreateProjectile(Vec2 dir, GameScene* scene)

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "HealthComponent.h"
-#include "Object.h"
 
 HealthComponent::HealthComponent()
 {

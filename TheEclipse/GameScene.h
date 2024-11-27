@@ -15,6 +15,5 @@ public:
 	//, GetSystemMetrics(SM_CYSCREEN) / 2 - SCREEN_HEIGHT / 2 };
 	Vec2 m_deltaPos;
 	float m_moveSpeed = 100.f;
-
 };
 

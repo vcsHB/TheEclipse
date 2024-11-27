@@ -15,15 +15,16 @@ void GameScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Object* pBoss = new Enemy(this);
-	pBoss->SetName(L"Enemy");
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
+	pBoss->SetName(L"Enemy");
 	AddObject(pBoss, LAYER::ENEMY);
 
 
 	//Object* backGround = new 
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 }
 
 void GameScene::Update()

@@ -1,27 +1,25 @@
 #pragma once
 #include "Agent.h"
-class HealthComponent;
-class GameScene;
+#include "HealthComponent.h"
 class Enemy :
 	public Agent
 {
 public:
 	Enemy(GameScene* scene);
-	~Enemy();
-
+	virtual ~Enemy();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-	//void SetPos(Vec2 v) override;
+	void Shooting()override;
+	void Movement() override;
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 private:
-	Vec2 originPos;
-
+	void CreateProjectile(Vec2 dir, GameScene* scene);
 private:
-	HealthComponent* healthComponent;
-	GameScene* currentScene;
+	Vec2 vecarr[3];
+	HealthComponent *healthComponent ;
 };
 
