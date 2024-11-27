@@ -14,4 +14,3 @@ private:
 	Texture* m_pTex;
 	HealthComponent* healthComponent;
 };
-

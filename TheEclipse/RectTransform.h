@@ -38,7 +38,7 @@ public:
 	}
 
 public:
-	bool enabled;
+	bool enabled = true;
 
 public:
 	void SetPos(Vec2 _vPos) { _position = _vPos; }
@@ -55,6 +55,7 @@ public:
 	}
 	const Vec2& GetPos() const { return _position; }
 	const Vec2& GetSize() const { return _size; }
+	const void SetActive(bool value) { enabled = value; }
 private:
 
 	Vec2 _position;

@@ -163,10 +163,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Agent.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="RectTransform.h" />
     <ClInclude Include="TextPro.h" />
@@ -202,6 +204,7 @@
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />

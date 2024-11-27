@@ -29,6 +29,8 @@ void RectTransform::Initialize()
 
 void RectTransform::Update()
 {
+	if (!enabled) return;
+
 	for (CanvasComponent* com : _components)
 	{
 		if (com)
@@ -40,6 +42,7 @@ void RectTransform::Update()
 
 void RectTransform::Render(HDC hdc)
 {
+	if (!enabled) return;
 	for (CanvasComponent* com : _components)
 	{
 		if (com)

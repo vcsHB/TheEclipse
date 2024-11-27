@@ -10,7 +10,6 @@ public:
 	~Canvas();
 private:
 	vector<RectTransform*> _uiList;
-	
 public:
 
 	void Initialize();
@@ -19,6 +18,7 @@ public:
 	void AddRectPanel(RectTransform* newPanel)
 	{
 		_uiList.push_back(newPanel);
+
 	}
 
 	// 해당 위치에 있는 UI를 가져온다. 
