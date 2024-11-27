@@ -14,6 +14,8 @@ void TextPro::Initialize()
 
 }
 
+
+
 void TextPro::SetText(wstring& content, float size = 12, COLORREF color = RGB(255,255,255), UINT alignType = TA_CENTER)
 {
 	_content = content;
@@ -34,4 +36,9 @@ void TextPro::Render(HDC hdc)
 	
 	GDISelector(hdc, _font);
 	TextOut(hdc, _owner->GetPos().x, _owner->GetPos().y, _content.c_str(), _content.length());
+}
+
+void TextPro::ChangeTextContent(wstring& content)
+{
+	_content = content;
 }
