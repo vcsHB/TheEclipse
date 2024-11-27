@@ -35,8 +35,8 @@ void Projectile::Update()
 	//vPos.y += sinf(m_angle) * 500.f * fDT;
 
 
-	vPos.x += (m_vDir.x * 200.f * fDT) -(currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x);// -currentScene->m_WorldPosition.x);
-	vPos.y += (m_vDir.y * 200.f * fDT) -(currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y);// -currentScene->m_WorldPosition.y);
+	vPos.x += (m_vDir.x * 200.f * fDT) - (currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x);// -currentScene->m_WorldPosition.x);
+	vPos.y += (m_vDir.y * 200.f * fDT) - (currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y);// -currentScene->m_WorldPosition.y);
 
 	//vPos.x -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x;
 	//vPos.y -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y;
@@ -48,7 +48,7 @@ void Projectile::Update()
 	//Object::SetPos(vPos);
 
 	Vec2 vSize = GetSize();
-	if (SCREEN_WIDTH/2  < -vSize.y)
+	if (SCREEN_WIDTH / 2 < -vSize.y)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
@@ -80,9 +80,16 @@ void Projectile::SetPos(Vec2 v)
 void Projectile::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
-	if (pOtherObj->GetName() == L"Enemy")
+
+	if (pOtherObj->GetName() == L"Player" && m_name == L"EnemyBullet")
 	{
+		std::wcout << m_name;
 		std::cout << "Proj Enter" << std::endl;
+		GET_SINGLE(EventManager)->DeleteObject(this);
+	}
+	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
+	{
+		//std::cout << "Proj Enter" << std::endl;
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }

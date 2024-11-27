@@ -3,7 +3,6 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "Component.h"
-#include "HealthComponent.h"
 Object::Object()
 	: m_vPos{}
 	, m_vSize{}

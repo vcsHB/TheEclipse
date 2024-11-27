@@ -1,7 +1,6 @@
 #pragma once
 class Collider;
 class Component;
-class HealthComponent;
 class Object
 {
 public:
@@ -13,12 +12,12 @@ public:
 	virtual void Render(HDC _hdc) abstract;
 	void ComponentRender(HDC _hdc);
 public:
-	virtual void SetPos(Vec2 _vPos){ m_vPos = _vPos; }
+	virtual void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
 	void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
 	const Vec2& GetPos() const { return m_vPos; }
 	const Vec2& GetSize() const { return m_vSize; }
 	const bool& GetIsDead() const { return m_IsDie; }
-	void SetDead() { m_IsDie = true; }	
+	void SetDead() { m_IsDie = true; }
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
@@ -27,7 +26,7 @@ public:
 	void SetName(wstring _name) { m_name = _name; }
 	const wstring& GetName() const { return m_name; }
 
-private:
+public:
 	bool m_IsDie;
 	wstring m_name;
 public:

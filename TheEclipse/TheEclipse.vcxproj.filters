@@ -147,6 +147,8 @@
       <Filter>Engine\03. Object\UISystem</Filter>
     </ClInclude>
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="Agent.h" />
+    <ClInclude Include="HealthComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -251,5 +253,6 @@
     </ClCompile>
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="Agent.cpp" />
   </ItemGroup>
 </Project>
