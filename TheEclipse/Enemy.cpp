@@ -53,11 +53,15 @@ void Enemy::Movement()
 
 void Enemy::Shooting()
 {
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	if (GET_KEYDOWN(KEY_TYPE::SPACE) && !isShooting)
 	{
+		Vec2 dir;
 
-		Vec2 dir = { 0 , 1 };
-		CreateProjectile(dir, currentScene);
+		for (int i = 0; i < 24; i++)
+		{
+			dir = { cosf(i), sinf(i) };
+			CreateProjectile(dir, currentScene);
+		}
 	}
 }
 
@@ -101,16 +105,18 @@ void Enemy::CreateProjectile(Vec2 dir, GameScene* scene)
 {
 	Projectile* pProj = new Projectile(scene);
 	Vec2 vPos = GetPos();
-	vPos.y += GetSize().y / 2.f;
-	pProj->SetPos(vPos);
-	pProj->SetSize({ 30.f,30.f });
+	dir.Normalize();
 
+	pProj->SetPos(vPos + dir * 3);
+	pProj->SetSize({ 30.f,30.f });
 
 	// 도 -> 라디안: PI / 180
 	//pProj->SetAngle(PI / 4 * 7.f); // 1
-	//static float angle = 0.f;
-	//pProj->SetAngle(angle * PI / 180); // 2
-	//angle += 10.f;
+	//pProj->SetDir({ cosf(duration) , sinf(duration) }); // 2
+	//if (duration >= 120)
+	//	duration = 30.f;
+	//duration += 10.f;
+
 	pProj->SetDir(dir);
 	pProj->SetName(L"EnemyBullet");
 	//Vec2 a = { 10.f, 10.f };

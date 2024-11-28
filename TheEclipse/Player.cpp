@@ -165,7 +165,6 @@ void Player::Movement()
 
 	currentScene->m_deltaPos = { dirX,dirY };
 
-	cout << currentScene->m_WorldPosition.y << endl;
 
 	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -525.f, 510.f);
 	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -80.f, 50.f);
@@ -200,9 +199,7 @@ void Player::CreateProjectile(Vec2 dir, GameScene* scene)
 	//angle += 10.f;
 	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
-	//Vec2 a = { 10.f, 10.f };
-	//Vec2 b = { 0.f, 0.f };
-	//Vec2 c = a / b;
+
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
 }

@@ -20,6 +20,8 @@ private:
 	void CreateProjectile(Vec2 dir, GameScene* scene);
 private:
 	Vec2 vecarr[3];
-	HealthComponent *healthComponent ;
+	HealthComponent* healthComponent;
+	float duration = 30;
+	bool isShooting = false;
 };
 

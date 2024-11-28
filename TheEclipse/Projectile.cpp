@@ -48,7 +48,7 @@ void Projectile::Update()
 	//Object::SetPos(vPos);
 
 	Vec2 vSize = GetSize();
-	if (SCREEN_WIDTH / 2 < -vSize.y)
+	if (vPos.x > 520 || vPos.x < 0 || vPos.y < 0 || vPos.y > 700)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
@@ -83,8 +83,7 @@ void Projectile::EnterCollision(Collider* _other)
 
 	if (pOtherObj->GetName() == L"Player" && m_name == L"EnemyBullet")
 	{
-		std::wcout << m_name;
-		std::cout << "Proj Enter" << std::endl;
+		//std::cout << "Proj Enter" << std::endl;
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
@@ -100,5 +99,4 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
-	std::cout << "Proj Exit" << std::endl;
 }
