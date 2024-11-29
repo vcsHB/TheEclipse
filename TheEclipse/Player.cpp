@@ -181,10 +181,10 @@ void Player::Shooting()
 	}
 }
 
-void Player::CreateProjectile(Vec2 dir, WorldSpaceScene* scene)
+void Player::CreateProjectile(Vec2 dir)
 {
 
-	Projectile* pProj = new Projectile(scene);
+	Projectile* pProj = new Projectile(currentScene);
 	Vec2 vPos = GetPos();
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
