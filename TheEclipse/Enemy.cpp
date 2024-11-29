@@ -60,7 +60,7 @@ void Enemy::Shooting()
 		for (int i = 0; i < 24; i++)
 		{
 			dir = { cosf(i), sinf(i) };
-			CreateProjectile(dir, currentScene);
+			CreateProjectile(dir);
 		}
 	}
 }
