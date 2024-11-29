@@ -4,6 +4,10 @@
 #include "Player.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "RectTransform.h"
+#include "Canvas.h"
+#include "Image.h"
+#include "TextPro.h"
 
 void GameScene_2::Init()
 {
@@ -14,6 +18,28 @@ void GameScene_2::Init()
 	pPlayer->SetSize({ 100.f, 100.f });
 	pPlayer->SetName(L"Player");
 	AddObject(pPlayer, LAYER::PLAYER);
+
+	Canvas* canvas = new Canvas();
+	AddObject(canvas, LAYER::UI);
+	SetCanvas(canvas);
+
+	RectTransform* healthEdgeUI = new RectTransform("HealthGaugeEdge");
+	healthEdgeUI->SetPos({ 250, 650 });
+	healthEdgeUI->AddComponent<Image>();
+	healthEdgeUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeEdge", L"Texture\\Gauge_Edge.bmp"));
+	RectTransform* healthFillUI = new RectTransform("HealthGaugeFill");
+	healthFillUI->SetPos({ 250, 650 });
+	healthFillUI->AddComponent<Image>();
+	healthFillUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeFill", L"Texture\\Gauge_Fill.bmp"));
+	RectTransform* healthText = new RectTransform("HealthText");
+	healthText->SetPos({ 250, 670 });
+	healthText->AddComponent<TextPro>();
+	wstring content = L"HP (50/50)";
+	healthText->GetComponent<TextPro>()->SetText(content, 20);
+
+	canvas->AddRectPanel(healthEdgeUI);
+	canvas->AddRectPanel(healthFillUI);
+	canvas->AddRectPanel(healthText);
 
 	Object* pBoss = new Enemy(this);
 	pBoss->SetSize({ 100.f, 100.f });
@@ -30,4 +56,5 @@ void GameScene_2::Init()
 
 void GameScene_2::Update()
 {
+	Scene::Update();
 }

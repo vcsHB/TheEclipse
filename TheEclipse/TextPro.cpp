@@ -16,7 +16,7 @@ void TextPro::Initialize()
 
 
 
-void TextPro::SetText(wstring& content, float size = 12, COLORREF color = RGB(255,255,255), UINT alignType = TA_CENTER)
+void TextPro::SetText(wstring& content, float size, COLORREF color, UINT alignType)
 {
 	_content = content;
 	_fontSize = size;
