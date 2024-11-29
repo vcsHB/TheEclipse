@@ -101,9 +101,9 @@ void Enemy::ExitCollision(Collider* _other)
 	std::cout << " Enemy Exit" << std::endl;
 }
 
-void Enemy::CreateProjectile(Vec2 dir, GameScene* scene)
+void Enemy::CreateProjectile(Vec2 dir)
 {
-	Projectile* pProj = new Projectile(scene);
+	Projectile* pProj = new Projectile(currentScene);
 	Vec2 vPos = GetPos();
 	dir.Normalize();
 
