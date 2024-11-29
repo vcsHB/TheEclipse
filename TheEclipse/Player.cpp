@@ -14,7 +14,7 @@
 
 int dirX = 0;
 int dirY = 0;
-Player::Player(GameScene* scene)
+Player::Player(WorldSpaceScene* scene)
 {
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
@@ -181,7 +181,7 @@ void Player::Shooting()
 	}
 }
 
-void Player::CreateProjectile(Vec2 dir, GameScene* scene)
+void Player::CreateProjectile(Vec2 dir, WorldSpaceScene* scene)
 {
 
 	Projectile* pProj = new Projectile(scene);

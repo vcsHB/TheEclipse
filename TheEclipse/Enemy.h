@@ -5,7 +5,7 @@ class Enemy :
 	public Agent
 {
 public:
-	Enemy(GameScene* scene);
+	Enemy(WorldSpaceScene* scene);
 	virtual ~Enemy();
 public:
 	void Update() override;

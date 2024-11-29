@@ -5,7 +5,7 @@ class Texture;
 class Projectile : public Object
 {
 public:
-	Projectile(GameScene* scene);
+	Projectile(WorldSpaceScene* scene);
 	~Projectile();
 	void Update() override;
 	void Render(HDC _hdc) override;
@@ -26,7 +26,7 @@ public:
 	virtual void ExitCollision(Collider* _other);
 private:
 	//float m_dir;
-	GameScene* currentScene;
+	WorldSpaceScene* currentScene;
 	float m_angle;
 	Vec2 m_vDir;
 	Vec2 originPos;
