@@ -13,7 +13,7 @@
 
 
 
-Enemy::Enemy(GameScene* scene)
+Enemy::Enemy(WorldSpaceScene* scene)
 {
 	AddComponent<Collider>();
 	AddComponent<HealthComponent>();

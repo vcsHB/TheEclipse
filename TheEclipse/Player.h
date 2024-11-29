@@ -5,7 +5,7 @@ class Texture;
 class Player : public Agent
 {
 public:
-	Player(GameScene* scene);
+	Player(WorldSpaceScene* scene);
 	virtual ~Player();
 public:
 	void Update() override;
