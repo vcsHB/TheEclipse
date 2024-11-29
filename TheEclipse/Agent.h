@@ -10,7 +10,7 @@ public:
 	virtual void Movement();
 	virtual void Shooting();
 public:
-	GameScene* currentScene;
+	WorldSpaceScene* currentScene;
 	Texture* m_pTex = nullptr;
 	HWND m_hWnd = GET_SINGLE(Core)->GetHwnd();
 };

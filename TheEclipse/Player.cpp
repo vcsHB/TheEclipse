@@ -34,14 +34,13 @@ Player::Player(GameScene* scene)
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 	currentScene = scene;
-
+	
 
 }
 Player::~Player()
 {
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
-
 
 }
 void Player::Update()
