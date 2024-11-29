@@ -168,6 +168,7 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="RectTransform.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="WorldSpaceScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
@@ -219,6 +221,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="WorldSpaceScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc" />

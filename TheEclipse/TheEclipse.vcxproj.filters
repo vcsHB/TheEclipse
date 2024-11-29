@@ -146,9 +146,21 @@
     <ClInclude Include="TextPro.h">
       <Filter>Engine\03. Object\UISystem</Filter>
     </ClInclude>
-    <ClInclude Include="Delegate.h" />
-    <ClInclude Include="Agent.h" />
-    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="WorldSpaceScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_2.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -251,8 +263,20 @@
     <ClCompile Include="TextPro.cpp">
       <Filter>Engine\03. Object\UISystem</Filter>
     </ClCompile>
-    <ClCompile Include="Delegate.cpp" />
-    <ClCompile Include="HealthComponent.cpp" />
-    <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="WorldSpaceScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_2.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>Engine\07. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
