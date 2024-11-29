@@ -177,7 +177,7 @@ void Player::Shooting()
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 	{
 		Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
-		CreateProjectile(dir, currentScene);
+		CreateProjectile(dir);
 	}
 }
 
