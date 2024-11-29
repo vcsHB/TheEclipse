@@ -181,7 +181,7 @@ void Player::Shooting()
 	}
 }
 
-void Player::CreateProjectile(Vec2 dir, GameScene* scene)
+void Player::CreateProjectile(Vec2 dir, WorldSpaceScene* scene)
 {
 
 	Projectile* pProj = new Projectile(scene);
