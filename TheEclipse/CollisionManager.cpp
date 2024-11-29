@@ -72,7 +72,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				continue;
 
 			COLLIDER_ID colliderID; // 두 충돌체로만 만들 수 있는 ID
- 			colliderID.left_ID = pLeftCollider->GetID();
+			colliderID.left_ID = pLeftCollider->GetID();
 			colliderID.right_ID = pRightCollider->GetID();
 
 			iter = m_mapCollisionInfo.find(colliderID.ID);
@@ -124,7 +124,6 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 		}
 	}
 }
-
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
 	Vec2 vLeftPos = _left->GetLatedUpatedPos();
@@ -144,3 +143,4 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 
 	return false;*/
 }
+

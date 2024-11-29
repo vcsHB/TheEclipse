@@ -1,6 +1,7 @@
 #pragma once
 //#include "Object.h"
 class Object; // 클래스 전방선언
+class Canvas;
 class Scene
 {
 public:
@@ -21,9 +22,15 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
+	Object* FindObjectByName(wstring name);
 private:
 	//Object m_obj;
 	//Object* m_pObj;
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+	
+protected:
+
+	Canvas* _canvas;
+	void SetCanvas(Canvas* canvas) { _canvas = canvas; }
 };
 

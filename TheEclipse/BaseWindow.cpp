@@ -69,8 +69,8 @@ ATOM BaseWindow::MyRegisterClass()
 
 void BaseWindow::createWindow()
 {
-    int ResolutionX = GetSystemMetrics(SM_CXSCREEN);
-    int ResolutionY = GetSystemMetrics(SM_CYSCREEN);
+    int ResolutionX = GetSystemMetrics(SM_CXSCREEN);  //1920
+    int ResolutionY = GetSystemMetrics(SM_CYSCREEN);  //1080
 
     int Winposx = ResolutionX / 2 - SCREEN_WIDTH / 2;
     int Winposy = ResolutionY / 2 - SCREEN_HEIGHT / 2;

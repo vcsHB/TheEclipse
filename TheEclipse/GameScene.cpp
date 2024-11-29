@@ -1,14 +1,38 @@
 #include "pch.h"
 #include "GameScene.h"
 #include "Enemy.h"
+#include "Player.h"
+#include "CollisionManager.h"
+#include "ResourceManager.h"
 void GameScene::Init()
 {
-	for (size_t i = 0; i < 100; i++)
-	{
-		Object* obj = new Enemy;
-		obj->SetPos({rand() % SCREEN_WIDTH,
-				rand() % SCREEN_HEIGHT});
-		obj->SetSize({100, 100});
-		AddObject(obj, LAYER::ENEMY);
-	}
+	HWND m_hWnd1;
+	HWND m_hWnd2;
+	Object* pPlayer = new Player(this);
+	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
+	pPlayer->SetSize({ 100.f, 100.f });
+	pPlayer->SetName(L"Player");
+	AddObject(pPlayer, LAYER::PLAYER);
+
+	Object* pBoss = new Enemy(this);
+	pBoss->SetSize({ 100.f, 100.f });
+	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
+	pBoss->SetName(L"Enemy");
+	AddObject(pBoss, LAYER::ENEMY);
+
+
+	//Object* backGround = new 
+
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 }
+
+void GameScene::Update()
+{
+	Scene::Update();
+
+}
+
+
+
+

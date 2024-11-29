@@ -8,6 +8,7 @@ void ResourceManager::Init()
 	wcscat_s(m_resourcePath, 255, L"\\Resource\\");
 	//::SetWindowText(GET_SINGLE(Core)->GetHwnd(), m_resourcePath);
 
+	
  	FMOD::System_Create(&m_pSoundSystem); // 시스템 생성 함수
 	// 채널수, 사운드 모드
 	if (m_pSoundSystem != nullptr)
@@ -126,4 +127,14 @@ tSoundInfo* ResourceManager::FindSound(const wstring& _key)
 	if (iter == m_mapSounds.end())
 		return nullptr;
 	return iter->second;
+}
+
+HFONT* ResourceManager::GetFont(const wstring& key)
+{
+	map<wstring, HFONT*>::iterator iter = _fonts.find(key);
+	//CreateFont(1, 1);
+	if (iter == _fonts.end())
+		return nullptr;
+	return iter->second;
+	return nullptr;
 }
