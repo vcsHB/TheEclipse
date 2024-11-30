@@ -173,6 +173,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="PlayerSkill.h" />
     <ClInclude Include="PlayerSkillController.h" />
+    <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="RectTransform.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="Stat.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="UpgradeData.h" />
     <ClInclude Include="UpgradeManager.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="WorldSpaceScene.h" />
@@ -236,6 +238,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerSkill.cpp" />
     <ClCompile Include="PlayerSkillController.cpp" />
+    <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RectTransform.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
@@ -248,6 +251,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="UpgradeData.cpp" />
     <ClCompile Include="UpgradeManager.cpp" />
     <ClCompile Include="WorldSpaceScene.cpp" />
   </ItemGroup>

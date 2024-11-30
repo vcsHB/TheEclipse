@@ -11,6 +11,8 @@
 #include "Animation.h"
 #include "EventManager.h"
 #include "Status.h"
+#include "PlayerStatus.h"
+#include "Stat.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -24,7 +26,8 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 
-	status = new Status(100, 2, 3);
+	_playerStatus = new PlayerStatus(100, 2, 3, 1, 1, 0);
+	status = _playerStatus;
 
 	AddComponent<Collider>();
 	AddComponent<Animator>();
@@ -201,6 +204,7 @@ void Player::CreateProjectile(Vec2 dir)
 	//angle += 10.f;
 	pProj->SetDir(dir);
 	pProj->SetName(L"PlayerBullet");
+	pProj->SetProjectile(status->atkStat->GetValue());
 
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);

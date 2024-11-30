@@ -10,6 +10,7 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 public:
+	void SetProjectile(int damage);
 	void SetAngle(float _f)
 	{
 		m_angle = _f;
@@ -31,5 +32,8 @@ private:
 	Vec2 m_vDir;
 	Vec2 originPos;
 	Texture* m_pTex;
+
+	int _damage;
+	
 };
 

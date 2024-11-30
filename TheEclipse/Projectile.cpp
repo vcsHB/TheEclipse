@@ -6,6 +6,8 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "GameScene.h"
+#include "HealthComponent.h"
+
 Projectile::Projectile(WorldSpaceScene* scene)
 //	: m_dir(-1.f)
 	: m_angle(0.f)
@@ -71,6 +73,11 @@ void Projectile::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
+void Projectile::SetProjectile(int damage)
+{
+	_damage = damage;
+}
+
 void Projectile::SetPos(Vec2 v)
 {
 	originPos = v;
@@ -84,11 +91,15 @@ void Projectile::EnterCollision(Collider* _other)
 	if (pOtherObj->GetName() == L"Player" && m_name == L"EnemyBullet")
 	{
 		//std::cout << "Proj Enter" << std::endl;
+		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
+		health->DecreaseHP(_damage);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
 	{
-		//std::cout << "Proj Enter" << std::endl;
+		std::cout << "GetDamage : " << _damage << std::endl;
+		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
+		health->DecreaseHP(_damage);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }

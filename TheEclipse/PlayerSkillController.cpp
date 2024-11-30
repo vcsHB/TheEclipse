@@ -3,11 +3,11 @@
 
 PlayerSkillController::PlayerSkillController()
 {
+
 }
 
 PlayerSkillController::~PlayerSkillController()
 {
-
 	for (std::pair<wstring, PlayerSkill*> skillPair : skillMap)
 	{
 		delete skillPair.second;
@@ -18,7 +18,6 @@ PlayerSkillController::~PlayerSkillController()
 
 void PlayerSkillController::AddSkill(wstring key, PlayerSkill* skill)
 {
-
 	skillMap.insert({ key, skill });
 }
 

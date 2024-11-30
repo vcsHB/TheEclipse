@@ -2,6 +2,7 @@
 #include "Agent.h"
 #include "HealthComponent.h"
 class Texture;
+class PlayerStatus;
 class Player : public Agent
 {
 public:
@@ -19,6 +20,8 @@ public:
 private:
 	void CreateProjectile(Vec2 dir);
 	HealthComponent* healthComponent;
+	PlayerStatus* _playerStatus;
+
 	//GameScene* currentScene;
 	//HealthComponent* healthComponent;
 	//Texture* m_pTex;

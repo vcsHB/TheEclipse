@@ -2,6 +2,10 @@
 #include "Status.h"
 #include "Stat.h"
 
+Status::Status()
+{
+}
+
 Status::Status(int health, int atk, int moveSpeed)
 {
 	healthStat = new Stat(health);

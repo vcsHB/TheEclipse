@@ -44,6 +44,9 @@
     <Filter Include="Engine\03. Object\StatSystem">
       <UniqueIdentifier>{75e3e517-21dd-4781-8060-77cc4d0c4b61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UpgradeSystem">
+      <UniqueIdentifier>{6771faf3-d441-481a-8b2f-e77d1a5cc467}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -182,6 +185,12 @@
     <ClInclude Include="UpgradeManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="UpgradeData.h">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -313,6 +322,12 @@
     </ClCompile>
     <ClCompile Include="UpgradeManager.cpp">
       <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeData.cpp">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp">
+      <Filter>Engine\03. Object\StatSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

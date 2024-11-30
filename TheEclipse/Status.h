@@ -1,16 +1,17 @@
 #pragma once
 class Stat;
+
 class Status
 {
-
 public:
+	Status();
 	Status(int health, int atk, int moveSpeed);
-	~Status();
+	virtual ~Status();
+
 public :
 	Stat* healthStat;
 	Stat* atkStat;
 	Stat* moveSpeedStat;
-
-
+	
 };
 

@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "UpgradeManager.h"
 
+UpgradeManager::~UpgradeManager()
+{
+    for (int i = 0; i < upgradeList.size(); i++)
+    {
+        delete upgradeList[i];
+    }
+    upgradeList.clear();
+}
+
 int UpgradeManager::CalcMaxExp(int level)
 {
     return level * 10;
