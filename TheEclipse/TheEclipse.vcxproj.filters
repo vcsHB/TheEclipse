@@ -167,13 +167,20 @@
     <ClInclude Include="HealthComponent.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerSkill.h" />
-    <ClInclude Include="PlayerSkillController.h" />
     <ClInclude Include="Stat.h">
       <Filter>Engine\03. Object\StatSystem</Filter>
     </ClInclude>
     <ClInclude Include="Status.h">
       <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSkill.h">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSkillController.h">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeManager.h">
+      <Filter>Engine\02. Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,13 +299,20 @@
     <ClCompile Include="HealthComponent.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerSkill.cpp" />
-    <ClCompile Include="PlayerSkillController.cpp" />
     <ClCompile Include="Stat.cpp">
       <Filter>Engine\03. Object\StatSystem</Filter>
     </ClCompile>
     <ClCompile Include="Status.cpp">
       <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSkill.cpp">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSkillController.cpp">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

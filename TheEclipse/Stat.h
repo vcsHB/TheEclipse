@@ -10,7 +10,7 @@ private :
 	int _baseValue;
 	vector<int> _modifiers;
 	bool _isValueChanged = true;
-	int _changedValue;
+	int _changedValue = 0;
 
 public:
 	void AddModifier(int value);

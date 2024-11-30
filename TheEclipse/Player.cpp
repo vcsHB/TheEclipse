@@ -10,7 +10,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "EventManager.h"
-
+#include "Status.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -23,6 +23,8 @@ Player::Player(WorldSpaceScene* scene)
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+
+	status = new Status(100, 2, 3);
 
 	AddComponent<Collider>();
 	AddComponent<Animator>();
@@ -39,9 +41,10 @@ Player::Player(WorldSpaceScene* scene)
 }
 Player::~Player()
 {
+	Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
-
+	
 }
 void Player::Update()
 {
