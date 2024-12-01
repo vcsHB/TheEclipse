@@ -10,10 +10,10 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "EventManager.h"
+#include "State.h"
+#include "StateMachine.h"
 
-
-
-Enemy::Enemy(WorldSpaceScene* scene)
+Enemy::Enemy(WorldSpaceScene* scene, map<wstring, State*> *states)
 {
 	AddComponent<Collider>();
 	AddComponent<HealthComponent>();
@@ -21,6 +21,10 @@ Enemy::Enemy(WorldSpaceScene* scene)
 	healthComponent->SetHp(10);
 	healthComponent->SetOwner(this);
 	currentScene = scene;
+
+	stateMachine = new StateMachine(this, states);
+	
+	stateMachine->ChangeState(L"Idle");
 
 	/*m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
@@ -36,8 +40,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	Movement();
-	Shooting();
+	stateMachine->Update();
 }
 
 void Enemy::Movement()
@@ -53,15 +56,12 @@ void Enemy::Movement()
 
 void Enemy::Shooting()
 {
-	if (GET_KEYDOWN(KEY_TYPE::SPACE) && !isShooting)
-	{
-		Vec2 dir;
+	Vec2 dir;
 
-		for (int i = 0; i < 24; i++)
-		{
-			dir = { cosf(i), sinf(i) };
-			CreateProjectile(dir);
-		}
+	for (int i = 0; i < 24; i++)
+	{
+		dir = { cosf(i), sinf(i) };
+		CreateProjectile(dir);
 	}
 }
 
@@ -100,6 +100,11 @@ void Enemy::ExitCollision(Collider* _other)
 {
 	std::cout << " Enemy Exit" << std::endl;
 }
+/*
+StateMachine* Enemy::GetStateMachine()
+{	
+	return stateMachine; 
+}*/
 
 void Enemy::CreateProjectile(Vec2 dir)
 {
