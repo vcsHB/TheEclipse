@@ -6,6 +6,7 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "GameScene.h"
+
 Projectile::Projectile(WorldSpaceScene* scene)
 //	: m_dir(-1.f)
 	: m_angle(0.f)
