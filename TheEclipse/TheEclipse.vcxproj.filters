@@ -47,6 +47,9 @@
     <Filter Include="Engine\03. Object\UpgradeSystem">
       <UniqueIdentifier>{6771faf3-d441-481a-8b2f-e77d1a5cc467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UISystem\UIs">
+      <UniqueIdentifier>{8b454661-3e54-44c8-ab04-85e2885d100c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -191,6 +194,9 @@
     <ClInclude Include="PlayerStatus.h">
       <Filter>Engine\03. Object\StatSystem</Filter>
     </ClInclude>
+    <ClInclude Include="UpgradeButton.h">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -328,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="PlayerStatus.cpp">
       <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeButton.cpp">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

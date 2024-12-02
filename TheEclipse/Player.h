@@ -3,6 +3,7 @@
 #include "HealthComponent.h"
 class Texture;
 class PlayerStatus;
+
 class Player : public Agent
 {
 public:

@@ -8,6 +8,8 @@
 #include "Canvas.h"
 #include "Image.h"
 #include "TextPro.h"
+#include "Button.h"
+#include "UpgradeButton.h"
 
 void GameScene_2::Init()
 {
@@ -37,9 +39,23 @@ void GameScene_2::Init()
 	wstring content = L"HP (50/50)";
 	healthText->GetComponent<TextPro>()->SetText(content, 20);
 
+
+
+	RectTransform* upgradeButton_1 = new RectTransform("UpgradePanel_1");
+	upgradeButton_1->SetPos({250, 220});
+	upgradeButton_1->AddComponent<UpgradeButton>();
+
+	RectTransform* upgradeButton_2 = new RectTransform("UpgradePanel_2");
+	upgradeButton_2->AddComponent<UpgradeButton>();
+	upgradeButton_2->SetPos({ 250, 370 });
+	upgradeButton_1->AddActiveGroup(upgradeButton_2);
+
 	canvas->AddRectPanel(healthEdgeUI);
 	canvas->AddRectPanel(healthFillUI);
 	canvas->AddRectPanel(healthText);
+	canvas->AddRectPanel(upgradeButton_1);
+	canvas->AddRectPanel(upgradeButton_2);
+
 
 	Object* pBoss = new Enemy(this);
 	pBoss->SetSize({ 100.f, 100.f });

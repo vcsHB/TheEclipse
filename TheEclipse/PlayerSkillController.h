@@ -7,6 +7,7 @@ class PlayerSkillController : public Component
 public:
 	PlayerSkillController();
 	~PlayerSkillController();
+
 public:
 	map<wstring, PlayerSkill*> skillMap;
 

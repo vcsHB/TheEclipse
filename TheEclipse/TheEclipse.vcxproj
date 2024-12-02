@@ -207,6 +207,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="UpgradeButton.h" />
     <ClInclude Include="UpgradeData.h" />
     <ClInclude Include="UpgradeManager.h" />
     <ClInclude Include="Vec2.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="UpgradeButton.cpp" />
     <ClCompile Include="UpgradeData.cpp" />
     <ClCompile Include="UpgradeManager.cpp" />
     <ClCompile Include="WorldSpaceScene.cpp" />

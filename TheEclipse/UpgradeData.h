@@ -2,18 +2,20 @@
 class UpgradeData
 {
 public:
-	UpgradeData();
+	UpgradeData(wstring name, wstring description, wstring textureKey);
 	~UpgradeData();
 
 private:
 	
+
 public:
 	wstring upgradeName;
 	wstring description;
+	wstring iconKey;
+
 	bool isLocked = true;
 
 public :
-	
 
 };
 
