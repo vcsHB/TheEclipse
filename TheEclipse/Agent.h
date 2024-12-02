@@ -2,15 +2,20 @@
 #include "Object.h"
 #include "Core.h"
 #include "GameScene.h"
+class Status;
 class Texture;
+
 class Agent :
 	public Object
 {  
+public :
+	virtual ~Agent() override;
 public:
 	virtual void Movement();
 	virtual void Shooting();
 public:
 	WorldSpaceScene* currentScene;
+	Status* status;
 	Texture* m_pTex = nullptr;
 	HWND m_hWnd = GET_SINGLE(Core)->GetHwnd();
 };
