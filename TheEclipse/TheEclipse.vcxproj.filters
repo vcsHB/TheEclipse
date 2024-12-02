@@ -38,11 +38,17 @@
     <Filter Include="Engine\03. Object\UISystem">
       <UniqueIdentifier>{f640a749-2651-4fa5-8edb-82e75830e8a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\fSM">
-      <UniqueIdentifier>{f70f2443-6a5b-493c-b8e3-e5963265e7a3}</UniqueIdentifier>
+    <Filter Include="Engine\03. Object\SkillSystem">
+      <UniqueIdentifier>{4aef6674-5550-4652-a53b-8b82b8341ed9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\fSM\States">
-      <UniqueIdentifier>{fa5cd3e7-98b6-402e-8517-8051e17e719d}</UniqueIdentifier>
+    <Filter Include="Engine\03. Object\StatSystem">
+      <UniqueIdentifier>{75e3e517-21dd-4781-8060-77cc4d0c4b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\UpgradeSystem">
+      <UniqueIdentifier>{6771faf3-d441-481a-8b2f-e77d1a5cc467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\UISystem\UIs">
+      <UniqueIdentifier>{8b454661-3e54-44c8-ab04-85e2885d100c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -167,16 +173,33 @@
     <ClInclude Include="HealthComponent.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>Engine\fSM</Filter>
+    <ClInclude Include="Stat.h">
+      <Filter>Engine\03. Object\StatSystem</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Engine\fSM</Filter>
+    <ClInclude Include="Status.h">
+      <Filter>Engine\03. Object\StatSystem</Filter>
     </ClInclude>
-    <ClInclude Include="IdleState.h">
-      <Filter>Engine\fSM\States</Filter>
+    <ClInclude Include="PlayerSkill.h">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
     </ClInclude>
-    <ClInclude Include="TargetingState.h" />
+    <ClInclude Include="PlayerSkillController.h">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeData.h">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeButton.h">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpGauge.h">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -294,15 +317,32 @@
     <ClCompile Include="HealthComponent.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Engine\fSM</Filter>
+    <ClCompile Include="Stat.cpp">
+      <Filter>Engine\03. Object\StatSystem</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Engine\fSM</Filter>
+    <ClCompile Include="Status.cpp">
+      <Filter>Engine\03. Object\StatSystem</Filter>
     </ClCompile>
-    <ClCompile Include="IdleState.cpp">
-      <Filter>Engine\fSM\States</Filter>
+    <ClCompile Include="PlayerSkill.cpp">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
     </ClCompile>
-    <ClCompile Include="TargetingState.cpp" />
+    <ClCompile Include="PlayerSkillController.cpp">
+      <Filter>Engine\03. Object\SkillSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeData.cpp">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp">
+      <Filter>Engine\03. Object\StatSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeButton.cpp">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpGauge.cpp">
+      <Filter>Engine\03. Object\UISystem\UIs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
