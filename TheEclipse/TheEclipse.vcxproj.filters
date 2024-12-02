@@ -197,6 +197,7 @@
     <ClInclude Include="UpgradeButton.h">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClInclude>
+    <ClInclude Include="ExpGauge.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -338,5 +339,6 @@
     <ClCompile Include="UpgradeButton.cpp">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClCompile>
+    <ClCompile Include="ExpGauge.cpp" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,6 @@ public:
 	void SetUpgradeData(UpgradeData* data);
 private :
 	TextPro* _textCompo;
-	Button* _button;
 	wstring _content;
 
 };

@@ -7,6 +7,7 @@
 #include "EventManager.h"
 #include "GameScene.h"
 #include "HealthComponent.h"
+#include "UpgradeManager.h"
 
 Projectile::Projectile(WorldSpaceScene* scene)
 //	: m_dir(-1.f)
@@ -100,6 +101,7 @@ void Projectile::EnterCollision(Collider* _other)
 		std::cout << "GetDamage : " << _damage << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
+		GET_SINGLE(UpgradeManager)->GainExp(4);
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }

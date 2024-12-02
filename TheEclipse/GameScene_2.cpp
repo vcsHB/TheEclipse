@@ -10,6 +10,8 @@
 #include "TextPro.h"
 #include "Button.h"
 #include "UpgradeButton.h"
+#include "UpgradeManager.h"
+#include "ExpGauge.h"
 
 void GameScene_2::Init()
 {
@@ -49,12 +51,17 @@ void GameScene_2::Init()
 	upgradeButton_2->AddComponent<UpgradeButton>();
 	upgradeButton_2->SetPos({ 250, 370 });
 	upgradeButton_1->AddActiveGroup(upgradeButton_2);
+	upgradeButton_1->SetActive(false);
+
+	RectTransform* expGauge = new RectTransform("ExpGauge");
+	expGauge->AddComponent<ExpGauge>();
 
 	canvas->AddRectPanel(healthEdgeUI);
 	canvas->AddRectPanel(healthFillUI);
 	canvas->AddRectPanel(healthText);
 	canvas->AddRectPanel(upgradeButton_1);
 	canvas->AddRectPanel(upgradeButton_2);
+	canvas->AddRectPanel(expGauge);
 
 
 	Object* pBoss = new Enemy(this);
@@ -65,6 +72,12 @@ void GameScene_2::Init()
 
 
 	//Object* backGround = new 
+	GET_SINGLE(UpgradeManager)->Initialize(
+
+		upgradeButton_1->GetComponent<UpgradeButton>(),
+		upgradeButton_2->GetComponent<UpgradeButton>(),
+		expGauge->GetComponent<ExpGauge>()
+	);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
