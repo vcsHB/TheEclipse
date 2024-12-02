@@ -176,7 +176,9 @@
     <ClInclude Include="IdleState.h">
       <Filter>Engine\fSM\States</Filter>
     </ClInclude>
-    <ClInclude Include="TargetingState.h" />
+    <ClInclude Include="TargetingState.h">
+      <Filter>Engine\fSM\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -303,6 +305,8 @@
     <ClCompile Include="IdleState.cpp">
       <Filter>Engine\fSM\States</Filter>
     </ClCompile>
-    <ClCompile Include="TargetingState.cpp" />
+    <ClCompile Include="TargetingState.cpp">
+      <Filter>Engine\fSM\States</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

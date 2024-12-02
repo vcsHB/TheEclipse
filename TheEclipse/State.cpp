@@ -18,7 +18,7 @@ void State::Enter()
 	std::wcout << name << "   " << L"Enter" << endl;
 }
 
-void State::Update()
+void State::Update(float _dt)
 {
 	// 창이동 보정 처리
 	Vec2 vPos = owner->GetPos();
@@ -27,18 +27,13 @@ void State::Update()
 
 	owner->Object::SetPos(vPos);
 
-	Timer();
-	Movement();
-	Shooting();
+	Movement(_dt);
+	Shooting(_dt);
 }
 
 void State::Exit()
 {
-	timer = 0;
+	timerforMove = 0;
 	std::wcout << name << "   " << L"Exit" << endl;
 }
 
-void State::Timer()
-{
-	timer += fDT;
-}

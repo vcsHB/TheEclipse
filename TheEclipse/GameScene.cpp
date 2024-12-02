@@ -6,17 +6,18 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "IdleState.h"
+#include "TargetingState.h"
 HWND m_hWnd1;
 HWND m_hWnd2;
 void GameScene::Init()
 {
 	map<wstring, State*> stage1;
 	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
-	stage1.insert(std::pair<wstring, State*>(L"Move", new IdleState(L"MoveState")));
+	stage1.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
 
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
-	stage2.insert(std::pair<wstring, State*>(L"Move", new IdleState(L"MoveState")));
+	stage2.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
 
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
