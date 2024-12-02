@@ -15,4 +15,3 @@ private :
 	wstring _content;
 
 };
-
