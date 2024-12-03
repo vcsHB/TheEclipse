@@ -1,4 +1,5 @@
 #pragma once
+class Projectile;
 class TargetingState :
 	public State
 {
@@ -9,4 +10,9 @@ public:
 protected:
 	void Movement(float _dt) override;
 	void Shooting(float _dt) override;
-};	
+
+private:
+	float waittime = 0;
+	Projectile* projectilles[24];
+	int projIdx = 0;
+};

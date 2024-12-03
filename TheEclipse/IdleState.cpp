@@ -19,6 +19,7 @@ void IdleState::Movement(float _dt) {
 
 	timerforMove += _dt;
 
+
 	if (owner->GetPos().x >= SCREEN_WIDTH || owner->GetPos().x < 0)
 	{
 		owner->GetStateMachine()->ChangeState(L"Target");

@@ -3,6 +3,7 @@
 #include "SpreadState.h"
 #include "Enemy.h"
 #include "StateMachine.h"
+#include "Projectile.h"
 
 Vec2 dirArr[4] = {  };
 int atkIdx = 0;
@@ -24,7 +25,7 @@ void SpreadState::Movement(float _dt) {
 
 
 	if (timerforMove > 8.f)
-		owner->GetStateMachine()->ChangeState(L"Idle");
+		owner->GetStateMachine()->ChangeState(L"Clamp");
 
 
 	if (timerforMove < 2.f)
@@ -56,7 +57,8 @@ void SpreadState::Shooting(float _dt) {
 			float x = cosf(angle * PI / 180);
 			float y = sinf(angle * PI / 180);
 			{
-				owner->CreateProjectile({ x,y });
+				Projectile* pProj = owner->CreateProjectile({ x,y });
+				pProj->isAnimated = true;
 			}
 		}
 	}
