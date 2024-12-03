@@ -212,7 +212,7 @@ Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
 	
 	pProj->SetPos(position);
 	pProj->SetSize({ 20.f,20.f });
-
+	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
 
 	// 도 -> 라디안: PI / 180
 	//pProj->SetAngle(PI / 4 * 7.f); // 1

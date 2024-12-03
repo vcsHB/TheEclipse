@@ -23,6 +23,7 @@ void GameScene_2::Init()
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
 	pPlayer->SetSize({ 100.f, 100.f });
 	pPlayer->SetName(L"Player");
+	player = pPlayer;
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Canvas* canvas = new Canvas();
