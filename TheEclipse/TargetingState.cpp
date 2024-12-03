@@ -7,15 +7,12 @@
 #include "Projectile.h"
 
 
-float waittime;
-Projectile* projectilles[24];
-int projIdx = 0;
-
 void TargetingState::Enter()
 {
 	State::Enter();
-	int _bulletCount = 20;
+	projIdx = 0;
 
+	int _bulletCount = 20;
 	Vec2 dir;
 	for (int i = 0; i < 24; i++)
 	{
@@ -27,7 +24,7 @@ void TargetingState::Enter()
 		dir = { x, y };
 		Projectile* pProj = owner->CreateProjectile({ 0,0 });
 		pProj->SetPos({ dir.x * 200 + player->GetPos().x  , dir.y * 200 + player->GetPos().y });
-
+		pProj->isAnimated = true;
 		projectilles[i] = (pProj);
 	}
 }
@@ -35,13 +32,8 @@ void TargetingState::Enter()
 
 void TargetingState::Exit()
 {
-	for (int i = 0; i < 24; i++)
-	{
-		projectilles[i] = nullptr;
-	}
 	waittime = 0;
 	State::Exit();
-
 }
 
 void TargetingState::Movement(float _dt)

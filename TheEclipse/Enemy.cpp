@@ -129,7 +129,6 @@ Projectile* Enemy::CreateProjectile(Vec2 dir)
 	pProj->SetDir(dir);
 	pProj->SetName(L"EnemyBullet");
 	pProj->GetComponent<Collider>()->SetSize({ 30.f,30.f });
-	pProj->isAnimated = true;
 	//Vec2 a = { 10.f, 10.f };
 	//Vec2 b = { 0.f, 0.f };
 	//Vec2 c = a / b;
