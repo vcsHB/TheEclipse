@@ -26,17 +26,17 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
-	playerStatus = new PlayerStatus(100, 2, 3, 2, 1, 0);
+	playerStatus = new PlayerStatus(100, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
 
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
 	healthComponent = GetComponent<HealthComponent>();
-	healthComponent->SetHp(10);
+	healthComponent->SetHp(status->healthStat->GetValue());
 	healthComponent->SetOwner(this);
-	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(80.f, 0.f),
-		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 5, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(40.f, 0.f),
+		Vec2(40.f, 40.f), Vec2(40.f, 0.f), 5, 0.1f);
 	/*GetComponent<Animator>()->CreateAnimation(L"Player_Idle-Sheet", m_pTex, Vec2(0.f, 150.f),
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);*/
 	GetComponent<Animator>()->PlayAnimation(L"PlayerIdle", true);
@@ -91,6 +91,7 @@ void Player::Render(HDC _hdc)
 	//::StretchBlt();
 	//::AlphaBlend();
 	//::PlgBlt();
+
 }
 
 void Player::EnterCollision(Collider* _other)
@@ -120,60 +121,45 @@ void Player::Movement()
 {
 	auto p = originPos();
 
+	currentScene->m_moveSpeed = 100.f * status->moveSpeedStat->GetValue();
+	float moveAmount = currentScene->m_moveSpeed * fDT;
+	Vec2 moveDirection = {0,0};
 	if (GET_KEY(KEY_TYPE::A))
 	{
-		currentScene->m_WorldPosition.x -= currentScene->m_moveSpeed * fDT;
-		if (currentScene->m_WorldPosition.x > -525.f)
-			dirX = -1;
-		else
-		{
-			dirX = 0;
-		}
+		moveDirection.x = -1;
+		
 	}
 	if (GET_KEY(KEY_TYPE::D))
 	{
-		currentScene->m_WorldPosition.x += currentScene->m_moveSpeed * fDT;
-		if (currentScene->m_WorldPosition.x < 510.f)
-			dirX = 1;
-		else
-		{
-			dirX = 0;
-		}
+		if (moveDirection.x == -1) moveDirection.x = 0;
+		moveDirection.x = 1;
 	}
-
-	if (GET_KEY(KEY_TYPE::A) == false && GET_KEY(KEY_TYPE::D) == false ||
-		GET_KEY(KEY_TYPE::A) == true && GET_KEY(KEY_TYPE::D) == true) {
-		dirX = 0;
-	}
-
-	//A x D x 
-	//dirX = 0;
 	if (GET_KEY(KEY_TYPE::W))
 	{
-		currentScene->m_WorldPosition.y -= currentScene->m_moveSpeed * fDT;
-		if (currentScene->m_WorldPosition.y > -80.f)
-			dirY = -1;
-		else
-			dirY = 0;
+		moveDirection.y = -1;
+		
 	}
 	if (GET_KEY(KEY_TYPE::S))
 	{
-		currentScene->m_WorldPosition.y += currentScene->m_moveSpeed * fDT;
-		if (currentScene->m_WorldPosition.y < 50.f)
-			dirY = 1;
-		else
-			dirY = 0;
-	}
-	if (GET_KEY(KEY_TYPE::W) == false && GET_KEY(KEY_TYPE::S) == false ||
-		GET_KEY(KEY_TYPE::W) == true && GET_KEY(KEY_TYPE::S) == true) {
-		dirY = 0;
+		if (moveDirection.y == -1) moveDirection.y = 0;
+		moveDirection.y = 1;
 	}
 
-	currentScene->m_deltaPos = { dirX,dirY };
+	moveDirection.Normalize();
+	currentScene->m_deltaPos = moveDirection;
 
+	int windowSizeX = GetSystemMetrics(SM_CXSCREEN);
+	int windowSizeY = GetSystemMetrics(SM_CXSCREEN);
+	float Winposx = windowSizeX / 2 - SCREEN_WIDTH / 2;
+	float Winposy = windowSizeY / 2 - SCREEN_HEIGHT / 2;
 
-	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -525.f, 510.f);
-	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -80.f, 50.f);
+	float widthClamp = windowSizeX / 2 - SCREEN_WIDTH;
+	float heightClamp = windowSizeY / 2 - SCREEN_HEIGHT;
+	
+
+	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount;
+	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -widthClamp, widthClamp);
+	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -heightClamp, heightClamp);
 	SetWindowPos(m_hWnd, HWND_TOP,
 		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
 		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
@@ -181,10 +167,13 @@ void Player::Movement()
 
 void Player::Shooting()
 {
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
+	_currentShootCoolTime += GET_SINGLE(TimeManager)->GetDT() * playerStatus->fireSpeedStat->GetValue();
+	if (_currentShootCoolTime >= 1.f)
 	{
-		Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
-		CreateProjectile(dir);
+		_currentShootCoolTime = 0;
+		//Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
+		Vec2 direction = { 0, -1 };
+		CreateProjectile(direction);
 	}
 }
 

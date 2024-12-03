@@ -14,6 +14,9 @@
 #include "ExpGauge.h"
 #include "State.h"
 #include "IdleState.h"
+#include "SpreadState.h"
+#include "TargetingState.h"
+#include "ClampingState.h"
 
 void GameScene_2::Init()
 {
@@ -57,6 +60,7 @@ void GameScene_2::Init()
 	upgradeButton_1->SetActive(false);
 
 	RectTransform* expGauge = new RectTransform("ExpGauge");
+	expGauge->SetPos({ 250, 630 });
 	expGauge->AddComponent<ExpGauge>();
 
 	canvas->AddRectPanel(healthEdgeUI);
@@ -69,16 +73,17 @@ void GameScene_2::Init()
 	// === Enemy Setting
 	map<wstring, State*> stage1;
 	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
-	stage1.insert(std::pair<wstring, State*>(L"Move", new IdleState(L"MoveState")));
+	stage1.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
+	stage1.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
+	stage1.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
 
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
-	stage2.insert(std::pair<wstring, State*>(L"Move", new IdleState(L"MoveState")));
+	stage2.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
 
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
 	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
-
 	Enemy* pBoss = new Enemy(this, &stateData->at(1));
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });

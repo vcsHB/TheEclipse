@@ -23,6 +23,7 @@ private:
 	void CreateProjectile(Vec2 dir);
 	Projectile* GenerateProjectile(Vec2 position, Vec2 direction);
 	HealthComponent* healthComponent;
+	float _currentShootCoolTime = 0.f;
 public:
 	PlayerStatus* playerStatus;
 
