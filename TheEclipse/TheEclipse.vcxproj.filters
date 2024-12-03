@@ -200,6 +200,13 @@
     <ClInclude Include="ExpGauge.h">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClInclude>
+    <ClInclude Include="AtkUpgrade.h">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="TargetingState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -344,5 +351,12 @@
     <ClCompile Include="ExpGauge.cpp">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClCompile>
+    <ClCompile Include="AtkUpgrade.cpp">
+      <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="TargetingState.cpp" />
   </ItemGroup>
 </Project>

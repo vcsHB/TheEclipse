@@ -17,6 +17,5 @@ void ExpGauge::Initialize()
 
 void ExpGauge::SetFillAmount(int current, int max)
 {
-
 	_fillImage->SetHorizontalFillAmount(current / (float)max);
 }

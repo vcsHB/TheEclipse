@@ -21,7 +21,9 @@ public:
 private:
 	void CreateProjectile(Vec2 dir);
 	HealthComponent* healthComponent;
-	PlayerStatus* _playerStatus;
+public:
+	PlayerStatus* playerStatus;
+
 
 	//GameScene* currentScene;
 	//HealthComponent* healthComponent;

@@ -42,5 +42,5 @@ int Stat::GetValue()
 		_changedValue += value;
 	}
 	_isValueChanged = false;
-	return 0;
+	return _changedValue;
 }
