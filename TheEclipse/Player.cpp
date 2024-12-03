@@ -26,7 +26,7 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 
-	playerStatus = new PlayerStatus(100, 2, 3, 1, 1, 0);
+	playerStatus = new PlayerStatus(100, 2, 3, 2, 1, 0);
 	status = playerStatus;
 
 	AddComponent<Collider>();
@@ -189,12 +189,28 @@ void Player::Shooting()
 
 void Player::CreateProjectile(Vec2 dir)
 {
+	int projectileAmount = playerStatus->bulletMultipleStat->GetValue();
 
+	Vec2 fireOriginPos = GetPos();
+	fireOriginPos.y -= GetSize().y / 2.f;
+	for (int i = 0; i < projectileAmount; i++)
+	{
+		float x = (-(20.f * 0.5f) * (projectileAmount - 1) + i * 20.f) + fireOriginPos.x;
+		Vec2 generatePos = { x, fireOriginPos.y};
+		GenerateProjectile(generatePos, dir);
+	}
+	
+
+
+}
+
+Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
+{
+	
 	Projectile* pProj = new Projectile(currentScene);
-	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
-	pProj->SetPos(vPos);
-	pProj->SetSize({ 30.f,30.f });
+	
+	pProj->SetPos(position);
+	pProj->SetSize({ 20.f,20.f });
 
 
 	// 도 -> 라디안: PI / 180
@@ -202,10 +218,10 @@ void Player::CreateProjectile(Vec2 dir)
 	//static float angle = 0.f;
 	//pProj->SetAngle(angle * PI / 180); // 2
 	//angle += 10.f;
-	pProj->SetDir(dir);
+	pProj->SetDir(direction);
 	pProj->SetName(L"PlayerBullet");
 	pProj->SetProjectile(status->atkStat->GetValue());
-
-
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
+
+	return pProj;
 }

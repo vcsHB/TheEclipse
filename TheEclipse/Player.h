@@ -3,6 +3,7 @@
 #include "HealthComponent.h"
 class Texture;
 class PlayerStatus;
+class Projectile;
 
 class Player : public Agent
 {
@@ -20,6 +21,7 @@ public:
 	virtual void ExitCollision(Collider* _other);
 private:
 	void CreateProjectile(Vec2 dir);
+	Projectile* GenerateProjectile(Vec2 position, Vec2 direction);
 	HealthComponent* healthComponent;
 public:
 	PlayerStatus* playerStatus;
