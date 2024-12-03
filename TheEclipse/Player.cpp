@@ -24,7 +24,7 @@ Player::Player(WorldSpaceScene* scene)
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
 	playerStatus = new PlayerStatus(100, 2, 3, 2, 1, 0);
 	status = playerStatus;
@@ -35,11 +35,12 @@ Player::Player(WorldSpaceScene* scene)
 	healthComponent = GetComponent<HealthComponent>();
 	healthComponent->SetHp(10);
 	healthComponent->SetOwner(this);
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
-		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(80.f, 0.f),
+		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 5, 0.1f);
+	/*GetComponent<Animator>()->CreateAnimation(L"Player_Idle-Sheet", m_pTex, Vec2(0.f, 150.f),
+		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);*/
+	GetComponent<Animator>()->PlayAnimation(L"PlayerIdle", true);
 	currentScene = scene;
-	
 
 }
 Player::~Player()
