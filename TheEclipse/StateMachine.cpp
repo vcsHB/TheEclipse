@@ -22,7 +22,7 @@ void StateMachine::ChangeState(wstring stateName)
 	currentState->Enter();
 }
 
-void StateMachine::Update()
+void StateMachine::Update(float _dt)
 {
-	currentState->Update();
+	currentState->Update(_dt);
 }

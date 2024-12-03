@@ -39,15 +39,13 @@ Player::Player(WorldSpaceScene* scene)
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 	currentScene = scene;
-	
-
 }
 Player::~Player()
 {
-	Agent::~Agent();
+	//Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
-	
+
 }
 void Player::Update()
 {
@@ -99,6 +97,8 @@ void Player::EnterCollision(Collider* _other)
 	wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetName() == L"EnemyBullet")
 	{
+		
+		
 		if (healthComponent->DecreaseHP(1))
 		{
 			currentScene->m_moveSpeed;
@@ -191,8 +191,10 @@ void Player::CreateProjectile(Vec2 dir)
 {
 
 	Projectile* pProj = new Projectile(currentScene);
+	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
+
 	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
+	//vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({ 30.f,30.f });
 

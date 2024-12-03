@@ -64,11 +64,11 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(expGauge);
 
 
-	Object* pBoss = new Enemy(this);
+	/*Object* pBoss = new Enemy(this);
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");
-	AddObject(pBoss, LAYER::ENEMY);
+	AddObject(pBoss, LAYER::ENEMY);*/
 
 
 	//Object* backGround = new 

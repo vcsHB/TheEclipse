@@ -12,7 +12,7 @@ public:
 	State* Current() {
 		return currentState;
 	}
-	void Update();
+	void Update(float _dt);
 private:
 	std::map< wstring, State*>* states;
 	State* currentState;
