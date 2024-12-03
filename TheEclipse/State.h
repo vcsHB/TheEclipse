@@ -1,5 +1,6 @@
 #pragma once
 class Enemy;
+class Player;
 class State
 {
 public:
@@ -14,7 +15,10 @@ protected:
 protected:
 	wstring name;
 	Enemy* owner;
+	Player* player;
 	float timerforMove = 0;
 	float timerforShot = 0;
+	Vec2 vPos;
+	Vec2 playerPos;
 };
 

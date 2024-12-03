@@ -1,6 +1,7 @@
 #pragma once
 #include "Agent.h"
 #include "HealthComponent.h"
+class Projectile;
 class StateMachine;
 class State;
 class Enemy :
@@ -12,7 +13,7 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-	void CreateProjectile(Vec2 dir);
+	Projectile* CreateProjectile(Vec2 dir);
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);

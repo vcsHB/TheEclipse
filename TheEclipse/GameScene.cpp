@@ -7,13 +7,17 @@
 #include "ResourceManager.h"
 #include "IdleState.h"
 #include "TargetingState.h"
+#include "SpreadState.h"
+#include "ClampingState.h"
 HWND m_hWnd1;
 HWND m_hWnd2;
 void GameScene::Init()
 {
 	map<wstring, State*> stage1;
 	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
-	stage1.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
+	stage1.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
+	stage1.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
+	stage1.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
 
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
@@ -45,7 +49,9 @@ void GameScene::SetNextLevel(int level)
 }
 
 void GameScene::ResetPlayer(int level) {
-	Object* pPlayer = new Player(this);
+	Player* pPlayer = new Player(this);
+
+	player = pPlayer;
 
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
 	pPlayer->SetSize({ 100.f, 100.f });
