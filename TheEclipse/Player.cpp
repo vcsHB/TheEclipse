@@ -44,7 +44,7 @@ Player::Player(WorldSpaceScene* scene)
 }
 Player::~Player()
 {
-	Agent::~Agent();
+	//Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
 	

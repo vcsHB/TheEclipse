@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "AtkUpgrade.h"
-#include "Player.h"
-#include "Status.h"
-#include "PlayerStatus.h"
-#include "Stat.h"
 
 AtkUpgrade::AtkUpgrade(wstring& name, wstring& description, wstring& textureKey, Player* player, int upgradeValue)
 {

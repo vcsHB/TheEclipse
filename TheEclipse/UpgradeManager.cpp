@@ -7,6 +7,7 @@
 #include "Button.h"
 #include "UpgradeData.h"
 #include "AtkUpgrade.h"
+#include "BulletMultipleUpgrade.h"
 
 UpgradeManager::~UpgradeManager()
 {
@@ -58,7 +59,7 @@ void UpgradeManager::SuffleSelectUpgradeData()
     vector<UpgradeData*> values = upgradeList;
     for (int i = values.size() - 1; i > 0; --i) {
         int randomIndex = std::rand() % (i + 1); // 0부터 i까지 난수 생성
-        if (values[randomIndex]->isLocked) continue;
+        if (!values[randomIndex]->isLocked) continue;
         std::swap(values[i], values[randomIndex]); // values[i]와 values[j] 교환
     }
     _data_1 = values[0];
@@ -91,12 +92,16 @@ void UpgradeManager::Initialize(UpgradeButton* btn1, UpgradeButton* btn2, ExpGau
     wstring name, description, texture;
 
     //  이거 함수로 빼
-    name = L"공격력 업1";
     description = L"설명명명";
     texture = L"밍밍";
+    name = L"공격력 업 3";
     upgradeList.push_back(new AtkUpgrade(name, description, texture, _player, 3));
-    name = L"공격력 업2";
+    name = L"공격력 업 4";
     upgradeList.push_back(new AtkUpgrade(name, description, texture, _player, 4));
+    name = L"투사체 증가";
+    upgradeList.push_back(new BulletMultipleUpgrade(name, description, texture, _player, 1));
+    name = L"투사체 증가 2";
+    upgradeList.push_back(new BulletMultipleUpgrade(name, description, texture, _player, 2));
     //upgradeList.push_back(new AtkUpgrade(L"공격력 업2", L"설명인..", L"TextureMing", _player, 3));
 
     

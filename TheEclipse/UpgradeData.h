@@ -1,4 +1,9 @@
 #pragma once
+
+#include "Player.h"
+#include "Status.h"
+#include "PlayerStatus.h"
+#include "Stat.h"
 class Player;
 class UpgradeData
 {
@@ -17,8 +22,6 @@ public:
 
 	int upgradeValue;
 	bool isLocked = true;
-
-
 
 
 public:

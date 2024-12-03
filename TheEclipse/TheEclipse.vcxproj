@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Agent.h" />
     <ClInclude Include="AtkUpgrade.h" />
+    <ClInclude Include="BulletMultipleUpgrade.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AtkUpgrade.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="BulletMultipleUpgrade.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CanvasComponent.cpp" />
