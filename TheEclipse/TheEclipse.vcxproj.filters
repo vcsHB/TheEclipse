@@ -200,16 +200,12 @@
     <ClInclude Include="ExpGauge.h">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClInclude>
-    <ClInclude Include="AtkUpgrade.h">
-      <Filter>Engine\03. Object\UpgradeSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="IdleState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="IdleState.h" />
     <ClInclude Include="TargetingState.h" />
-    <ClInclude Include="BulletMultipleUpgrade.h">
-      <Filter>Engine\03. Object\UpgradeSystem</Filter>
-    </ClInclude>
+    <ClInclude Include="SpreadState.h" />
+    <ClInclude Include="ClampingState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -354,15 +350,11 @@
     <ClCompile Include="ExpGauge.cpp">
       <Filter>Engine\03. Object\UISystem\UIs</Filter>
     </ClCompile>
-    <ClCompile Include="AtkUpgrade.cpp">
-      <Filter>Engine\03. Object\UpgradeSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="TargetingState.cpp" />
-    <ClCompile Include="BulletMultipleUpgrade.cpp">
-      <Filter>Engine\03. Object\UpgradeSystem</Filter>
-    </ClCompile>
+    <ClCompile Include="SpreadState.cpp" />
+    <ClCompile Include="ClampingState.cpp" />
   </ItemGroup>
 </Project>

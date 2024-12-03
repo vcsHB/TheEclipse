@@ -1,12 +1,14 @@
 #pragma once
-class TargetingState :
+class ClampingState :
 	public State
 {
 public:
-	TargetingState(wstring name) :State(name) {};
+	ClampingState(wstring name) :State(name) {};
 	void Enter() override;
 	void Exit() override;
+
 protected:
 	void Movement(float _dt) override;
 	void Shooting(float _dt) override;
-};	
+};
+

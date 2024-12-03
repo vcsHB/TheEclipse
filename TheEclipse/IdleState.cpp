@@ -15,12 +15,23 @@ void IdleState::Exit() {
 }
 
 
-void IdleState::Movement() {
-	if (timer > 5.f)
-		owner->stateMachine->ChangeState(L"Move");
-		//owner->GetStateMachine()->ChangeState(L"Move");
+void IdleState::Movement(float _dt) {
+
+	timerforMove += _dt;
+
+	if (owner->GetPos().x >= SCREEN_WIDTH || owner->GetPos().x < 0)
+	{
+		owner->GetStateMachine()->ChangeState(L"Target");
+	}
+
+
+	if (timerforMove > 4.f)
+	{
+		owner->GetStateMachine()->ChangeState(L"Spread");
+	}
 }
 
-void IdleState::Shooting() {
-	//this->owner;
+void IdleState::Shooting(float _dt) {
+
+
 }

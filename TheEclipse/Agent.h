@@ -3,20 +3,23 @@
 #include "Core.h"
 #include "GameScene.h"
 class Status;
+class Collider;
 class Texture;
 
 class Agent :
 	public Object
-{  
-public :
+{
+public:
 	virtual ~Agent() override;
 public:
-	virtual void Movement();
 	virtual void Shooting();
+	virtual void Movement();
+	virtual void KnockBack();
 public:
 	WorldSpaceScene* currentScene;
 	Status* status;
 	Texture* m_pTex = nullptr;
 	HWND m_hWnd = GET_SINGLE(Core)->GetHwnd();
+	Collider* colliderComponent;
 };
 
