@@ -53,7 +53,6 @@ void Projectile::Update()
 	//vPos = originPos;
 	//vPos -= currentScene->m_WorldPosition *fDT;
 	//Object::SetPos(vPos);
-
 	Vec2 vSize = GetSize();
 	if (vPos.x > 1000 || vPos.x < -1000 || vPos.y < -700 || vPos.y > 900)
 	{

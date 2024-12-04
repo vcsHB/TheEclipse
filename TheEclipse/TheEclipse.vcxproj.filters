@@ -206,6 +206,7 @@
     <ClInclude Include="TargetingState.h" />
     <ClInclude Include="SpreadState.h" />
     <ClInclude Include="ClampingState.h" />
+    <ClInclude Include="CrackLine.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -356,5 +357,6 @@
     <ClCompile Include="TargetingState.cpp" />
     <ClCompile Include="SpreadState.cpp" />
     <ClCompile Include="ClampingState.cpp" />
+    <ClCompile Include="CrackLine.cpp" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #pragma once
-class Projectile;
+class CrackLine;
 class ClampingState :
 	public State
 {
@@ -12,8 +12,9 @@ protected:
 	void Movement(float _dt) override;
 	void Shooting(float _dt) override;
 private:
-	Projectile* projectiles[2];
-	float waittime = 0;
+	CrackLine* crackLines[2];
+	CrackLine* shootingCrackLines[4];
+	int crackLineIdx = 0;
 
 };
 

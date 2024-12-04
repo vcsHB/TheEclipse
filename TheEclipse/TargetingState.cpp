@@ -31,7 +31,7 @@ void TargetingState::Enter()
 
 
 void TargetingState::Exit()
-{
+{	
 	waittime = 0;
 	State::Exit();
 }

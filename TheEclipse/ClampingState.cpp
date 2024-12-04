@@ -4,12 +4,12 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "StateMachine.h"
-#include "Projectile.h"
 #include "ResourceManager.h"
 #include "Animator.h"
 #include "Animation.h"
 #include "EventManager.h"
 #include "Collider.h"	
+#include "CrackLine.h"
 
 
 void ClampingState::Enter()
@@ -18,13 +18,8 @@ void ClampingState::Enter()
 
 	for (int i = 0; i < 2; i++)
 	{
-		Projectile* pProj = owner->CreateProjectile({ 0,0 });
-		pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLine", L"Texture\\CrackLine.bmp");
+		CrackLine* pProj = owner->CreateCrackLine();
 
-		pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLine", pProj->m_pTex, Vec2(0.f, 0.f),
-			Vec2(32.f, 512.f), Vec2(32.f, 0.f), 8, 0.03f, true);
-		pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLine", true);
-		pProj->isAnimated = true;
 		pProj->GetComponent<Collider>()->SetSize({ 30, 150 });
 		if (i == 0)
 		{
@@ -35,7 +30,15 @@ void ClampingState::Enter()
 			pProj->SetPos({ player->GetPos().x + 200 , playerPos.y + 350 });
 		}
 
-		projectiles[i] = pProj;
+		crackLines[i] = pProj;
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		CrackLine* pProj = owner->CreateCrackLine();
+		pProj->SetPos(owner->GetPos());
+
+		shootingCrackLines[i] = pProj;
 	}
 }
 
@@ -43,9 +46,8 @@ void ClampingState::Exit()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		GET_SINGLE(EventManager)->DeleteObject(projectiles[i]);
+		GET_SINGLE(EventManager)->DeleteObject(crackLines[i]);
 	}
-	waittime = 0;
 	State::Exit();
 }
 
@@ -54,14 +56,22 @@ void ClampingState::Movement(float _dt)
 	timerforMove += _dt;
 	if (timerforMove > 10.f)
 		owner->GetStateMachine()->ChangeState(L"Idle");
+
+
 }
 
 void ClampingState::Shooting(float _dt)
 {
+
 	timerforShot += _dt;
-	if (timerforShot > 2)
+
+	if ((int)timerforShot % 2 == 0)
 	{
-		timerforShot = 0;
+		Vec2 dir =
+		{ player->GetPos().x , owner->GetPos().y };
+
 
 	}
+
+
 }

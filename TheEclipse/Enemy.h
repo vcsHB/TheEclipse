@@ -2,6 +2,7 @@
 #include "Agent.h"
 #include "HealthComponent.h"
 class Projectile;
+class CrackLine;
 class StateMachine;
 class State;
 class Enemy :
@@ -14,6 +15,7 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	Projectile* CreateProjectile(Vec2 dir);
+	CrackLine* CreateCrackLine();
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
