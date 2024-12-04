@@ -33,12 +33,14 @@ public:
 	int _damage;
 	bool isAnimated = false;
 	float moveSpeed = 1.f;
+	float lifeTime = 5.f;
 private:
 	//float m_dir;
 	WorldSpaceScene* currentScene;
 	float m_angle;
 	Vec2 m_vDir;
 	Vec2 originPos;
+	float _currentLifeTime = 0.f;
 
 
 };
