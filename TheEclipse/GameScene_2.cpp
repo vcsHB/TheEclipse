@@ -12,15 +12,22 @@
 #include "UpgradeButton.h"
 #include "UpgradeManager.h"
 #include "ExpGauge.h"
+#include "State.h"
+#include "IdleState.h"
+#include "SpreadState.h"
+#include "TargetingState.h"
+#include "ClampingState.h"
+#include "PoolManager.h"
 
 void GameScene_2::Init()
 {
 	HWND m_hWnd1;
 	HWND m_hWnd2;
-	Object* pPlayer = new Player(this);
+	Player* pPlayer = new Player(this);
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
 	pPlayer->SetSize({ 100.f, 100.f });
 	pPlayer->SetName(L"Player");
+	player = pPlayer;
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Canvas* canvas = new Canvas();
@@ -54,6 +61,7 @@ void GameScene_2::Init()
 	upgradeButton_1->SetActive(false);
 
 	RectTransform* expGauge = new RectTransform("ExpGauge");
+	expGauge->SetPos({ 250, 630 });
 	expGauge->AddComponent<ExpGauge>();
 
 	canvas->AddRectPanel(healthEdgeUI);
@@ -63,12 +71,36 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(upgradeButton_2);
 	canvas->AddRectPanel(expGauge);
 
+	// === Enemy Setting
+	map<wstring, State*> stage1;
+	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
+	stage1.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
+	stage1.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
+	stage1.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
 
-	/*Object* pBoss = new Enemy(this);
+	map <wstring, State*> stage2;
+	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
+	stage2.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
+
+	stateData = new map<int, map<wstring, State*>>();
+	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
+	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
+	Enemy* pBoss = new Enemy(this, &stateData->at(1));
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");
-	AddObject(pBoss, LAYER::ENEMY);*/
+	AddObject(pBoss, LAYER::ENEMY); 
+
+	// ===== Pool Setting =====
+	//IPoolable* poolable = new T;
+	for (int i = 0; i < 40; i++)
+	{
+		Projectile* projectile = new Projectile(this);
+		projectile->enabled = false;
+		PoolManager::AddPool(PoolingType::Projectile, projectile);
+	}
+	//PoolManager::AddPool<Projectile>(PoolingType::Projectile, 40, poolable);
+
 
 
 	//Object* backGround = new 
@@ -76,7 +108,8 @@ void GameScene_2::Init()
 
 		upgradeButton_1->GetComponent<UpgradeButton>(),
 		upgradeButton_2->GetComponent<UpgradeButton>(),
-		expGauge->GetComponent<ExpGauge>()
+		expGauge->GetComponent<ExpGauge>(),
+		pPlayer
 	);
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);

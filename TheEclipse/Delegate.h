@@ -6,6 +6,15 @@
 template<typename... Args>
 class Delegate {
 public:
+
+    /*~Delegate()
+    {
+        for (auto func : functions)
+        {
+            delete func;
+        }
+    }*/
+public:
     using FuncType = std::function<void(Args...)>;
 
     void Add(FuncType func) {
