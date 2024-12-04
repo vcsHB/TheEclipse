@@ -13,6 +13,7 @@
 #include "Status.h"
 #include "PlayerStatus.h"
 #include "Stat.h"
+#include "PoolManager.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -187,7 +188,7 @@ void Player::CreateProjectile(Vec2 dir)
 Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
 {
 	
-	Projectile* pProj = new Projectile(currentScene);
+	Projectile* pProj = dynamic_cast<Projectile*>(PoolManager::Pop(PoolingType::Projectile));
 	
 	pProj->SetPos(position);
 	pProj->SetSize({ 20.f,20.f });

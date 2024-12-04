@@ -17,6 +17,7 @@
 #include "SpreadState.h"
 #include "TargetingState.h"
 #include "ClampingState.h"
+#include "PoolManager.h"
 
 void GameScene_2::Init()
 {
@@ -88,7 +89,17 @@ void GameScene_2::Init()
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");
-	AddObject(pBoss, LAYER::ENEMY);
+	AddObject(pBoss, LAYER::ENEMY); 
+
+	// ===== Pool Setting =====
+	//IPoolable* poolable = new T;
+	for (int i = 0; i < 40; i++)
+	{
+		Projectile* projectile = new Projectile(this);
+		projectile->enabled = false;
+		PoolManager::AddPool(PoolingType::Projectile, projectile);
+	}
+	//PoolManager::AddPool<Projectile>(PoolingType::Projectile, 40, poolable);
 
 
 

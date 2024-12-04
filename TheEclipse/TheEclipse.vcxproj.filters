@@ -50,6 +50,9 @@
     <Filter Include="Engine\03. Object\UISystem\UIs">
       <UniqueIdentifier>{8b454661-3e54-44c8-ab04-85e2885d100c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\02. Manager\ObjectPool">
+      <UniqueIdentifier>{dc267d36-7b12-4512-b3e0-30acd188719e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -218,6 +221,12 @@
     <ClInclude Include="BulletMultipleUpgrade.h">
       <Filter>Engine\03. Object\UpgradeSystem</Filter>
     </ClInclude>
+    <ClInclude Include="PoolManager.h">
+      <Filter>Engine\02. Manager\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="IPoolable.h">
+      <Filter>Engine\02. Manager\ObjectPool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -379,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="BulletMultipleUpgrade.cpp">
       <Filter>Engine\03. Object\UpgradeSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolManager.cpp">
+      <Filter>Engine\02. Manager\ObjectPool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

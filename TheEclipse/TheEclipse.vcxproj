@@ -177,9 +177,11 @@
     <ClInclude Include="HealthGauge.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="IPoolable.h" />
     <ClInclude Include="PlayerSkill.h" />
     <ClInclude Include="PlayerSkillController.h" />
     <ClInclude Include="PlayerStatus.h" />
+    <ClInclude Include="PoolManager.h" />
     <ClInclude Include="RectTransform.h" />
     <ClInclude Include="SpreadState.h" />
     <ClInclude Include="State.h" />
@@ -257,6 +259,7 @@
     <ClCompile Include="PlayerSkill.cpp" />
     <ClCompile Include="PlayerSkillController.cpp" />
     <ClCompile Include="PlayerStatus.cpp" />
+    <ClCompile Include="PoolManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RectTransform.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

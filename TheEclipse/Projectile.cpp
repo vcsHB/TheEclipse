@@ -10,6 +10,15 @@
 #include "UpgradeManager.h"
 #include "Animation.h"
 #include "Animator.h"
+#include "PoolManager.h"
+
+Projectile::Projectile()
+	: m_angle(0.f)
+	, m_vDir(1.f, 1.f)
+	, isAnimated(false)
+{
+	
+}
 
 Projectile::Projectile(WorldSpaceScene* scene)
 //	: m_dir(-1.f)
@@ -54,8 +63,8 @@ void Projectile::Update()
 	Vec2 vSize = GetSize();
 	if (_currentLifeTime >= lifeTime)
 	{
-
-		GET_SINGLE(EventManager)->DeleteObject(this);
+		PoolManager::Push(this);
+		//GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }
 
@@ -117,4 +126,19 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
+}
+
+PoolingType Projectile::GetPoolingType()
+{
+	return PoolingType::Projectile;
+}
+
+Object* Projectile::GetPoolObject()
+{
+	return this;
+}
+
+void Projectile::ResetItem()
+{
+	
 }
