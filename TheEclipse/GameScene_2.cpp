@@ -94,7 +94,7 @@ void GameScene_2::Init()
 	// ===== Pool Setting =====
 	PoolManager::Initialize();
 	//IPoolable* poolable = new T;
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 90; i++)
 	{
 		Projectile* projectile = new Projectile(this);
 		projectile->enabled = false;
