@@ -37,6 +37,9 @@ void StatusUpgrade::ApplyUpgradeEffect()
 	case UpgradeStatusType::BulletSpeed:
 		_player->playerStatus->bulletSpeedStat->AddModifier(upgradeValue);
 		break;
+	case UpgradeStatusType::FireSpeed:
+		_player->playerStatus->fireSpeedStat->AddModifier(upgradeValue);
+		break;
 
 	case UpgradeStatusType::ShieldSpeed:
 		_player->playerStatus->shieldPowerStat->AddModifier(upgradeValue);

@@ -8,6 +8,7 @@
 #include "UpgradeData.h"
 #include "AtkUpgrade.h"
 #include "BulletMultipleUpgrade.h"
+#include "StatusUpgrade.h"
 
 UpgradeManager::~UpgradeManager()
 {
@@ -92,16 +93,15 @@ void UpgradeManager::Initialize(UpgradeButton* btn1, UpgradeButton* btn2, ExpGau
     wstring name, description, texture;
 
     //  이거 함수로 빼
-    description = L"설명명명";
     texture = L"밍밍";
-    name = L"공격력 업 3";
-    upgradeList.push_back(new AtkUpgrade(name, description, texture, _player, 3));
-    name = L"공격력 업 4";
-    upgradeList.push_back(new AtkUpgrade(name, description, texture, _player, 4));
-    name = L"투사체 증가";
-    upgradeList.push_back(new BulletMultipleUpgrade(name, description, texture, _player, 1));
-    name = L"투사체 증가 2";
-    upgradeList.push_back(new BulletMultipleUpgrade(name, description, texture, _player, 2));
+    name = L"체력 증가";
+    description = L"";
+    AddStatusUpgrade(L"체력 강화", L"최대 체력을 10 증가시킵니다", L"", UpgradeStatusType::Health, 10);
+    AddStatusUpgrade(L"강화마법", L"공격력을 1 증가시킵니다", L"", UpgradeStatusType::Attack, 1);
+    AddStatusUpgrade(L"신속", L"이동 속도를 1 증가시킵니다", L"", UpgradeStatusType::MoveSpeed, 1);
+    AddStatusUpgrade(L"다중 탄환", L"마법 공격 탄환이 1개 증가합니다", L"", UpgradeStatusType::BulletMultiple, 1);
+    AddStatusUpgrade(L"빠른 시전", L"마법 영창 시간이 단축됩니다", L"", UpgradeStatusType::FireSpeed, 4);
+    //upgradeList.push_back(new StatusUpgrade(name, description, texture, _player, 2, UpgradeStatusType::Health));
     //upgradeList.push_back(new AtkUpgrade(L"공격력 업2", L"설명인..", L"TextureMing", _player, 3));
 
     
@@ -131,6 +131,11 @@ void UpgradeManager::Select(int index)
         _data_2->ApplyUpgradeEffect();
 
     }
+}
+
+void UpgradeManager::AddStatusUpgrade(wstring name, wstring description, wstring textureName, UpgradeStatusType type, int value)
+{
+    upgradeList.push_back(new StatusUpgrade(name, description, textureName, _player, value, UpgradeStatusType::Health));
 }
 
 

@@ -8,6 +8,7 @@ enum class UpgradeStatusType
 	MoveSpeed,
 	BulletMultiple,
 	BulletSpeed,
+	FireSpeed,
 	ShieldSpeed
 
 };

@@ -4,7 +4,7 @@ class UpgradeData;
 class UpgradeButton;
 class ExpGauge;
 class Player;
-
+enum class UpgradeStatusType;
 class UpgradeManager
 {
 	DECLARE_SINGLE(UpgradeManager);
@@ -41,5 +41,6 @@ public:
 
 	void GainExp(int amount); // 경험치 획득처. 아슬아슬한 회피기동, 적 피격
 	void Select(int index);
+	void AddStatusUpgrade(wstring name, wstring description, wstring textureName, UpgradeStatusType type, int value);
 };
 

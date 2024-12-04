@@ -96,17 +96,7 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	std::cout << "Enemy Enter" << std::endl;
-	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"EnemyBullet")
-	{
-		if (healthComponent->DecreaseHP(1))
-		{
-			currentScene->m_moveSpeed;
-			GET_SINGLE(EventManager)->DeleteObject(this);
-		}
-	}
+	
 }
 
 void Player::StayCollision(Collider* _other)

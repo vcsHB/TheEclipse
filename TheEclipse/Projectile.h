@@ -33,7 +33,7 @@ public:
 	int _damage;
 	bool isAnimated = false;
 	float moveSpeed = 1.f;
-	float lifeTime = 5.f;
+	float lifeTime = 2.f;
 private:
 	//float m_dir;
 	WorldSpaceScene* currentScene;
