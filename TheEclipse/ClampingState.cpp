@@ -33,13 +33,7 @@ void ClampingState::Enter()
 		crackLines[i] = pProj;
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		CrackLine* pProj = owner->CreateCrackLine();
-		pProj->SetPos(owner->GetPos());
 
-		shootingCrackLines[i] = pProj;
-	}
 }
 
 void ClampingState::Exit()
@@ -55,23 +49,12 @@ void ClampingState::Movement(float _dt)
 {
 	timerforMove += _dt;
 	if (timerforMove > 10.f)
-		owner->GetStateMachine()->ChangeState(L"Idle");
+		owner->GetStateMachine()->ChangeState(L"Side");
 
 
 }
 
 void ClampingState::Shooting(float _dt)
 {
-
-	timerforShot += _dt;
-
-	if ((int)timerforShot % 2 == 0)
-	{
-		Vec2 dir =
-		{ player->GetPos().x , owner->GetPos().y };
-
-
-	}
-
 
 }

@@ -9,9 +9,9 @@ void SceneManager::Init()
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene",std::make_shared<GameScene>());
-	RegisterScene(L"GameScene2",std::make_shared<GameScene_2>());
+	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
+	RegisterScene(L"GameScene", std::make_shared<GameScene>());
+	RegisterScene(L"GameScene2", std::make_shared<GameScene_2>());
 
 	// ¾À ·Îµå
 	LoadScene(L"GameScene2");
@@ -36,7 +36,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 {
 	if (_sceneName.empty() || _scene == nullptr)
 		return;
-	m_mapScenes.insert(m_mapScenes.end(), {_sceneName, _scene});
+	m_mapScenes.insert(m_mapScenes.end(), { _sceneName, _scene });
 }
 
 void SceneManager::LoadScene(const wstring& _sceneName)

@@ -9,8 +9,11 @@
 #include "TargetingState.h"
 #include "SpreadState.h"
 #include "ClampingState.h"
-HWND m_hWnd1;
-HWND m_hWnd2;
+#include "SideSpreadState.h"
+#include "Projectile.h"
+#include "PoolManager.h"
+
+
 void GameScene::Init()
 {
 	map<wstring, State*> stage1;
@@ -18,6 +21,8 @@ void GameScene::Init()
 	stage1.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
 	stage1.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
 	stage1.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
+	stage1.insert(std::pair<wstring, State*>(L"Side", new SideSpreadState(L"SideSpreadState")));
+
 
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
@@ -28,6 +33,13 @@ void GameScene::Init()
 	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
 
 	//Object* backGround = new 
+
+	for (int i = 0; i < 120; i++)
+	{
+		Projectile* projectile = new Projectile(this);
+		projectile->enabled = false;
+		PoolManager::AddPool(PoolingType::Projectile, projectile);
+	}
 
 	SetNextLevel(1);
 

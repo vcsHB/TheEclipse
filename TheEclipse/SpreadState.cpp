@@ -5,9 +5,6 @@
 #include "StateMachine.h"
 #include "Projectile.h"
 
-Vec2 dirArr[4] = {  };
-int atkIdx = 0;
-int _bulletCount = 24;
 void SpreadState::Enter()
 {
 	State::Enter();
@@ -53,7 +50,7 @@ void SpreadState::Shooting(float _dt) {
 		Vec2 dir;
 		for (int i = 0; i < 24; i++)
 		{
-			float angle = 360.f / _bulletCount * i;
+			float angle = 360.f / 24 * i;
 			float x = cosf(angle * PI / 180);
 			float y = sinf(angle * PI / 180);
 			{

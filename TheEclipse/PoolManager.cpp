@@ -32,7 +32,7 @@ void PoolManager::Push(IPoolable* poolable)
 		int id = poolable->GetPoolObject()->GetId();
 		if (enabledPool.find(id) == enabledPool.end())
 		{
-			cout << "POOL ERROR : this Object is not regist in Pool" << "[ ID : " << id << " ]";
+			//Scout << "POOL ERROR : this Object is not regist in Pool" << "[ ID : " << id << " ]";
 			return;
 		}
 

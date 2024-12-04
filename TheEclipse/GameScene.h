@@ -15,5 +15,8 @@ public:
 	void SpawnBoss(int level);
 public:
 	map<int, map<wstring, State*>>* stateData;
+private:
+	HWND m_hWnd1;
+	HWND m_hWnd2;
 };
 

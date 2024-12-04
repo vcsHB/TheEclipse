@@ -15,6 +15,7 @@
 #include "StateMachine.h"
 #include "Status.h"
 #include "Stat.h"
+#include "PoolManager.h"
 
 Enemy::Enemy(WorldSpaceScene* scene, map<wstring, State*>* states)
 {
@@ -103,7 +104,7 @@ StateMachine* Enemy::GetStateMachine()
 
 Projectile* Enemy::CreateProjectile(Vec2 dir)
 {
-	Projectile* pProj = new Projectile(currentScene);
+	Projectile* pProj = new Projectile(currentScene);   //dynamic_cast<Projectile*>(PoolManager::Pop(PoolingType::Projectile));
 
 
 	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"SpinSword", L"Texture\\SpinSword.bmp");
@@ -111,6 +112,7 @@ Projectile* Enemy::CreateProjectile(Vec2 dir)
 	pProj->GetComponent<Animator>()->CreateAnimation(L"SpinSword", pProj->m_pTex, Vec2(0.f, 0.f),
 		Vec2(32.f, 32.f), Vec2(32.f, 0.f), 8, 0.03f, true);
 	pProj->GetComponent<Animator>()->PlayAnimation(L"SpinSword", true);
+
 
 
 	Vec2 vPos = GetPos();

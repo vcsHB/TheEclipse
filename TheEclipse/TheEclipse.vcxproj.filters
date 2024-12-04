@@ -227,6 +227,8 @@
     <ClInclude Include="IPoolable.h">
       <Filter>Engine\02. Manager\ObjectPool</Filter>
     </ClInclude>
+    <ClInclude Include="CrackLine.h" />
+    <ClInclude Include="SideSpreadState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -392,5 +394,11 @@
     <ClCompile Include="PoolManager.cpp">
       <Filter>Engine\02. Manager\ObjectPool</Filter>
     </ClCompile>
+    <ClCompile Include="CrackLine.cpp" />
+    <ClCompile Include="SideSpreadState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

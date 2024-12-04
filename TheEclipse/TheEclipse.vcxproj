@@ -184,6 +184,7 @@
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="PoolManager.h" />
     <ClInclude Include="RectTransform.h" />
+    <ClInclude Include="SideSpreadState.h" />
     <ClInclude Include="SpreadState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SideSpreadState.cpp" />
     <ClCompile Include="SpreadState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -290,6 +292,10 @@
   <ItemGroup>
     <Image Include="TheEclipse.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
