@@ -1,6 +1,6 @@
 #pragma once
 //#include <queue>
-//#include <map>
+#include <unordered_map>
 #include <type_traits> // std::is_base_of
 #include "SceneManager.h"
 #include "Scene.h"
@@ -18,8 +18,8 @@ class PoolManager
 private:
 	//static std::map<PoolingType, std::queue<IPoolable*>> pool;
 	//static std::map<int, IPoolable*> enabledPool;
-	static std::map<PoolingType, std::queue<IPoolable*>> pool;
-	static std::map<int, IPoolable*> enabledPool;
+	static std::unordered_map<PoolingType, std::queue<IPoolable*>> pool;
+	static std::unordered_map<int, IPoolable*> enabledPool;
 
 public:
 	//template <poolable T>
@@ -38,6 +38,8 @@ public:
 	//	}
 	//}
 
+	static void Initialize();
+
 	static void AddPool(PoolingType type, IPoolable* poolable)
 	{
 		if (pool.find(type) == pool.end())
@@ -45,6 +47,7 @@ public:
 			pool[type] = std::queue<IPoolable*>();
 		}
 		pool[type].push(poolable);
+		cout << "นึ";
 		GET_SINGLE(SceneManager)->GetCurrentScene().get()->AddObject(poolable->GetPoolObject(), LAYER::PROJECTILE);
 	}
 

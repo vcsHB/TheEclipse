@@ -92,8 +92,9 @@ void GameScene_2::Init()
 	AddObject(pBoss, LAYER::ENEMY); 
 
 	// ===== Pool Setting =====
+	PoolManager::Initialize();
 	//IPoolable* poolable = new T;
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		Projectile* projectile = new Projectile(this);
 		projectile->enabled = false;

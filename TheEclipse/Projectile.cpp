@@ -108,7 +108,7 @@ void Projectile::EnterCollision(Collider* _other)
 		//std::cout << "Proj Enter" << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
-		GET_SINGLE(EventManager)->DeleteObject(this);
+		PoolManager::Push(this);
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
 	{
@@ -116,7 +116,7 @@ void Projectile::EnterCollision(Collider* _other)
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GET_SINGLE(UpgradeManager)->GainExp(4);
-		GET_SINGLE(EventManager)->DeleteObject(this);
+		PoolManager::Push(this);
 	}
 }
 
@@ -140,5 +140,5 @@ Object* Projectile::GetPoolObject()
 
 void Projectile::ResetItem()
 {
-	
+	_currentLifeTime = 0.f;
 }
