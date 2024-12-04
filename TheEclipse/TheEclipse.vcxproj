@@ -164,6 +164,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AtkUpgrade.h" />
+    <ClInclude Include="BulletMultipleUpgrade.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
@@ -173,17 +175,21 @@
     <ClInclude Include="ExpGauge.h" />
     <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="HealthGauge.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="IPoolable.h" />
     <ClInclude Include="PlayerSkill.h" />
     <ClInclude Include="PlayerSkillController.h" />
     <ClInclude Include="PlayerStatus.h" />
+    <ClInclude Include="PoolManager.h" />
     <ClInclude Include="RectTransform.h" />
     <ClInclude Include="SpreadState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="Stat.h" />
+    <ClInclude Include="StatusUpgrade.h" />
     <ClInclude Include="TargetingState.h" />
     <ClInclude Include="TextPro.h" />
     <ClInclude Include="TheEclipse.h" />
@@ -225,7 +231,9 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="AtkUpgrade.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="BulletMultipleUpgrade.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CanvasComponent.cpp" />
@@ -243,6 +251,7 @@
     <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="HealthGauge.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -252,6 +261,7 @@
     <ClCompile Include="PlayerSkill.cpp" />
     <ClCompile Include="PlayerSkillController.cpp" />
     <ClCompile Include="PlayerStatus.cpp" />
+    <ClCompile Include="PoolManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RectTransform.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
@@ -263,6 +273,7 @@
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Stat.cpp" />
+    <ClCompile Include="StatusUpgrade.cpp" />
     <ClCompile Include="TargetingState.cpp" />
     <ClCompile Include="TextPro.cpp" />
     <ClCompile Include="Texture.cpp" />

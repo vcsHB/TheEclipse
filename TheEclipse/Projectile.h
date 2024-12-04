@@ -1,11 +1,13 @@
 #pragma once
 #include "Object.h"
 #include "GameScene.h"
+#include "IPoolable.h"
 class Texture;
 
-class Projectile : public Object
+class Projectile : public Object, public IPoolable
 {
 public:
+	Projectile();
 	Projectile(WorldSpaceScene* scene);
 	~Projectile();
 	void Update() override;
@@ -28,17 +30,24 @@ public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
+
+public:
+	PoolingType GetPoolingType() override;
+	Object* GetPoolObject() override;
+	void ResetItem() override;
 public:
 	Texture* m_pTex;
 	int _damage;
 	bool isAnimated = false;
 	float moveSpeed = 1.f;
+	float lifeTime = 2.f;
 private:
 	//float m_dir;
 	WorldSpaceScene* currentScene;
 	float m_angle;
 	Vec2 m_vDir;
 	Vec2 originPos;
+	float _currentLifeTime = 0.f;
 
 
 };

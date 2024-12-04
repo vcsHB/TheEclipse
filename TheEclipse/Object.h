@@ -17,7 +17,11 @@ public:
 	const Vec2& GetPos() const { return m_vPos; }
 	const Vec2& GetSize() const { return m_vSize; }
 	const bool& GetIsDead() const { return m_IsDie; }
+	const void SetActive(bool value) { enabled = value; }
 	void SetDead() { m_IsDie = true; }
+
+	const void SetId(int id) { _objectID = id; }
+	int GetId() { return _objectID; }
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
@@ -28,7 +32,9 @@ public:
 
 public:
 	bool m_IsDie;
+	bool enabled = true;
 	wstring m_name;
+
 public:
 	template<typename T>
 	void AddComponent()
@@ -50,6 +56,7 @@ public:
 		return component;
 	}
 private:
+	int _objectID;
 	//POINT m_ptPos;
 	//POINT m_ptSize;
 	Vec2 m_vPos = { 0,0 };

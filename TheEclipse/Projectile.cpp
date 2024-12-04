@@ -10,6 +10,15 @@
 #include "UpgradeManager.h"
 #include "Animation.h"
 #include "Animator.h"
+#include "PoolManager.h"
+
+Projectile::Projectile()
+	: m_angle(0.f)
+	, m_vDir(1.f, 1.f)
+	, isAnimated(false)
+{
+	
+}
 
 Projectile::Projectile(WorldSpaceScene* scene)
 //	: m_dir(-1.f)
@@ -34,6 +43,7 @@ Projectile::~Projectile()
 
 void Projectile::Update()
 {
+	_currentLifeTime += GET_SINGLE(TimeManager)->GetDT();
 	Vec2 vPos = GetPos();
 
 	// 삼각함수의 단위가 2가지가 있다.
@@ -41,12 +51,8 @@ void Projectile::Update()
 	//vPos.x += cosf(m_angle) * 500.f * fDT;
 	//vPos.y += sinf(m_angle) * 500.f * fDT;
 
-
 	vPos.x += (m_vDir.x * 200.f * fDT * moveSpeed) - (currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x);// -currentScene->m_WorldPosition.x);
 	vPos.y += (m_vDir.y * 200.f * fDT * moveSpeed) - (currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y);// -currentScene->m_WorldPosition.y);
-
-	//vPos.x -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.x;
-	//vPos.y -= currentScene->m_moveSpeed * fDT * currentScene->m_deltaPos.y;
 
 	Object::SetPos(vPos);
 
@@ -54,9 +60,10 @@ void Projectile::Update()
 	//vPos -= currentScene->m_WorldPosition *fDT;
 	//Object::SetPos(vPos);
 	Vec2 vSize = GetSize();
-	if (vPos.x > 1000 || vPos.x < -1000 || vPos.y < -700 || vPos.y > 900)
+	if (_currentLifeTime >= lifeTime)
 	{
-		GET_SINGLE(EventManager)->DeleteObject(this);
+		PoolManager::Push(this);
+		//GET_SINGLE(EventManager)->DeleteObject(this);
 	}
 }
 
@@ -118,4 +125,19 @@ void Projectile::StayCollision(Collider* _other)
 
 void Projectile::ExitCollision(Collider* _other)
 {
+}
+
+PoolingType Projectile::GetPoolingType()
+{
+	return PoolingType::Projectile;
+}
+
+Object* Projectile::GetPoolObject()
+{
+	return this;
+}
+
+void Projectile::ResetItem()
+{
+	
 }

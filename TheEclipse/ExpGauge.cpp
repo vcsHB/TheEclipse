@@ -8,7 +8,7 @@ void ExpGauge::OnEnable()
 {
 	_owner->AddComponent<Image>();
 	_fillImage = _owner->GetComponent<Image>();
-	_fillImage->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Upgrade_Panel", L"Texture\\Upgrade_Panel.bmp"));
+	_fillImage->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeFill", L"Texture\\Texture\\Gauge_Fill.bmp"));
 }
 
 void ExpGauge::Initialize()
@@ -17,6 +17,5 @@ void ExpGauge::Initialize()
 
 void ExpGauge::SetFillAmount(int current, int max)
 {
-
 	_fillImage->SetHorizontalFillAmount(current / (float)max);
 }

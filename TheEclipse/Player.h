@@ -3,6 +3,7 @@
 #include "HealthComponent.h"
 class Texture;
 class PlayerStatus;
+class Projectile;
 
 class Player : public Agent
 {
@@ -20,8 +21,12 @@ public:
 	virtual void ExitCollision(Collider* _other);
 private:
 	void CreateProjectile(Vec2 dir);
+	Projectile* GenerateProjectile(Vec2 position, Vec2 direction);
 	HealthComponent* healthComponent;
-	PlayerStatus* _playerStatus;
+	float _currentShootCoolTime = 0.f;
+public:
+	PlayerStatus* playerStatus;
+
 
 	//GameScene* currentScene;
 	//HealthComponent* healthComponent;
