@@ -139,5 +139,5 @@ Object* Projectile::GetPoolObject()
 
 void Projectile::ResetItem()
 {
-	
+	_currentLifeTime = 0.f;
 }
