@@ -61,6 +61,7 @@ void Scene::Render(HDC _hdc)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size();)
 		{
+			//if (!m_vecObj[i][j]->enabled) continue;
 			if (m_vecObj[i][j] != nullptr && !m_vecObj[i][j]->GetIsDead() && m_vecObj[i][j]->enabled)
 				m_vecObj[i][j++]->Render(_hdc);
 			else

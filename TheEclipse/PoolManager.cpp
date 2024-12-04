@@ -2,10 +2,18 @@
 #include "PoolManager.h"
 #include "Object.h"
 
-std::map<PoolingType, std::queue<IPoolable*>> PoolManager::pool = {};
-std::map<int, IPoolable*> PoolManager::enabledPool = {};
+std::unordered_map<PoolingType, std::queue<IPoolable*>> PoolManager::pool = {};
+std::unordered_map<int, IPoolable*> PoolManager::enabledPool = {};
+
 PoolManager::~PoolManager()
 {
+}
+
+void PoolManager::Initialize()
+{
+	pool = {};
+	enabledPool = {};
+	
 }
 
 IPoolable* PoolManager::Pop(PoolingType type)
@@ -28,17 +36,15 @@ IPoolable* PoolManager::Pop(PoolingType type)
 
 void PoolManager::Push(IPoolable* poolable)
 {
+	int id = poolable->GetPoolObject()->GetId();
+	if (enabledPool.count(id))
 	{
-		int id = poolable->GetPoolObject()->GetId();
-		if (enabledPool.find(id) == enabledPool.end())
-		{
-			cout << "POOL ERROR : this Object is not regist in Pool" << "[ ID : " << id << " ]";
-			return;
-		}
-
-		pool[poolable->GetPoolingType()].push(poolable);
-		enabledPool.erase(id);
-
+		cout << "POOL ERROR : this Object is not regist in Pool" << "[ ID : " << id << " ]" << endl;
+		return;
 	}
+
+	pool[poolable->GetPoolingType()].push(poolable);
+	enabledPool.erase(id);
+	poolable->GetPoolObject()->enabled = false;
 
 }
