@@ -111,7 +111,6 @@ void GameScene_2::Init()
 		vfx->enabled = false;
 		PoolManager::AddPool(PoolingType::HitVFX, vfx);
 	}
-	
 
 	//Object* backGround = new 
 	GET_SINGLE(UpgradeManager)->Initialize(

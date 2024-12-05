@@ -154,4 +154,6 @@ void Projectile::GenerateBreakVFX()
 	vfx->SetPos(GetPos());
 	cout << GetPos().x << " y:" << GetPos().y << endl;
 	vfx->Play();
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(vfx, LAYER::PROJECTILE);
+
 }
