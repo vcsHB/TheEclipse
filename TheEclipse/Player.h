@@ -17,6 +17,7 @@ public:
 	void Render(HDC _hdc) override;
 	void Shooting() override;
 	void Movement() override;
+	Vec2 OriginPos() override;
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);

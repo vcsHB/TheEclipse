@@ -60,7 +60,6 @@ void Projectile::Update()
 	//vPos = originPos;
 	//vPos -= currentScene->m_WorldPosition *fDT;
 	//Object::SetPos(vPos);
-
 	Vec2 vSize = GetSize();
 	if (_currentLifeTime >= lifeTime)
 	{

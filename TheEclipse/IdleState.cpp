@@ -26,7 +26,7 @@ void IdleState::Movement(float _dt) {
 	}
 
 
-	if (timerforMove > 4.f)
+	if (timerforMove > 3.f)
 	{
 		owner->GetStateMachine()->ChangeState(L"Spread");
 	}

@@ -170,6 +170,7 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
     <ClInclude Include="ClampingState.h" />
+    <ClInclude Include="CrackLine.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="ExpGauge.h" />
     <ClInclude Include="GameScene_2.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="PoolManager.h" />
     <ClInclude Include="RectTransform.h" />
+    <ClInclude Include="SideSpreadState.h" />
     <ClInclude Include="SpreadState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -243,6 +245,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="CrackLine.cpp" />
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
@@ -270,6 +273,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SideSpreadState.cpp" />
     <ClCompile Include="SpreadState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -292,6 +296,10 @@
   <ItemGroup>
     <Image Include="TheEclipse.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

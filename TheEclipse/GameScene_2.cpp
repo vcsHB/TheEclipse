@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameScene_2.h"
+#include "WorldSpaceScene.h"
 #include "Enemy.h"
 #include "Player.h"
 #include "CollisionManager.h"
@@ -17,6 +18,7 @@
 #include "SpreadState.h"
 #include "TargetingState.h"
 #include "ClampingState.h"
+#include "SideSpreadState.h"
 #include "PoolManager.h"
 #include "HealthGauge.h"
 #include "ParticleSystem.h"
@@ -53,7 +55,7 @@ void GameScene_2::Init()
 
 
 	RectTransform* upgradeButton_1 = new RectTransform("UpgradePanel_1");
-	upgradeButton_1->SetPos({250, 220});
+	upgradeButton_1->SetPos({ 250, 220 });
 	upgradeButton_1->AddComponent<UpgradeButton>();
 
 	RectTransform* upgradeButton_2 = new RectTransform("UpgradePanel_2");
@@ -81,6 +83,8 @@ void GameScene_2::Init()
 	stage1.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
 	stage1.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
 	stage1.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
+	stage1.insert(std::pair<wstring, State*>(L"Side", new SideSpreadState(L"SideSpreadState")));
+
 
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
@@ -89,11 +93,11 @@ void GameScene_2::Init()
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
 	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
-	Enemy* pBoss = new Enemy(this, &stateData->at(1));
+	Enemy* pBoss = new Enemy(this, stateData);
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");
-	AddObject(pBoss, LAYER::ENEMY); 
+	AddObject(pBoss, LAYER::ENEMY);
 
 	// ===== Pool Setting =====
 	PoolManager::Initialize();
@@ -123,6 +127,7 @@ void GameScene_2::Init()
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::CRACKLINE, LAYER::PLAYER);
 }
 
 void GameScene_2::Update()
