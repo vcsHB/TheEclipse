@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Collider.h"
+#include "Core.h"
 
 CrackLine::CrackLine(WorldSpaceScene* scene)
 {
@@ -54,16 +55,21 @@ void CrackLine::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
 
+	Vec2 playerPos = pOtherObj->GetPos();
+
+	Vec2 m_Pos = GetPos();
 	if (pOtherObj->GetName() == L"Player" && m_name == L"EnemyLine")
 	{
 		//std::cout << "Proj Enter" << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
+		pOtherObj->SetPos({ playerPos.x + (playerPos.x - m_Pos.x), playerPos.y });
 	}
 }
 
 void CrackLine::StayCollision(Collider* _other)
 {
+
 }
 
 void CrackLine::ExitCollision(Collider* _other)

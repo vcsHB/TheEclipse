@@ -29,16 +29,16 @@ void SideSpreadState::Movement(float _dt)
 		switch (moveIdx)
 		{
 		case 0:
-			owner->SetPos({ player->GetPos().x , player->GetPos().y - 300 });
+			vPos = { player->GetPos().x , player->GetPos().y - 300 };
 			break;
 		case 1:
-			owner->SetPos({ player->GetPos().x - 300, player->GetPos().y });
+			vPos = { player->GetPos().x - 300, player->GetPos().y };
 			break;
 		case 2:
-			owner->SetPos({ player->GetPos().x , player->GetPos().y + 300 });
+			vPos = { player->GetPos().x , player->GetPos().y + 300 };
 			break;
 		case 3:
-			owner->SetPos({ player->GetPos().x + 300 , player->GetPos().y });
+			vPos = { player->GetPos().x + 300 , player->GetPos().y };
 			break;
 		}
 		timerforMove = 0;

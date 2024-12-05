@@ -1,3 +1,4 @@
+
 #include "pch.h"
 #include "State.h"
 #include "TargetingState.h"
@@ -31,7 +32,7 @@ void TargetingState::Enter()
 
 
 void TargetingState::Exit()
-{	
+{
 	waittime = 0;
 	State::Exit();
 }
@@ -42,14 +43,14 @@ void TargetingState::Movement(float _dt)
 
 	Vec2 enemyPos = owner->GetPos();
 
-	Vec2 dir;
-	dir = playerPos - enemyPos;
+	Vec2 dir = player->GetPos();
+	dir = dir - enemyPos;
 	vPos.x += dir.x * _dt * 10.f;
 }
 
 void TargetingState::Shooting(float _dt)
 {
-
+	Vec2 dir = player->GetPos();
 	timerforShot += _dt;
 	waittime += _dt;
 	if (waittime > 1.f)
@@ -57,7 +58,7 @@ void TargetingState::Shooting(float _dt)
 		if (timerforShot >= 0.2f)
 		{
 
-			projectilles[projIdx]->SetDir(playerPos - projectilles[projIdx]->GetPos());
+			projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
 			timerforShot = 0;
 			projIdx++;
 

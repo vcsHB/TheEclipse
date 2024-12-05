@@ -16,29 +16,52 @@ void ClampingState::Enter()
 {
 	State::Enter();
 
-	for (int i = 0; i < 2; i++)
+	vPos = { player->GetPos().x, player->GetPos().y - 300.f };
+
+	for (int i = 0; i < 4; i++)
 	{
+
+
 		CrackLine* pProj = owner->CreateCrackLine();
 
-		pProj->GetComponent<Collider>()->SetSize({ 30, 150 });
-		if (i == 0)
+		if (i >= 2)
 		{
-			pProj->SetPos({ player->GetPos().x - 200 , playerPos.y + 350 });
+			pProj->GetComponent<Collider>()->SetSize({ 550, 30 });
+			pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLineWidth", L"Texture\\CrackLineWidth.bmp");
+
+			pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLineWidth", pProj->m_pTex, Vec2(0.f, 0.f),
+				Vec2(512.f, 32.f), Vec2(0.f, 32.f), 5, 0.03f, true);
+			pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLineWidth", true);
+			if (i == 2)
+			{
+				pProj->SetPos({ player->GetPos().x  , player->GetPos().y - 200.f });
+			}
+			else
+			{
+				pProj->SetPos({ player->GetPos().x  , player->GetPos().y + 200.f });
+			}
 		}
 		else
 		{
-			pProj->SetPos({ player->GetPos().x + 200 , playerPos.y + 350 });
+			pProj->GetComponent<Collider>()->SetSize({ 30, 550 });
+			if (i == 0)
+			{
+				pProj->SetPos({ player->GetPos().x - 200 , player->GetPos().y });
+			}
+			else
+			{
+				pProj->SetPos({ player->GetPos().x + 200 , player->GetPos().y });
+			}
 		}
 
 		crackLines[i] = pProj;
 	}
 
-
 }
 
 void ClampingState::Exit()
 {
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(crackLines[i]);
 	}
@@ -56,5 +79,6 @@ void ClampingState::Movement(float _dt)
 
 void ClampingState::Shooting(float _dt)
 {
+
 
 }

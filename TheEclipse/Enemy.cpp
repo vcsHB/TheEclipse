@@ -149,7 +149,7 @@ CrackLine* Enemy::CreateCrackLine()
 	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLine", L"Texture\\CrackLine.bmp");
 
 	pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLine", pProj->m_pTex, Vec2(0.f, 0.f),
-		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 8, 0.03f, true);
+		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 5, 0.03f, true);
 	pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLine", true);
 
 
