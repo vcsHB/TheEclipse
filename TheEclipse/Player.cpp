@@ -49,7 +49,7 @@ Player::~Player()
 	//Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
-	
+
 }
 void Player::Update()
 {
@@ -57,7 +57,8 @@ void Player::Update()
 	Shooting();
 }
 
-Vec2 originPos() {
+Vec2 Player::OriginPos()
+{
 	int ResolutionX = GetSystemMetrics(SM_CXSCREEN);  //1920
 	int ResolutionY = GetSystemMetrics(SM_CYSCREEN);  //1080
 
@@ -97,7 +98,7 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	
+
 }
 
 void Player::StayCollision(Collider* _other)
@@ -110,15 +111,15 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Movement()
 {
-	auto p = originPos();
+	auto p = OriginPos();
 
 	currentScene->m_moveSpeed = 100.f * status->moveSpeedStat->GetValue();
 	float moveAmount = currentScene->m_moveSpeed * fDT;
-	Vec2 moveDirection = {0,0};
+	Vec2 moveDirection = { 0,0 };
 	if (GET_KEY(KEY_TYPE::A))
 	{
 		moveDirection.x = -1;
-		
+
 	}
 	if (GET_KEY(KEY_TYPE::D))
 	{
@@ -128,7 +129,7 @@ void Player::Movement()
 	if (GET_KEY(KEY_TYPE::W))
 	{
 		moveDirection.y = -1;
-		
+
 	}
 	if (GET_KEY(KEY_TYPE::S))
 	{
@@ -146,7 +147,7 @@ void Player::Movement()
 
 	float widthClamp = windowSizeX / 2 - SCREEN_WIDTH;
 	float heightClamp = windowSizeY / 2 - SCREEN_HEIGHT;
-	
+
 
 	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount;
 	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -widthClamp, widthClamp);
@@ -166,7 +167,7 @@ void Player::Shooting()
 		Vec2 direction = { 0, -1 };
 		CreateProjectile(direction);
 	}
-}
+}	
 
 void Player::CreateProjectile(Vec2 dir)
 {
@@ -177,19 +178,16 @@ void Player::CreateProjectile(Vec2 dir)
 	for (int i = 0; i < projectileAmount; i++)
 	{
 		float x = (-(20.f * 0.5f) * (projectileAmount - 1) + i * 20.f) + fireOriginPos.x;
-		Vec2 generatePos = { x, fireOriginPos.y};
+		Vec2 generatePos = { x, fireOriginPos.y };
 		GenerateProjectile(generatePos, dir);
 	}
-	
-
-
 }
 
 Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
 {
-	
+
 	Projectile* pProj = dynamic_cast<Projectile*>(PoolManager::Pop(PoolingType::Projectile));
-	
+
 	pProj->SetPos(position);
 	pProj->SetSize({ 20.f,20.f });
 	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");

@@ -10,6 +10,7 @@ public:
 	virtual void Update() abstract;
 	virtual void LateUpdate();
 	virtual void Render(HDC _hdc) abstract;
+	virtual Vec2 OriginPos();
 	void ComponentRender(HDC _hdc);
 public:
 	virtual void SetPos(Vec2 _vPos) { m_vPos = _vPos; }

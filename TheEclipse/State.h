@@ -19,6 +19,5 @@ protected:
 	float timerforMove = 0;
 	float timerforShot = 0;
 	Vec2 vPos;
-	Vec2 playerPos;
 };
 

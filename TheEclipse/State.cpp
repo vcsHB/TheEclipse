@@ -30,8 +30,6 @@ void State::Update(float _dt)
 	vPos.x -= owner->currentScene->m_moveSpeed * fDT * owner->currentScene->m_deltaPos.x;
 	vPos.y -= owner->currentScene->m_moveSpeed * fDT * owner->currentScene->m_deltaPos.y;
 
-	playerPos = player->GetPos();
-
 	Movement(_dt);
 	Shooting(_dt);
 
