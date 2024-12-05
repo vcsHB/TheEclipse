@@ -71,7 +71,7 @@ void GameScene::ResetPlayer(int level) {
 	AddObject(pPlayer, LAYER::PLAYER);
 }
 void GameScene::SpawnBoss(int level) {
-	Enemy* pBoss = new Enemy(this, &stateData->at(level));
+	Enemy* pBoss = new Enemy(this, stateData);
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");

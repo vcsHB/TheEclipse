@@ -23,3 +23,9 @@ void Agent::KnockBack()
 
 	blockMove -= colliderComponent->GetOffSetPos();
 }
+
+void Agent::Blink(bool active)
+{
+	blinkDuration = 0;
+	isBlinking = true;
+}
