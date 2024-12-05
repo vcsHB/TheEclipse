@@ -18,6 +18,7 @@
 #include "TargetingState.h"
 #include "ClampingState.h"
 #include "PoolManager.h"
+#include "HealthGauge.h"
 
 void GameScene_2::Init()
 {
@@ -40,13 +41,13 @@ void GameScene_2::Init()
 	healthEdgeUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeEdge", L"Texture\\Gauge_Edge.bmp"));
 	RectTransform* healthFillUI = new RectTransform("HealthGaugeFill");
 	healthFillUI->SetPos({ 250, 650 });
-	healthFillUI->AddComponent<Image>();
-	healthFillUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeFill", L"Texture\\Gauge_Fill.bmp"));
+	healthFillUI->AddComponent<HealthGauge>();
+
 	RectTransform* healthText = new RectTransform("HealthText");
 	healthText->SetPos({ 250, 670 });
 	healthText->AddComponent<TextPro>();
 	wstring content = L"HP (50/50)";
-	healthText->GetComponent<TextPro>()->SetText(content, 20);
+	healthText->GetComponent<TextPro>()->SetText(content, 10);
 
 
 
@@ -71,6 +72,8 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(upgradeButton_2);
 	canvas->AddRectPanel(expGauge);
 
+
+	canvas->Initialize();
 	// === Enemy Setting
 	map<wstring, State*> stage1;
 	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
@@ -100,7 +103,6 @@ void GameScene_2::Init()
 		projectile->enabled = false;
 		PoolManager::AddPool(PoolingType::Projectile, projectile);
 	}
-	//PoolManager::AddPool<Projectile>(PoolingType::Projectile, 40, poolable);
 
 
 

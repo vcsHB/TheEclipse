@@ -100,3 +100,14 @@ Object* Scene::FindObjectByName(wstring name)
 	std::wcout << L"Can't Found Object By Name. name:[" << name << L"]";
 	return nullptr;
 }
+
+void Scene::StartObjects()
+{
+	for (size_t i = 0; i < (UINT)LAYER::END; i++)
+	{
+		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
+		{
+			m_vecObj[i][j]->Start();
+		}
+	}
+}

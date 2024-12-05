@@ -19,6 +19,10 @@ Object::~Object()
 	m_vecComponents.clear();
 }
 
+void Object::Start()
+{
+}
+
 void Object::LateUpdate()
 {
 	for (Component* com : m_vecComponents)

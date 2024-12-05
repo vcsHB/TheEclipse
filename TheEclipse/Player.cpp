@@ -14,6 +14,9 @@
 #include "PlayerStatus.h"
 #include "Stat.h"
 #include "PoolManager.h"
+#include "HealthGauge.h"
+#include "Canvas.h"
+#include "RectTransform.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -29,13 +32,15 @@ Player::Player(WorldSpaceScene* scene)
 
 	playerStatus = new PlayerStatus(100, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
-
+	
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
 	healthComponent = GetComponent<HealthComponent>();
+	healthComponent->SetMaxHealth(status->healthStat->GetValue());
 	healthComponent->SetHp(status->healthStat->GetValue());
 	healthComponent->SetOwner(this);
+	
 	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(40.f, 0.f),
 		Vec2(40.f, 40.f), Vec2(40.f, 0.f), 5, 0.1f);
 	/*GetComponent<Animator>()->CreateAnimation(L"Player_Idle-Sheet", m_pTex, Vec2(0.f, 150.f),
@@ -44,12 +49,20 @@ Player::Player(WorldSpaceScene* scene)
 	currentScene = scene;
 
 }
+
+
 Player::~Player()
 {
 	//Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
 	
+}
+void Player::Start()
+{
+	_healthGauge = currentScene->GetCanvas()->Find("HealthGaugeFill")->GetComponent<HealthGauge>();
+	healthComponent->OnHealthChangedEvent.Add(std::bind(&HealthGauge::HandleRefreshGauge, _healthGauge, std::placeholders::_1, std::placeholders::_2));
+
 }
 void Player::Update()
 {
@@ -158,7 +171,8 @@ void Player::Movement()
 
 void Player::Shooting()
 {
-	_currentShootCoolTime += GET_SINGLE(TimeManager)->GetDT() * playerStatus->fireSpeedStat->GetValue();
+	int fireSpeed = playerStatus->fireSpeedStat->GetValue();
+	_currentShootCoolTime += GET_SINGLE(TimeManager)->GetDT() * (1 + fireSpeed * 0.2f);
 	if (_currentShootCoolTime >= 1.f)
 	{
 		_currentShootCoolTime = 0;
@@ -171,7 +185,6 @@ void Player::Shooting()
 void Player::CreateProjectile(Vec2 dir)
 {
 	int projectileAmount = playerStatus->bulletMultipleStat->GetValue();
-
 	Vec2 fireOriginPos = GetPos();
 	fireOriginPos.y -= GetSize().y / 2.f;
 	for (int i = 0; i < projectileAmount; i++)

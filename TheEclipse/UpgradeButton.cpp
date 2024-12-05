@@ -29,7 +29,8 @@ void UpgradeButton::Initialize()
 
 void UpgradeButton::SetUpgradeData(UpgradeData* data)
 {
-	_content = data->upgradeName + L"\n" + data->description;
-	_textCompo->SetText(_content, 16);
+	_content = data->upgradeName + data->description;
+	_textCompo->SetText(_content, 12);
+	_textCompo->Initialize();
 
 }

@@ -39,6 +39,7 @@ int Stat::GetValue()
 	_changedValue = _baseValue;
 	for (int value : _modifiers)
 	{
+		cout << _changedValue << "에 " << value << "를 더했지" << endl;
 		_changedValue += value;
 	}
 	_isValueChanged = false;

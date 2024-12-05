@@ -4,6 +4,7 @@
 class Texture;
 class PlayerStatus;
 class Projectile;
+class HealthGauge;
 
 class Player : public Agent
 {
@@ -11,6 +12,7 @@ public:
 	Player(WorldSpaceScene* scene);
 	virtual ~Player() override;
 public:
+	void Start() override;
 	void Update() override;
 	void Render(HDC _hdc) override;
 	void Shooting() override;
@@ -23,6 +25,7 @@ private:
 	void CreateProjectile(Vec2 dir);
 	Projectile* GenerateProjectile(Vec2 position, Vec2 direction);
 	HealthComponent* healthComponent;
+	HealthGauge* _healthGauge;
 	float _currentShootCoolTime = 0.f;
 public:
 	PlayerStatus* playerStatus;

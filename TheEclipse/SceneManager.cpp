@@ -53,5 +53,6 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	{
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
+		m_pCurrentScene->StartObjects();
 	}
 }

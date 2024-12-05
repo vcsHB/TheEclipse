@@ -7,7 +7,7 @@ void TextPro::Initialize()
 { 
 	AddFontResource(TEXT("\\Resource\\Font\\Silver"));
 	_font = CreateFont(
-		(int)(((float)_fontSize / 2 )* 3), _fontSize, 0, 0, 0, 0, 0, 0, HANGUL_CHARSET,
+		(int)(((float)_fontSize / 2 )* 3), _fontSize / 1.3f, 0, 0, 0, 0, 0, 0, HANGUL_CHARSET,
 		0, 0, 0, VARIABLE_PITCH | FF_ROMAN,
 		TEXT("Silver")
 	);
