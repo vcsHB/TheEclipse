@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "TimeManager.h"
 #include "Enemy.h"
+#include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Projectile.h"
@@ -17,10 +17,11 @@
 #include "Stat.h"
 #include "PoolManager.h"
 
-Enemy::Enemy(WorldSpaceScene* scene, map<wstring, State*>* states)
+Enemy::Enemy(WorldSpaceScene* scene, map<int, map<wstring, State*>>* states)
 {
+	statesArr = states;
+
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
-	m_pTex2 = GET_SINGLE(ResourceManager)->TextureLoad(L"AngryBoss", L"Texture\\AngryBoss.bmp");
 
 	status = new Status(300, 2, 3);
 	AddComponent<Collider>();
@@ -37,7 +38,7 @@ Enemy::Enemy(WorldSpaceScene* scene, map<wstring, State*>* states)
 
 	currentScene = scene;
 
-	stateMachine = new StateMachine(this, states);
+	stateMachine = new StateMachine(this, &statesArr->at(1));
 
 	stateMachine->ChangeState(L"Idle");
 
@@ -56,6 +57,16 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 	stateMachine->Update(fDT);
+	if (isBlinking)
+	{
+		blinkDuration += fDT;
+
+		if (blinkDuration > 0.3f)
+		{
+			isBlinking = false;
+			Blink(isBlinking);
+		}
+	}
 }
 
 
@@ -77,13 +88,21 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	std::cout << "Enemy Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
 	wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetName() == L"PlayerBullet")
 	{
 		if (healthComponent->DecreaseHP(1))
 			GET_SINGLE(EventManager)->DeleteObject(this);
+
+		Blink(true);
+
+		if (healthComponent->GetHp() <= 50 && isAngry == false)
+		{
+			isAngry = true;
+			stateMachine = new StateMachine(this, &statesArr->at(2));
+			Blink(false);
+		}
 	}
 }
 
@@ -101,6 +120,8 @@ StateMachine* Enemy::GetStateMachine()
 {
 	return stateMachine;
 }
+
+
 
 Projectile* Enemy::CreateProjectile(Vec2 dir)
 {
@@ -149,7 +170,7 @@ CrackLine* Enemy::CreateCrackLine()
 	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLine", L"Texture\\CrackLine.bmp");
 
 	pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLine", pProj->m_pTex, Vec2(0.f, 0.f),
-		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 5, 0.03f, true);
+		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 8, 0.03f, true);
 	pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLine", true);
 
 
@@ -173,5 +194,42 @@ CrackLine* Enemy::CreateCrackLine()
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::CRACKLINE);
 
 	return pProj;
+}
+
+void Enemy::Blink(bool active)
+{
+
+	Agent::Blink(active);
+
+	if (isAngry)
+	{
+		if (active)
+		{
+			DoAnimation(L"BossAngryHit", L"Texture\\BossAngryHit.bmp");
+		}
+		else
+		{
+			DoAnimation(L"BossAngry", L"Texture\\BossAngry.bmp");
+		}
+	}
+	else
+	{
+		if (active)
+		{
+			DoAnimation(L"BossHit", L"Texture\\BossHit.bmp");
+		}
+		else
+		{
+			DoAnimation(L"Boss", L"Texture\\Boss.bmp");
+		}
+	}
+}
+
+void Enemy::DoAnimation(wstring name, wstring path)
+{
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(name, path);
+	GetComponent<Animator>()->CreateAnimation(name, m_pTex, Vec2(0.f, 0.f),
+		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 8, 0.1f);
+	GetComponent<Animator>()->PlayAnimation(name, true);
 }
 

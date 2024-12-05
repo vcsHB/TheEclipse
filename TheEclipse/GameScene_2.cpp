@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameScene_2.h"
+#include "WorldSpaceScene.h"
 #include "Enemy.h"
 #include "Player.h"
 #include "CollisionManager.h"
@@ -88,7 +89,7 @@ void GameScene_2::Init()
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
 	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
-	Enemy* pBoss = new Enemy(this, &stateData->at(1));
+	Enemy* pBoss = new Enemy(this, stateData);
 	pBoss->SetSize({ 100.f, 100.f });
 	pBoss->SetPos({ SCREEN_WIDTH / 2.f, 150.f });
 	pBoss->SetName(L"Enemy");
