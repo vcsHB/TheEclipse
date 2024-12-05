@@ -178,6 +178,7 @@
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="IPoolable.h" />
+    <ClInclude Include="ParticleCell.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PlayerSkill.h" />
     <ClInclude Include="PlayerSkillController.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ParticleCell.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerSkill.cpp" />

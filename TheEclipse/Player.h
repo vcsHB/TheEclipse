@@ -27,6 +27,10 @@ private:
 	HealthComponent* healthComponent;
 	HealthGauge* _healthGauge;
 	float _currentShootCoolTime = 0.f;
+
+	float _currentDashTime = 0.f;
+	
+	
 public:
 	PlayerStatus* playerStatus;
 

@@ -30,7 +30,7 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
-	playerStatus = new PlayerStatus(100, 1, 3, 1, 1, 1, 0);
+	playerStatus = new PlayerStatus(10, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
 	
 	AddComponent<Collider>();
@@ -126,6 +126,7 @@ void Player::Movement()
 	auto p = originPos();
 
 	currentScene->m_moveSpeed = 100.f * status->moveSpeedStat->GetValue();
+	_currentDashTime += GET_SINGLE(TimeManager)->GetDT();
 	float moveAmount = currentScene->m_moveSpeed * fDT;
 	Vec2 moveDirection = {0,0};
 	if (GET_KEY(KEY_TYPE::A))
@@ -149,8 +150,19 @@ void Player::Movement()
 		moveDirection.y = 1;
 	}
 
+	Vec2 dashDirection = {0,0};
 	moveDirection.Normalize();
-	currentScene->m_deltaPos = moveDirection;
+	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	{
+		if (_currentDashTime > 1.f)
+		{
+			_currentDashTime = 0.f;
+			dashDirection = moveDirection * 100.f;
+
+		}
+	}
+
+	currentScene->m_deltaPos = moveDirection  + dashDirection;
 
 	int windowSizeX = GetSystemMetrics(SM_CXSCREEN);
 	int windowSizeY = GetSystemMetrics(SM_CXSCREEN);
@@ -161,11 +173,11 @@ void Player::Movement()
 	float heightClamp = windowSizeY / 2 - SCREEN_HEIGHT;
 	
 
-	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount;
+	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount + dashDirection;
 	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -widthClamp, widthClamp);
 	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -heightClamp, heightClamp);
 	SetWindowPos(m_hWnd, HWND_TOP,
-		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
+		p.x + currentScene->m_WorldPosition.x + dashDirection.x, p.y + currentScene->m_WorldPosition.y + dashDirection.y,
 		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
 }
 

@@ -19,6 +19,7 @@
 #include "ClampingState.h"
 #include "PoolManager.h"
 #include "HealthGauge.h"
+#include "ParticleSystem.h"
 
 void GameScene_2::Init()
 {
@@ -104,7 +105,13 @@ void GameScene_2::Init()
 		PoolManager::AddPool(PoolingType::Projectile, projectile);
 	}
 
-
+	for (int i = 0; i < 20; i++)
+	{
+		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", {0,0}, 0.2f, 4, 0.7f, 14.3f);
+		vfx->enabled = false;
+		PoolManager::AddPool(PoolingType::HitVFX, vfx);
+	}
+	
 
 	//Object* backGround = new 
 	GET_SINGLE(UpgradeManager)->Initialize(

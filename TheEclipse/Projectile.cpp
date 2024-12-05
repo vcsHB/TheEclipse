@@ -11,6 +11,7 @@
 #include "Animation.h"
 #include "Animator.h"
 #include "PoolManager.h"
+#include "ParticleSystem.h"
 
 Projectile::Projectile()
 	: m_angle(0.f)
@@ -108,6 +109,8 @@ void Projectile::EnterCollision(Collider* _other)
 		//std::cout << "Proj Enter" << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
+		GenerateBreakVFX();
+
 		PoolManager::Push(this);
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
@@ -116,6 +119,8 @@ void Projectile::EnterCollision(Collider* _other)
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GET_SINGLE(UpgradeManager)->GainExp(4);
+		GenerateBreakVFX();
+
 		PoolManager::Push(this);
 	}
 }
@@ -141,4 +146,12 @@ Object* Projectile::GetPoolObject()
 void Projectile::ResetItem()
 {
 	_currentLifeTime = 0.f;
+}
+
+void Projectile::GenerateBreakVFX()
+{
+	ParticleSystem* vfx = dynamic_cast<ParticleSystem*> (PoolManager::Pop(PoolingType::HitVFX));
+	vfx->SetPos(GetPos());
+	cout << GetPos().x << " y:" << GetPos().y << endl;
+	vfx->Play();
 }

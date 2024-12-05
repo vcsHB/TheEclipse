@@ -49,6 +49,8 @@ private:
 	Vec2 originPos;
 	float _currentLifeTime = 0.f;
 
+private:
 
+	void GenerateBreakVFX();
 };
 

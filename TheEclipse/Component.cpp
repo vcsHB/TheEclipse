@@ -11,3 +11,7 @@ Component::~Component()
 {
 
 }
+
+void Component::Start()
+{
+}

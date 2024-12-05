@@ -53,6 +53,9 @@
     <Filter Include="Engine\02. Manager\ObjectPool">
       <UniqueIdentifier>{dc267d36-7b12-4512-b3e0-30acd188719e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\VFX">
+      <UniqueIdentifier>{112e1df8-4c5b-4d1b-a25d-34d06b7ce606}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -227,7 +230,12 @@
     <ClInclude Include="IPoolable.h">
       <Filter>Engine\02. Manager\ObjectPool</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleCell.h">
+      <Filter>Engine\03. Object\VFX</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Engine\03. Object\VFX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -393,6 +401,11 @@
     <ClCompile Include="PoolManager.cpp">
       <Filter>Engine\02. Manager\ObjectPool</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleCell.cpp">
+      <Filter>Engine\03. Object\VFX</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Engine\03. Object\VFX</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

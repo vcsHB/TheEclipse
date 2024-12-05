@@ -21,6 +21,13 @@ Object::~Object()
 
 void Object::Start()
 {
+	for (Component* com : m_vecComponents)
+	{
+		if (com)
+		{
+			com->Start();
+		}
+	}
 }
 
 void Object::LateUpdate()
