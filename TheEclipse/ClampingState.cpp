@@ -24,7 +24,6 @@ void ClampingState::Enter()
 	for (int i = 0; i < 4; i++)
 	{
 
-
 		CrackLine* pProj = owner->CreateCrackLine();
 
 		if (i >= 2)
@@ -57,8 +56,10 @@ void ClampingState::Enter()
 			}
 		}
 
-		crackLines[crackLineIdx++] = pProj;
+		crackLines[crackLineIdx] = pProj;
+		crackLineIdx++;
 	}
+
 
 }
 
@@ -87,42 +88,45 @@ void ClampingState::Shooting(float _dt)
 
 	if (timerforShot > 2)
 	{
-		for (int i = 1; i <= 4; i++)
+
+
+		for (int i = 0; i < 4; i++)
 		{
 			CrackLine* pProj = owner->CreateCrackLine();
 
-			if (i % 2 == 0)
+			if (i < 2)
 			{
-				pProj->GetComponent<Collider>()->SetSize({ 550, 30 });
 				pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLineWidth", L"Texture\\CrackLineWidth.bmp");
 
 				pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLineWidth", pProj->m_pTex, Vec2(0.f, 0.f),
 					Vec2(512.f, 32.f), Vec2(0.f, 32.f), 5, 0.03f, true);
 				pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLineWidth", true);
-				if (i == 2)
-				{
-					pProj->SetPos({ player->GetPos().x  , player->GetPos().y - sizeArr[sizeIdx] });
-				}
-				else
-				{
-					pProj->SetPos({ player->GetPos().x  , player->GetPos().y + sizeArr[sizeIdx] });
-				}
 			}
-			else
+			switch (i)
 			{
+			case 0:
+				pProj->GetComponent<Collider>()->SetSize({ 550, 30 });
+				pProj->SetPos({ player->GetPos().x  , player->GetPos().y - sizeArr[sizeIdx] });
+				break;
+			case 1:
+				pProj->GetComponent<Collider>()->SetSize({ 550, 30 });
+				pProj->SetPos({ player->GetPos().x  , player->GetPos().y + sizeArr[sizeIdx] });
+				break;
+			case 2:
+
 				pProj->GetComponent<Collider>()->SetSize({ 30, 550 });
-				if (i == 1)
-				{
-					pProj->SetPos({ player->GetPos().x + sizeArr[sizeIdx] , player->GetPos().y });
-				}
-				else
-				{
-					pProj->SetPos({ player->GetPos().x + sizeArr[sizeIdx] , player->GetPos().y });
-				}
+				pProj->SetPos({ player->GetPos().x - sizeArr[sizeIdx] , player->GetPos().y });
+				break;
+			case 3:
+				pProj->GetComponent<Collider>()->SetSize({ 30, 550 });
+				pProj->SetPos({ player->GetPos().x + sizeArr[sizeIdx] , player->GetPos().y });
+				break;
 			}
 
-			crackLines[crackLineIdx++] = pProj;
+			crackLines[crackLineIdx] = pProj;
+			crackLineIdx++;
 		}
+
 		timerforShot = 0;
 		sizeIdx++;
 	}

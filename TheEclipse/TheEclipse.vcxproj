@@ -164,6 +164,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AngryClampState.h" />
+    <ClInclude Include="AngrySpreadState.h" />
     <ClInclude Include="AtkUpgrade.h" />
     <ClInclude Include="BulletMultipleUpgrade.h" />
     <ClInclude Include="Button.h" />
@@ -232,6 +234,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AngryClampState.cpp" />
+    <ClCompile Include="AngrySpreadState.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AtkUpgrade.cpp" />

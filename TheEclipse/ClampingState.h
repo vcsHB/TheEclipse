@@ -12,7 +12,7 @@ protected:
 	void Movement(float _dt) override;
 	void Shooting(float _dt) override;
 private:
-	CrackLine* crackLines[16];
+	CrackLine* crackLines[24];
 	int crackLineIdx = 0;
 	float shootTime = 0;
 
