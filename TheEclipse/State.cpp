@@ -20,7 +20,6 @@ void State::Enter()
 	std::wcout << name << "   " << L"Enter" << endl;
 	timerforMove = 0;
 	timerforShot = 0;
-
 }
 
 void State::Update(float _dt)

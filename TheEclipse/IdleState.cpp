@@ -28,8 +28,13 @@ void IdleState::Movement(float _dt) {
 
 	if (timerforMove > 3.f)
 	{
-		owner->GetStateMachine()->ChangeState(L"Spread");
+		if (owner->isAngry)
+			owner->GetStateMachine()->ChangeState(L"AngrySpread");
+		else
+			owner->GetStateMachine()->ChangeState(L"Spread");
+
 	}
+
 }
 
 void IdleState::Shooting(float _dt) {

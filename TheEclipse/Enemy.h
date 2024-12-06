@@ -24,13 +24,16 @@ public:
 
 	StateMachine* GetStateMachine();
 private:
+	void DoAnimation(wstring name, wstring path);
+
+public:
+	bool isAngry = false;
+private:
 	map<int, map<wstring, State*>>* statesArr;
 	StateMachine* stateMachine;
 	HealthComponent* healthComponent;
 	Collider* colliderComponent;
 	float duration = 30;
-	bool isAngry = false;
 
-	void DoAnimation(wstring name, wstring path);
 };
 
