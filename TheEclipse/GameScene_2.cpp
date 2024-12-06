@@ -19,6 +19,7 @@
 #include "TargetingState.h"
 #include "ClampingState.h"
 #include "SideSpreadState.h"
+#include "AngrySpreadState.h"
 #include "PoolManager.h"
 
 void GameScene_2::Init()
@@ -85,6 +86,12 @@ void GameScene_2::Init()
 	map <wstring, State*> stage2;
 	stage2.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
 	stage2.insert(std::pair<wstring, State*>(L"Move", new TargetingState(L"MoveState")));
+	stage2.insert(std::pair<wstring, State*>(L"AngrySpread", new AngrySpreadState(L"AngrySpreadState")));
+	stage2.insert(std::pair<wstring, State*>(L"Target", new TargetingState(L"TargetingState")));
+	stage2.insert(std::pair<wstring, State*>(L"Clamp", new ClampingState(L"ClampingState")));
+	stage2.insert(std::pair<wstring, State*>(L"Side", new SideSpreadState(L"SideSpreadState")));
+	stage2.insert(std::pair<wstring, State*>(L"Spread", new SpreadState(L"SpreadState")));
+
 
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));

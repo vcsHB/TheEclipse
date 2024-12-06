@@ -67,6 +67,13 @@ void Enemy::Update()
 			Blink(isBlinking);
 		}
 	}
+
+	if (GET_KEY(KEY_TYPE::SPACE))
+	{
+		isAngry = true;
+		stateMachine = new StateMachine(this, &statesArr->at(2));
+		Blink(false);
+	}
 }
 
 
@@ -100,6 +107,7 @@ void Enemy::EnterCollision(Collider* _other)
 		if (healthComponent->GetHp() <= 50 && isAngry == false)
 		{
 			isAngry = true;
+			stateMachine->ChangeState(L"Idle");
 			stateMachine = new StateMachine(this, &statesArr->at(2));
 			Blink(false);
 		}
@@ -205,11 +213,11 @@ void Enemy::Blink(bool active)
 	{
 		if (active)
 		{
-			DoAnimation(L"BossAngryHit", L"Texture\\BossAngryHit.bmp");
+			DoAnimation(L"AngryBossHit", L"Texture\\AngryBossHit.bmp");
 		}
 		else
 		{
-			DoAnimation(L"BossAngry", L"Texture\\BossAngry.bmp");
+			DoAnimation(L"AngryBoss", L"Texture\\AngryBoss.bmp");
 		}
 	}
 	else
