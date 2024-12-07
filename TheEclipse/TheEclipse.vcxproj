@@ -304,6 +304,8 @@
     <ResourceCompile Include="TheEclipse.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="GameIcon.ico" />
+    <Image Include="icon1.ico" />
     <Image Include="TheEclipse.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
