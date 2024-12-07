@@ -56,7 +56,6 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	stateMachine->Update(fDT);
 	if (isBlinking)
 	{
 		blinkDuration += fDT;
@@ -68,12 +67,15 @@ void Enemy::Update()
 		}
 	}
 
-	if (GET_KEY(KEY_TYPE::SPACE))
+	if (GET_KEY(KEY_TYPE::J))
 	{
 		isAngry = true;
-		stateMachine = new StateMachine(this, &statesArr->at(2));
+		ChangeToAngryMode();
 		Blink(false);
 	}
+
+	stateMachine->Update(fDT);
+
 }
 
 
@@ -93,6 +95,12 @@ void Enemy::Render(HDC _hdc)
 	//DeleteObject(brush);
 }
 
+void Enemy::ChangeToAngryMode()
+{
+	stateMachine->SetStateList(this, &statesArr->at(2));
+	isAngry = true;
+	Blink(false);
+}
 void Enemy::EnterCollision(Collider* _other)
 {
 	Object* pOtherObj = _other->GetOwner();
@@ -106,10 +114,7 @@ void Enemy::EnterCollision(Collider* _other)
 
 		if (healthComponent->GetHp() <= 50 && isAngry == false)
 		{
-			isAngry = true;
-			stateMachine->ChangeState(L"Idle");
-			stateMachine = new StateMachine(this, &statesArr->at(2));
-			Blink(false);
+			ChangeToAngryMode();
 		}
 	}
 }
@@ -240,4 +245,6 @@ void Enemy::DoAnimation(wstring name, wstring path)
 		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 8, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(name, true);
 }
+
+
 
