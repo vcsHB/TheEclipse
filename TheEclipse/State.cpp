@@ -35,7 +35,6 @@ void State::Update(float _dt)
 
 	owner->Object::SetPos(vPos);
 
-	cout << vPos.x << " " << vPos.y << endl;
 }
 
 void State::Exit()
