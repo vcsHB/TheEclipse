@@ -19,7 +19,6 @@ void AngryClampState::Enter()
 
 	vPos = { player->GetPos().x, player->GetPos().y - 300.f };
 
-	projIdx = 0;
 
 	int _bulletCount = 20;
 	Vec2 dir;
@@ -80,8 +79,13 @@ void AngryClampState::Enter()
 
 void AngryClampState::Exit()
 {
+	for (int i = 0; i < crackLineIdx; i++)
+	{
+		GET_SINGLE(EventManager)->DeleteObject(crackLines[i]);
+	}
 	waittime = 0;
 	createTime = 0;
+	projIdx = 0;
 	isCreated = false;
 	State::Exit();
 }
@@ -101,7 +105,6 @@ void AngryClampState::Shooting(float _dt)
 	if (createTime > 6 && isCreated == false)
 	{
 		isCreated = true;
-		projIdx = 0;
 
 		int _bulletCount = 20;
 		Vec2 dir;
@@ -110,7 +113,6 @@ void AngryClampState::Shooting(float _dt)
 			float angle = 360.f / _bulletCount * i;
 			float x = cosf(angle * PI / 180);
 			float y = sinf(angle * PI / 180);
-
 
 			dir = { x, y };
 			Projectile* pProj = owner->CreateProjectile({ 0,0 });
@@ -124,13 +126,15 @@ void AngryClampState::Shooting(float _dt)
 	{
 		if (timerforShot >= 0.2f)
 		{
-			projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
-			timerforShot = 0;
-			projIdx++;
-
-			if (40 == projIdx)
+			if (projectilles[projIdx] != nullptr)
 			{
-				owner->GetStateMachine()->ChangeState(L"Idle");
+				projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
+				projIdx++;
+				timerforShot = 0;
+			}
+			if (20 == projIdx)
+			{
+				owner->GetStateMachine()->ChangeState(L"Chase");
 			}
 		}
 	}

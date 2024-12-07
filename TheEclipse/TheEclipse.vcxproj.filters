@@ -231,6 +231,8 @@
     <ClInclude Include="SideSpreadState.h" />
     <ClInclude Include="AngrySpreadState.h" />
     <ClInclude Include="AngryClampState.h" />
+    <ClInclude Include="ChaseState.h" />
+    <ClInclude Include="WallThrowState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -400,6 +402,8 @@
     <ClCompile Include="SideSpreadState.cpp" />
     <ClCompile Include="AngrySpreadState.cpp" />
     <ClCompile Include="AngryClampState.cpp" />
+    <ClCompile Include="ChaseState.cpp" />
+    <ClCompile Include="WallThrowState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
