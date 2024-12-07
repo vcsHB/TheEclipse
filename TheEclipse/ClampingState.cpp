@@ -25,7 +25,8 @@ void ClampingState::Enter()
 	{
 
 		CrackLine* pProj = owner->CreateCrackLine();
-
+		crackLines[crackLineIdx] = pProj;
+		crackLineIdx++;
 		if (i >= 2)
 		{
 			pProj->GetComponent<Collider>()->SetSize({ 550, 30 });
@@ -55,12 +56,7 @@ void ClampingState::Enter()
 				pProj->SetPos({ player->GetPos().x + 200 , player->GetPos().y });
 			}
 		}
-
-		crackLines[crackLineIdx] = pProj;
-		crackLineIdx++;
 	}
-
-
 }
 
 void ClampingState::Exit()
@@ -70,6 +66,7 @@ void ClampingState::Exit()
 		GET_SINGLE(EventManager)->DeleteObject(crackLines[i]);
 	}
 	State::Exit();
+
 }
 
 void ClampingState::Movement(float _dt)
@@ -94,6 +91,8 @@ void ClampingState::Shooting(float _dt)
 		{
 			CrackLine* pProj = owner->CreateCrackLine();
 
+			crackLines[crackLineIdx] = pProj;
+			crackLineIdx++;
 			if (i < 2)
 			{
 				pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLineWidth", L"Texture\\CrackLineWidth.bmp");
@@ -122,11 +121,7 @@ void ClampingState::Shooting(float _dt)
 				pProj->SetPos({ player->GetPos().x + sizeArr[sizeIdx] , player->GetPos().y });
 				break;
 			}
-
-			crackLines[crackLineIdx] = pProj;
-			crackLineIdx++;
 		}
-
 		timerforShot = 0;
 		sizeIdx++;
 	}

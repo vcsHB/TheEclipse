@@ -49,13 +49,13 @@ void AngrySpreadState::Movement(float _dt)
 	}
 	else if (timerforMove >= 6.f && timerforMove < 8.f)
 	{
-		vPos.x -= (300 * _dt);
+		vPos.x -= (150 * _dt);
 	}
 
 
 	if (timerforMove > 10.f)
 	{
-		owner->GetStateMachine()->ChangeState(L"Clamp");
+		owner->GetStateMachine()->ChangeState(L"AngryClamp");
 	}
 
 }

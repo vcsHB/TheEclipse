@@ -12,6 +12,7 @@ public:
 	State* Current() {
 		return currentState;
 	}
+	void SetStateList(Enemy* enemy, std::map< wstring, State*>* states);
 	void Update(float _dt);
 private:
 	std::map< wstring, State*>* states;
