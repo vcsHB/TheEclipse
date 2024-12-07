@@ -18,7 +18,7 @@ class StatusUpgrade : public UpgradeData
 
 
 public:
-	StatusUpgrade(wstring& name, wstring& description, wstring& textureKey, Player* player, int upgradeValue, UpgradeStatusType type);
+	StatusUpgrade(wstring& name, wstring& description, wstring& textureKey, Player* player, int upgradeValue, UpgradeStatusType& type);
 
 private:
 	UpgradeStatusType _upgradeStatType;

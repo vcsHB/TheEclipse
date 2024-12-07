@@ -7,6 +7,7 @@ public:
 	Object();
 	virtual ~Object();
 public:
+	virtual void Start();
 	virtual void Update() abstract;
 	virtual void LateUpdate();
 	virtual void Render(HDC _hdc) abstract;

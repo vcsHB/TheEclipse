@@ -47,8 +47,8 @@ public:
 			pool[type] = std::queue<IPoolable*>();
 		}
 		pool[type].push(poolable);
-		cout << "นึ";
 		GET_SINGLE(SceneManager)->GetCurrentScene().get()->AddObject(poolable->GetPoolObject(), LAYER::PROJECTILE);
+		cout << "ID : " << poolable->GetPoolObject()->GetId() << "| Added In Pool" << endl;
 	}
 
 

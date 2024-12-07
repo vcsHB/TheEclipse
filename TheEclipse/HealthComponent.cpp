@@ -11,13 +11,20 @@ HealthComponent::~HealthComponent()
 }
 
 
+void HealthComponent::FillMaxHealth() 
+{ 
+	m_hp = _maxHealth; 
+	OnHealthChangedEvent.Invoke(m_hp, _maxHealth);
+}
+
 bool HealthComponent::DecreaseHP(int damage)
 {
 	if (m_hp > 0)
 	{
 		m_hp -= damage;
 	}
-
+	cout << "\n=========== Health Changed" << endl;
+	OnHealthChangedEvent.Invoke(m_hp, _maxHealth);
 	return m_hp <= 0; 
 }
 

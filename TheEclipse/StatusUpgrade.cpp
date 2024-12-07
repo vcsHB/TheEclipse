@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "StatusUpgrade.h"
 
-StatusUpgrade::StatusUpgrade(wstring& name, wstring& description, wstring& textureKey, Player* player, int upgradeValue, UpgradeStatusType type)
+StatusUpgrade::StatusUpgrade(wstring& name, wstring& description, wstring& textureKey, Player* player, int upgradeValue, UpgradeStatusType& type)
 {
 	upgradeName = name;
 	this->description = description;
@@ -20,6 +20,7 @@ void StatusUpgrade::ApplyUpgradeEffect()
 
 	case UpgradeStatusType::Health:
 		_player->playerStatus->healthStat->AddModifier(upgradeValue);
+		_player->GetComponent<HealthComponent>()->FillMaxHealth();
 		break; 
 
 	case UpgradeStatusType::Attack:

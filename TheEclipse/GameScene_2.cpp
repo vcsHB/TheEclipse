@@ -21,9 +21,11 @@
 #include "SideSpreadState.h"
 #include "AngrySpreadState.h"
 #include "AngryClampState.h"
+#include "PoolManager.h"
+#include "HealthGauge.h"
+#include "ParticleSystem.h"
 #include "ChaseState.h"
 #include "WallThrowState.h"
-#include "PoolManager.h"
 
 void GameScene_2::Init()
 {
@@ -46,15 +48,39 @@ void GameScene_2::Init()
 	healthEdgeUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeEdge", L"Texture\\Gauge_Edge.bmp"));
 	RectTransform* healthFillUI = new RectTransform("HealthGaugeFill");
 	healthFillUI->SetPos({ 250, 650 });
-	healthFillUI->AddComponent<Image>();
-	healthFillUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeFill", L"Texture\\Gauge_Fill.bmp"));
+	healthFillUI->AddComponent<HealthGauge>();
+
 	RectTransform* healthText = new RectTransform("HealthText");
 	healthText->SetPos({ 250, 670 });
 	healthText->AddComponent<TextPro>();
-	wstring content = L"HP (50/50)";
-	healthText->GetComponent<TextPro>()->SetText(content, 20);
+	wstring content = L"HP (20/20)";
+	healthFillUI->GetComponent<HealthGauge>()->SetTextCompo(healthText->GetComponent<TextPro>());
+	healthText->GetComponent<TextPro>()->SetText(content, 10);
 
+	
+	// Enemy Health
+	RectTransform* bossHealthEdgeUI = new RectTransform("Enemy_HealthGaugeEdge");
+	bossHealthEdgeUI->SetPos({ 250, 30 });
+	bossHealthEdgeUI->AddComponent<Image>();
+	bossHealthEdgeUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeEdge", L"Texture\\Gauge_Edge.bmp"));
+	RectTransform* bossHealthFillUI = new RectTransform("Enemy_HealthGaugeFill");
+	bossHealthFillUI->SetPos({ 250, 30 });
+	bossHealthFillUI->AddComponent<HealthGauge>();
 
+	RectTransform* bossHealthText = new RectTransform("Enemy_HealthText");
+	bossHealthText->SetPos({ 250, 45 });
+	bossHealthText->AddComponent<TextPro>();
+	bossHealthFillUI->GetComponent<HealthGauge>()->SetTextCompo(bossHealthText->GetComponent<TextPro>());
+	content = L"HP (50/50)";
+	bossHealthText->GetComponent<TextPro>()->SetText(content, 10);
+
+	RectTransform* bossNameText = new RectTransform("BossNameText");
+	bossNameText->SetPos({ 250, 60 });
+	bossNameText->AddComponent<TextPro>();
+	content = L"집행자 밍글링";
+	bossNameText->GetComponent<TextPro>()->SetText(content, 13);
+
+	//==
 
 	RectTransform* upgradeButton_1 = new RectTransform("UpgradePanel_1");
 	upgradeButton_1->SetPos({ 250, 220 });
@@ -70,13 +96,22 @@ void GameScene_2::Init()
 	expGauge->SetPos({ 250, 630 });
 	expGauge->AddComponent<ExpGauge>();
 
+
 	canvas->AddRectPanel(healthEdgeUI);
 	canvas->AddRectPanel(healthFillUI);
 	canvas->AddRectPanel(healthText);
+
+	canvas->AddRectPanel(bossHealthEdgeUI);
+	canvas->AddRectPanel(bossHealthFillUI);
+	canvas->AddRectPanel(bossHealthText);
+	canvas->AddRectPanel(bossNameText);
+
 	canvas->AddRectPanel(upgradeButton_1);
 	canvas->AddRectPanel(upgradeButton_2);
 	canvas->AddRectPanel(expGauge);
 
+
+	canvas->Initialize();
 	// === Enemy Setting
 	map<wstring, State*> stage1;
 	stage1.insert(std::pair<wstring, State*>(L"Idle", new IdleState(L"IdleState")));
@@ -97,6 +132,7 @@ void GameScene_2::Init()
 	stage2.insert(std::pair<wstring, State*>(L"WallThrow", new WallThrowState(L"WallThrowState")));
 
 
+
 	stateData = new map<int, map<wstring, State*>>();
 	stateData->insert(std::pair<int, map<wstring, State*>>(1, stage1));
 	stateData->insert(std::pair<int, map<wstring, State*>>(2, stage2));
@@ -115,9 +151,13 @@ void GameScene_2::Init()
 		projectile->enabled = false;
 		PoolManager::AddPool(PoolingType::Projectile, projectile);
 	}
-	//PoolManager::AddPool<Projectile>(PoolingType::Projectile, 40, poolable);
 
-
+	for (int i = 0; i < 20; i++)
+	{
+		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", { 0,0 }, 0.2f, 4, 0.7f, 14.3f);
+		vfx->enabled = false;
+		PoolManager::AddPool(PoolingType::HitVFX, vfx);
+	}
 
 	//Object* backGround = new 
 	GET_SINGLE(UpgradeManager)->Initialize(
@@ -131,6 +171,10 @@ void GameScene_2::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::CRACKLINE, LAYER::PLAYER);
+
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 void GameScene_2::Update()

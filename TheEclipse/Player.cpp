@@ -14,6 +14,9 @@
 #include "PlayerStatus.h"
 #include "Stat.h"
 #include "PoolManager.h"
+#include "HealthGauge.h"
+#include "Canvas.h"
+#include "RectTransform.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -27,15 +30,17 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
-	playerStatus = new PlayerStatus(100, 1, 3, 1, 1, 1, 0);
+	playerStatus = new PlayerStatus(20, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
-
+	
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
 	healthComponent = GetComponent<HealthComponent>();
+	healthComponent->SetMaxHealth(status->healthStat->GetValue());
 	healthComponent->SetHp(status->healthStat->GetValue());
 	healthComponent->SetOwner(this);
+	
 	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(40.f, 0.f),
 		Vec2(40.f, 40.f), Vec2(40.f, 0.f), 5, 0.1f);
 	/*GetComponent<Animator>()->CreateAnimation(L"Player_Idle-Sheet", m_pTex, Vec2(0.f, 150.f),
@@ -44,11 +49,19 @@ Player::Player(WorldSpaceScene* scene)
 	currentScene = scene;
 
 }
+
+
 Player::~Player()
 {
 	//Agent::~Agent();
 	//if (nullptr != m_pTex)
 	//	delete m_pTex;
+
+}
+void Player::Start()
+{
+	_healthGauge = currentScene->GetCanvas()->Find("HealthGaugeFill")->GetComponent<HealthGauge>();
+	healthComponent->OnHealthChangedEvent.Add(std::bind(&HealthGauge::HandleRefreshGauge, _healthGauge, std::placeholders::_1, std::placeholders::_2));
 
 }
 void Player::Update()
@@ -114,6 +127,7 @@ void Player::Movement()
 	auto p = OriginPos();
 
 	currentScene->m_moveSpeed = 100.f * status->moveSpeedStat->GetValue();
+	_currentDashTime += GET_SINGLE(TimeManager)->GetDT();
 	float moveAmount = currentScene->m_moveSpeed * fDT;
 	Vec2 moveDirection = { 0,0 };
 	if (GET_KEY(KEY_TYPE::A))
@@ -137,8 +151,19 @@ void Player::Movement()
 		moveDirection.y = 1;
 	}
 
+	Vec2 dashDirection = {0,0};
 	moveDirection.Normalize();
-	currentScene->m_deltaPos = moveDirection;
+	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	{
+		if (_currentDashTime > 1.f)
+		{
+			_currentDashTime = 0.f;
+			dashDirection = moveDirection * 100.f;
+
+		}
+	}
+
+	currentScene->m_deltaPos = moveDirection  + dashDirection;
 
 	int windowSizeX = GetSystemMetrics(SM_CXSCREEN);
 	int windowSizeY = GetSystemMetrics(SM_CXSCREEN);
@@ -149,22 +174,24 @@ void Player::Movement()
 	float heightClamp = windowSizeY / 2 - SCREEN_HEIGHT;
 
 
-	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount;
+	currentScene->m_WorldPosition = currentScene->m_WorldPosition + moveDirection * moveAmount + dashDirection;
 	currentScene->m_WorldPosition.x = std::clamp(currentScene->m_WorldPosition.x, -widthClamp, widthClamp);
 	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -heightClamp, heightClamp);
 	SetWindowPos(m_hWnd, HWND_TOP,
-		p.x + currentScene->m_WorldPosition.x, p.y + currentScene->m_WorldPosition.y,
+		p.x + currentScene->m_WorldPosition.x + dashDirection.x, p.y + currentScene->m_WorldPosition.y + dashDirection.y,
 		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
 }
 
 void Player::Shooting()
 {
-	_currentShootCoolTime += GET_SINGLE(TimeManager)->GetDT() * playerStatus->fireSpeedStat->GetValue();
+	int fireSpeed = playerStatus->fireSpeedStat->GetValue();
+	_currentShootCoolTime += GET_SINGLE(TimeManager)->GetDT() * (1 + fireSpeed * 0.2f);
 	if (_currentShootCoolTime >= 1.f)
 	{
 		_currentShootCoolTime = 0;
 		//Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
 		Vec2 direction = { 0, -1 };
+		GET_SINGLE(ResourceManager)->Play(L"Bullet_Shoot");
 		CreateProjectile(direction);
 	}
 }	
@@ -172,7 +199,6 @@ void Player::Shooting()
 void Player::CreateProjectile(Vec2 dir)
 {
 	int projectileAmount = playerStatus->bulletMultipleStat->GetValue();
-
 	Vec2 fireOriginPos = GetPos();
 	fireOriginPos.y -= GetSize().y / 2.f;
 	for (int i = 0; i < projectileAmount; i++)

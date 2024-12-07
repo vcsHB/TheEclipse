@@ -25,6 +25,9 @@ public:
 		return m_vecObj[(UINT)_type];
 	}
 	Object* FindObjectByName(wstring name);
+	Canvas* GetCanvas() { return _canvas; }
+
+	void StartObjects();
 private:
 	//Object m_obj;
 	//Object* m_pObj;

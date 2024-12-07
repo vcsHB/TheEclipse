@@ -14,7 +14,7 @@ void SceneManager::Init()
 	RegisterScene(L"GameScene2", std::make_shared<GameScene_2>());
 
 	// ¾À ·Îµå
-	LoadScene(L"GameScene2");
+	LoadScene(L"TitleScene");
 }
 
 void SceneManager::Update()
@@ -53,5 +53,6 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	{
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
+		m_pCurrentScene->StartObjects();
 	}
 }
