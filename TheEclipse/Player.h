@@ -34,6 +34,7 @@ private:
 	
 public:
 	PlayerStatus* playerStatus;
+	HealthComponent* GetHealth() { return healthComponent; }
 
 
 	//GameScene* currentScene;

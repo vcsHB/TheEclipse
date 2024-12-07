@@ -51,7 +51,7 @@ void UpgradeManager::LevelUp()
 
     _upgradeButton_1->SetUpgradeData(_data_1);
     _upgradeButton_2->SetUpgradeData(_data_2);
-
+    _player->GetHealth()->FillMaxHealth();
 
 }
 
