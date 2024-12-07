@@ -1,4 +1,5 @@
 
+
 #include "pch.h"
 #include "State.h"
 #include "TargetingState.h"
@@ -10,7 +11,6 @@
 
 void TargetingState::Enter()
 {
-	State::Enter();
 	projIdx = 0;
 
 	int _bulletCount = 20;
@@ -26,9 +26,15 @@ void TargetingState::Enter()
 		Projectile* pProj = owner->CreateProjectile({ 0,0 });
 		pProj->SetPos({ dir.x * 200 + player->GetPos().x  , dir.y * 200 + player->GetPos().y });
 		pProj->isAnimated = true;
+		if (owner->isAngry)
+			pProj->moveSpeed = 1.5f;
 		projectilles[i] = (pProj);
 	}
+
+	State::Enter();
+
 }
+
 
 
 void TargetingState::Exit()
@@ -64,7 +70,12 @@ void TargetingState::Shooting(float _dt)
 
 			if (24 == projIdx)
 			{
-				owner->GetStateMachine()->ChangeState(L"Idle");
+				if (owner->isAngry)
+					owner->GetStateMachine()->ChangeState(L"Clamp");
+				else
+				{
+					owner->GetStateMachine()->ChangeState(L"Idle");
+				}
 			}
 		}
 	}

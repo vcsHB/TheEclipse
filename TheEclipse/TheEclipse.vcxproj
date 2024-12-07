@@ -171,6 +171,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasComponent.h" />
+    <ClInclude Include="ChaseState.h" />
     <ClInclude Include="ClampingState.h" />
     <ClInclude Include="CrackLine.h" />
     <ClInclude Include="Delegate.h" />
@@ -231,6 +232,7 @@
     <ClInclude Include="UpgradeData.h" />
     <ClInclude Include="UpgradeManager.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="WallThrowState.h" />
     <ClInclude Include="WorldSpaceScene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +247,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CanvasComponent.cpp" />
+    <ClCompile Include="ChaseState.cpp" />
     <ClCompile Include="ClampingState.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -294,6 +297,7 @@
     <ClCompile Include="UpgradeButton.cpp" />
     <ClCompile Include="UpgradeData.cpp" />
     <ClCompile Include="UpgradeManager.cpp" />
+    <ClCompile Include="WallThrowState.cpp" />
     <ClCompile Include="WorldSpaceScene.cpp" />
   </ItemGroup>
   <ItemGroup>

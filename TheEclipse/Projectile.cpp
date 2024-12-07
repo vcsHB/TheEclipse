@@ -114,7 +114,7 @@ void Projectile::EnterCollision(Collider* _other)
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
 	{
-		std::cout << "GetDamage : " << _damage << std::endl;
+		//std::cout << "GetDamage : " << _damage << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GET_SINGLE(UpgradeManager)->GainExp(4);

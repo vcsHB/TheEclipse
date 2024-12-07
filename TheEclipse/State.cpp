@@ -13,11 +13,12 @@ void State::Init(Enemy* owner)
 {
 	this->owner = owner;
 	player = owner->currentScene->player;
+
 }
 
 void State::Enter()
 {
-	std::wcout << name << "   " << L"Enter" << endl;
+	//std::wcout << name << "   " << L"Enter" << endl;
 	timerforMove = 0;
 	timerforShot = 0;
 }
@@ -33,11 +34,12 @@ void State::Update(float _dt)
 	Shooting(_dt);
 
 	owner->Object::SetPos(vPos);
+
 }
 
 void State::Exit()
 {
 	timerforMove = 0;
-	std::wcout << name << "   " << L"Exit" << endl;
+	//std::wcout << name << "   " << L"Exit" << endl;
 }
 
