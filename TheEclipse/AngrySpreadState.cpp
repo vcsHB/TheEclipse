@@ -5,6 +5,7 @@
 #include "Player.h"	
 #include "Enemy.h"	
 #include "StateMachine.h"	
+#include "ResourceManager.h"	
 
 
 void AngrySpreadState::Enter()
@@ -66,6 +67,8 @@ void AngrySpreadState::Shooting(float _dt)
 
 	if (timerforShot > 1.f)
 	{
+		GET_SINGLE(ResourceManager)->LoadSound(L"EnemyShot", L"Sound\\EnemyShot.wav", true);
+		GET_SINGLE(ResourceManager)->Play(L"EnemyShot");
 		timerforShot = 0;
 		Vec2 dir;
 		for (int i = 0; i < 24; i++)

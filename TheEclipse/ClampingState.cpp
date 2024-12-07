@@ -130,6 +130,8 @@ void ClampingState::Shooting(float _dt)
 	Vec2 playerPos = player->GetPos();
 	if (shootTime > 0.5f)
 	{
+		GET_SINGLE(ResourceManager)->LoadSound(L"EnemyShot", L"Sound\\EnemyShot.wav", true);
+		GET_SINGLE(ResourceManager)->Play(L"EnemyShot");
 		Projectile* pProj = owner->CreateProjectile(playerPos - vPos);
 		pProj->isAnimated = true;
 		shootTime = 0;

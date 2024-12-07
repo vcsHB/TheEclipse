@@ -19,7 +19,8 @@ void WallThrowState::Enter()
 	Vec2 playerPos = player->GetPos();
 
 
-
+	GET_SINGLE(ResourceManager)->LoadSound(L"WallCreate", L"Sound\\WallCreate.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"WallCreate");
 	for (int i = 0; i < idx; i++)
 	{
 		CrackLine* pCrackLine = owner->CreateCrackLine();
@@ -76,6 +77,8 @@ void WallThrowState::Shooting(float _dt)
 
 		if (timerforShot < 2)
 		{
+			GET_SINGLE(ResourceManager)->LoadSound(L"MovingWall", L"Sound\\MovingWall.wav", true);
+			GET_SINGLE(ResourceManager)->Play(L"MovingWall");
 
 			int posX = abs(curPos.x);
 			int posY = abs(curPos.y);
@@ -88,6 +91,7 @@ void WallThrowState::Shooting(float _dt)
 				crackLines[crackLineIdx]->SetPos({ pos.x += _dt * +300 , pos.y });
 			else if (posY == 150 && curPos.x == 300)
 				crackLines[crackLineIdx]->SetPos({ pos.x += _dt * -300 , pos.y });
+		
 		}
 
 		if (timerforShot >= 3)

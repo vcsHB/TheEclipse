@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "StateMachine.h"
 #include "Projectile.h"
+#include "ResourceManager.h"
 
 void SpreadState::Enter()
 {
@@ -46,6 +47,8 @@ void SpreadState::Shooting(float _dt) {
 
 	if (timerforShot > 1.f)
 	{
+		GET_SINGLE(ResourceManager)->LoadSound(L"BossShot", L"Sound\\BossShot.wav", true);
+		GET_SINGLE(ResourceManager)->Play(L"BossShot");
 		timerforShot = 0;
 		Vec2 dir;
 		for (int i = 0; i < 24; i++)
