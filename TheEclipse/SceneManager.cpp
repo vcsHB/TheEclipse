@@ -14,7 +14,7 @@ void SceneManager::Init()
 	RegisterScene(L"GameScene2", std::make_shared<GameScene_2>());
 
 	// ¾À ·Îµå
-	LoadScene(L"GameScene2");
+	LoadScene(L"TitleScene");
 }
 
 void SceneManager::Update()

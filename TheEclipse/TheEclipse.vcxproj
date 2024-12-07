@@ -175,6 +175,7 @@
     <ClInclude Include="CrackLine.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="ExpGauge.h" />
+    <ClInclude Include="FadePanel.h" />
     <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="HealthGauge.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="ExpGauge.cpp" />
+    <ClCompile Include="FadePanel.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="GDISelector.cpp" />

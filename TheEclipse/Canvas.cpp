@@ -73,6 +73,7 @@ RectTransform* Canvas::GetUIInPosition(Vec2 position)
 	// 위치를 입력 받아 그 위치에 해당하는 RectTransform을 반환
 	for (RectTransform* ui : _uiList)
 	{
+		if (ui == nullptr) continue;
 		if (!ui->enabled) continue;
 
 		RECT rect = ui->GetRect();

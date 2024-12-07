@@ -30,7 +30,7 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
-	playerStatus = new PlayerStatus(10, 1, 3, 1, 1, 1, 0);
+	playerStatus = new PlayerStatus(15, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
 	
 	AddComponent<Collider>();
