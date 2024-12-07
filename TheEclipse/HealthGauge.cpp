@@ -2,7 +2,10 @@
 #include "HealthGauge.h"
 #include "RectTransform.h"
 #include "Image.h"
+#include "TextPro.h"
 #include "ResourceManager.h"
+#include <string>
+#include <sstream>
 
 void HealthGauge::OnEnable()
 {
@@ -21,5 +24,14 @@ void HealthGauge::HandleRefreshGauge(int current, int max)
 {
 	cout << "\n\n" << current << " / " << max << endl;
 	_fillGaugeImage->SetHorizontalFillAmount((float)current / max);
+	std::wstringstream wss;
+	wss << L"(" << current << L"/" << max << L")";
+	wstring content = wss.str();
+	_text->SetText(content);
 
+}
+
+void HealthGauge::SetTextCompo(TextPro* textCompo)
+{
+	_text = textCompo;
 }

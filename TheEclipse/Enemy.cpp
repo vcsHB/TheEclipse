@@ -16,6 +16,9 @@
 #include "Status.h"
 #include "Stat.h"
 #include "PoolManager.h"
+#include "HealthGauge.h"
+#include "Canvas.h"
+#include "RectTransform.h"
 
 Enemy::Enemy(WorldSpaceScene* scene, map<int, map<wstring, State*>>* states)
 {
@@ -23,18 +26,21 @@ Enemy::Enemy(WorldSpaceScene* scene, map<int, map<wstring, State*>>* states)
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
 
-	status = new Status(300, 2, 3);
+	status = new Status(150, 2, 3);
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
 	colliderComponent = GetComponent <Collider>();
 	colliderComponent->SetSize({ 100.f, 100.f });
 	healthComponent = GetComponent<HealthComponent>();
-	healthComponent->SetHp(status->healthStat->GetValue());
+	healthComponent->SetMaxHealth(status->healthStat->GetValue());
+	healthComponent->FillMaxHealth();
 	healthComponent->SetOwner(this);
 	GetComponent<Animator>()->CreateAnimation(L"Boss", m_pTex, Vec2(0.f, 0.f),
 		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 8, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"Boss", true);
+	HealthGauge* gauge = scene->GetCanvas()->Find("Enemy_HealthGaugeFill")->GetComponent<HealthGauge>();
+	healthComponent->OnHealthChangedEvent.Add(std::bind(&HealthGauge::HandleRefreshGauge, gauge, std::placeholders::_1, std::placeholders::_2));
 
 	currentScene = scene;
 
