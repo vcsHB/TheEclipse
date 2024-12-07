@@ -30,7 +30,7 @@ Player::Player(WorldSpaceScene* scene)
 	m_hWnd = GET_SINGLE(Core)->GetHwnd();
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerIdle", L"Texture\\Player_Idle-Sheet.bmp");
 
-	playerStatus = new PlayerStatus(15, 1, 3, 1, 1, 1, 0);
+	playerStatus = new PlayerStatus(20, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
 	
 	AddComponent<Collider>();
@@ -191,6 +191,7 @@ void Player::Shooting()
 		_currentShootCoolTime = 0;
 		//Vec2 dir = { (Vec2)GET_MOUSEPOS - GetPos() };
 		Vec2 direction = { 0, -1 };
+		GET_SINGLE(ResourceManager)->Play(L"Bullet_Shoot");
 		CreateProjectile(direction);
 	}
 }	

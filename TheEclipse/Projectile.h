@@ -35,6 +35,7 @@ public:
 	PoolingType GetPoolingType() override;
 	Object* GetPoolObject() override;
 	void ResetItem() override;
+	void GenerateBreakVFX();
 public:
 	Texture* m_pTex;
 	int _damage;

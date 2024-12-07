@@ -27,7 +27,7 @@ void FadePanel::Fade(bool value)
 {
 	if (_isFading) return;
 	if (_onOff == value) return;
-
+	_onOff = value;
 	_currentTime = value ? 0.f : 1.f;
 
 }

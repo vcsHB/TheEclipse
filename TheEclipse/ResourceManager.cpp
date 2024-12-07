@@ -14,6 +14,8 @@ void ResourceManager::Init()
 	if (m_pSoundSystem != nullptr)
 		m_pSoundSystem->init((int)SOUND_CHANNEL::END, FMOD_INIT_NORMAL, nullptr);
 
+	LoadSound(L"Bullet_Shoot", L"Sound\\to-the-ShootSFX.wav", false);
+
 }
 
 Texture* ResourceManager::TextureLoad(const wstring& _key, const wstring& _path)
