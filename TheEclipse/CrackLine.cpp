@@ -63,7 +63,6 @@ void CrackLine::EnterCollision(Collider* _other)
 		//std::cout << "Proj Enter" << std::endl;
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
-		pOtherObj->SetPos({ playerPos.x + (playerPos.x - m_Pos.x), playerPos.y });
 	}
 }
 

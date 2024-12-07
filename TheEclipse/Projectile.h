@@ -40,7 +40,7 @@ public:
 	int _damage;
 	bool isAnimated = false;
 	float moveSpeed = 1.f;
-	float lifeTime = 4.f;
+	float lifeTime = 10.f;
 private:
 	//float m_dir;
 	WorldSpaceScene* currentScene;
@@ -49,8 +49,6 @@ private:
 	Vec2 originPos;
 	float _currentLifeTime = 0.f;
 
-private:
 
-	void GenerateBreakVFX();
 };
 

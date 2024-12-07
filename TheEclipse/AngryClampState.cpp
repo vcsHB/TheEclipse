@@ -23,7 +23,7 @@ void AngryClampState::Enter()
 
 	int _bulletCount = 20;
 	Vec2 dir;
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < _bulletCount; i++)
 	{
 		float angle = 360.f / _bulletCount * i;
 		float x = cosf(angle * PI / 180);
@@ -124,7 +124,6 @@ void AngryClampState::Shooting(float _dt)
 	{
 		if (timerforShot >= 0.2f)
 		{
-
 			projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
 			timerforShot = 0;
 			projIdx++;
