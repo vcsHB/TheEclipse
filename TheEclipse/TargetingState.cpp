@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "StateMachine.h"
 #include "Projectile.h"
+#include "ResourceManager.h"
 
 
 void TargetingState::Enter()
@@ -63,7 +64,8 @@ void TargetingState::Shooting(float _dt)
 	{
 		if (timerforShot >= 0.2f)
 		{
-
+			GET_SINGLE(ResourceManager)->LoadSound(L"BossShot", L"Sound\\BossShot.wav", true);
+			GET_SINGLE(ResourceManager)->Play(L"BossShot");
 			projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
 			timerforShot = 0;
 			projIdx++;

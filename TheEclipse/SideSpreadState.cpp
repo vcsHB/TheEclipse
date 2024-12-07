@@ -5,6 +5,7 @@
 #include "Enemy.h"	
 #include "StateMachine.h"
 #include "Projectile.h"
+#include "ResourceManager.h"
 
 void SideSpreadState::Enter()
 {
@@ -61,7 +62,8 @@ void SideSpreadState::Shooting(float _dt)
 	{
 
 		Vec2 playerPos = player->GetPos();
-
+		GET_SINGLE(ResourceManager)->LoadSound(L"EnemyShot", L"Sound\\EnemyShot.wav", true);
+		GET_SINGLE(ResourceManager)->Play(L"EnemyShot");
 		for (int i = 0; i < 20; i++)
 		{
 			float angle = 360 / 20 * i;

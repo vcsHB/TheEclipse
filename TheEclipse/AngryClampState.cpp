@@ -36,6 +36,9 @@ void AngryClampState::Enter()
 		projectilles[i] = (pProj);
 	}
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"WallCreate", L"Sound\\WallCreate.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"WallCreate");
+
 	for (int i = 0; i < 4; i++)
 	{
 
@@ -129,6 +132,8 @@ void AngryClampState::Shooting(float _dt)
 			if (projectilles[projIdx] != nullptr)
 			{
 				projectilles[projIdx]->SetDir(dir - projectilles[projIdx]->GetPos());
+				GET_SINGLE(ResourceManager)->LoadSound(L"EnemyShot", L"Sound\\EnemyShot.wav", true);
+				GET_SINGLE(ResourceManager)->Play(L"EnemyShot");
 				projIdx++;
 				timerforShot = 0;
 			}
