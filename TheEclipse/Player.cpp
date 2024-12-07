@@ -40,6 +40,7 @@ Player::Player(WorldSpaceScene* scene)
 	healthComponent->SetMaxHealth(status->healthStat->GetValue());
 	healthComponent->SetHp(status->healthStat->GetValue());
 	healthComponent->SetOwner(this);
+	healthComponent->OnDieEvent.Add(std::bind(&Player::HandlePlayerDie, this, std::placeholders::_1));
 	
 	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(40.f, 0.f),
 		Vec2(40.f, 40.f), Vec2(40.f, 0.f), 5, 0.1f);
@@ -229,4 +230,9 @@ Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
 
 	return pProj;
+}
+
+void Player::HandlePlayerDie(bool value)
+{
+	GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 }

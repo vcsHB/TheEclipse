@@ -72,7 +72,6 @@ void ParticleSystem::Render(HDC _hdc)
 
 void ParticleSystem::Play()
 {
-	cout << GetId() << "가 아이디임";
 	srand(time(0));
 	Vec2 zero = { 0,0 };
 	for (int i = 0; i < _emissionAmount; i++)

@@ -20,9 +20,8 @@ IPoolable* PoolManager::Pop(PoolingType type)
 {
 	if (pool[type].empty())
 	{
-		// 보충 예외 처리 일단 미룸
-		//AddPool(type, )
 		cout << "POOL ERROR : not poolObject in Pool";
+		return nullptr;
 	}
 	IPoolable* poolObject = pool[type].front();
 	pool[type].pop();
