@@ -126,7 +126,6 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	std::cout << " Enemy Exit" << std::endl;
 }
 
 StateMachine* Enemy::GetStateMachine()
@@ -183,7 +182,7 @@ CrackLine* Enemy::CreateCrackLine()
 	pProj->m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"CrackLine", L"Texture\\CrackLine.bmp");
 
 	pProj->GetComponent<Animator>()->CreateAnimation(L"CrackLine", pProj->m_pTex, Vec2(0.f, 0.f),
-		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 8, 0.03f, true);
+		Vec2(32.f, 512.f), Vec2(32.f, 0.f), 5, 0.03f, true);
 	pProj->GetComponent<Animator>()->PlayAnimation(L"CrackLine", true);
 
 
@@ -199,7 +198,7 @@ CrackLine* Enemy::CreateCrackLine()
 	//duration += 10.f;
 
 	pProj->SetName(L"EnemyLine");
-	pProj->GetComponent<Collider>()->SetSize({ 30.f, 300.f });
+	pProj->GetComponent<Collider>()->SetSize({ 30.f, 550.f });
 	//Vec2 a = { 10.f, 10.f };
 	//Vec2 b = { 0.f, 0.f };
 	//Vec2 c = a / b;
