@@ -31,6 +31,8 @@ void TitleScene::Init()
 	Canvas* canvas = dynamic_cast<Canvas*>(canvasObj);
 	SetCanvas(canvas);
 	RectTransform* testUI_1 = new RectTransform("Logo");
+	RectTransform* titleBg = new RectTransform("titleBg");
+
 	TextPro* textPro = new TextPro();
 
 	testUI_1->SetSize({ 500, 300 }); // Image넣는 순간 의미 없음
@@ -38,6 +40,13 @@ void TitleScene::Init()
 	testUI_1->AddComponent<Image>();
 	testUI_1->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GameLogo", L"Texture\\GameLogo.bmp"));
 	
+	titleBg->SetSize({ 500, 300 }); // Image넣는 순간 의미 없음
+	titleBg->SetPos({ 250, 350 });
+	titleBg->AddComponent<Image>();
+	titleBg->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"BG", L"Texture\\TitleBG1.bmp"));
+
+
+
 
 	RectTransform* startButton = new RectTransform("quitButton");
 	startButton->SetPos({ 250, 300 });
@@ -64,6 +73,7 @@ void TitleScene::Init()
 	fadePanel->GetComponent<FadePanel>();
 
 
+	canvas->AddRectPanel(titleBg);
 	canvas->AddRectPanel(testUI_1);
 	canvas->AddRectPanel(startButton);
 	canvas->AddRectPanel(quitButton);
@@ -71,7 +81,6 @@ void TitleScene::Init()
 
 	canvas->Initialize();
 
-	
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");

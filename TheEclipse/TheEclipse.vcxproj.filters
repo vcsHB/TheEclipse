@@ -233,6 +233,9 @@
     <ClInclude Include="AngryClampState.h" />
     <ClInclude Include="ChaseState.h" />
     <ClInclude Include="WallThrowState.h" />
+    <ClInclude Include="FadePanel.h" />
+    <ClInclude Include="ParticleCell.h" />
+    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TheEclipse.rc">
@@ -244,6 +247,12 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="TheEclipse.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="GameIcon.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -404,6 +413,9 @@
     <ClCompile Include="AngryClampState.cpp" />
     <ClCompile Include="ChaseState.cpp" />
     <ClCompile Include="WallThrowState.cpp" />
+    <ClCompile Include="FadePanel.cpp" />
+    <ClCompile Include="ParticleCell.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

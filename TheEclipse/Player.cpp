@@ -32,7 +32,7 @@ Player::Player(WorldSpaceScene* scene)
 
 	playerStatus = new PlayerStatus(20, 1, 3, 1, 1, 1, 0);
 	status = playerStatus;
-	
+
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
@@ -40,7 +40,7 @@ Player::Player(WorldSpaceScene* scene)
 	healthComponent->SetMaxHealth(status->healthStat->GetValue());
 	healthComponent->SetHp(status->healthStat->GetValue());
 	healthComponent->SetOwner(this);
-	
+
 	GetComponent<Animator>()->CreateAnimation(L"PlayerIdle", m_pTex, Vec2(40.f, 0.f),
 		Vec2(40.f, 40.f), Vec2(40.f, 0.f), 5, 0.1f);
 	/*GetComponent<Animator>()->CreateAnimation(L"Player_Idle-Sheet", m_pTex, Vec2(0.f, 150.f),
@@ -151,7 +151,7 @@ void Player::Movement()
 		moveDirection.y = 1;
 	}
 
-	Vec2 dashDirection = {0,0};
+	Vec2 dashDirection = { 0,0 };
 	moveDirection.Normalize();
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 	{
@@ -163,7 +163,7 @@ void Player::Movement()
 		}
 	}
 
-	currentScene->m_deltaPos = moveDirection  + dashDirection;
+	currentScene->m_deltaPos = moveDirection + dashDirection;
 
 	int windowSizeX = GetSystemMetrics(SM_CXSCREEN);
 	int windowSizeY = GetSystemMetrics(SM_CXSCREEN);
@@ -179,7 +179,7 @@ void Player::Movement()
 	currentScene->m_WorldPosition.y = std::clamp(currentScene->m_WorldPosition.y, -heightClamp, heightClamp);
 	SetWindowPos(m_hWnd, HWND_TOP,
 		p.x + currentScene->m_WorldPosition.x + dashDirection.x, p.y + currentScene->m_WorldPosition.y + dashDirection.y,
-		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS);
+		0, 0, SWP_NOSIZE | SWP_SHOWWINDOW | SWP_ASYNCWINDOWPOS | SWP_NOZORDER | SWP_FRAMECHANGED);
 }
 
 void Player::Shooting()
@@ -194,7 +194,7 @@ void Player::Shooting()
 		GET_SINGLE(ResourceManager)->Play(L"Bullet_Shoot");
 		CreateProjectile(direction);
 	}
-}	
+}
 
 void Player::CreateProjectile(Vec2 dir)
 {
