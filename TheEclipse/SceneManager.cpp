@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "ResourceManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
@@ -44,6 +45,7 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	// ¾ÀÀÌ ÀÖÀ¸¸é
 	if (m_pCurrentScene != nullptr)
 	{
+		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 		m_pCurrentScene->Release();
 		m_pCurrentScene = nullptr;
 	}

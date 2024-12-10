@@ -26,7 +26,5 @@ public:
 	// 해당 위치에 있는 UI를 가져온다. 
 	// ( 우선순위를 관리해야하나 싶긴 한데 일단은 걍 최대한 안겹치게끔 노력을 해봅시다. )
 	RectTransform* GetUIInPosition(Vec2 position);
-
-
 };
 

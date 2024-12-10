@@ -35,6 +35,7 @@ IPoolable* PoolManager::Pop(PoolingType type)
 
 void PoolManager::Push(IPoolable* poolable)
 {
+	if (poolable == nullptr) return;
 	int id = poolable->GetPoolObject()->GetId();
 	if (enabledPool.count(id))
 	{

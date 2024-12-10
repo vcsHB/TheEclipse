@@ -97,6 +97,7 @@ void GameScene_2::Init()
 	expGauge->AddComponent<ExpGauge>();
 
 
+
 	canvas->AddRectPanel(healthEdgeUI);
 	canvas->AddRectPanel(healthFillUI);
 	canvas->AddRectPanel(healthText);
@@ -180,4 +181,10 @@ void GameScene_2::Init()
 void GameScene_2::Update()
 {
 	Scene::Update();
+}
+
+void GameScene_2::Release()
+{
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	Scene::Release();
 }

@@ -106,21 +106,21 @@ void Projectile::EnterCollision(Collider* _other)
 	if (pOtherObj->GetName() == L"Player" && m_name == L"EnemyBullet")
 	{
 		//std::cout << "Proj Enter" << std::endl;
+		PoolManager::Push(this);
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GenerateBreakVFX();
 
-		PoolManager::Push(this);
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
 	{
 		//std::cout << "GetDamage : " << _damage << std::endl;
+		PoolManager::Push(this);
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GET_SINGLE(UpgradeManager)->GainExp(4);
 		GenerateBreakVFX();
 
-		PoolManager::Push(this);
 	}
 }
 
