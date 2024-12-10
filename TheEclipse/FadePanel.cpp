@@ -20,7 +20,7 @@ void FadePanel::Update()
 		_currentTime += fDT;
 	else
 		_currentTime -= fDT;
-	cout << _currentTime << "นึ" << endl;
+	cout << "FillAmount : " << (float)_currentTime / _duration << endl;
 	_imageComponent->SetVerticalFillAmount(_currentTime / _duration);
 }
 void FadePanel::Fade(bool value)
@@ -28,6 +28,7 @@ void FadePanel::Fade(bool value)
 	if (_isFading) return;
 	if (_onOff == value) return;
 	_onOff = value;
+	_isFading = true;
 	_currentTime = value ? 0.f : 1.f;
 
 }

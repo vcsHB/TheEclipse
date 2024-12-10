@@ -6,10 +6,10 @@ class FadePanel : public CanvasComponent
 {
 private:
 	Image* _imageComponent;
-	float _duration = 0.5f;
+	float _duration = 1.5f;
 	float _currentTime = 0.f; 
 	bool _isFading = false;
-	bool _onOff;
+	bool _onOff = false;
 public:
 
 	void OnEnable() override;

@@ -46,8 +46,6 @@ void TitleScene::Init()
 	titleBg->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"BG", L"Texture\\TitleBG1.bmp"));
 
 
-
-
 	RectTransform* startButton = new RectTransform("quitButton");
 	startButton->SetPos({ 250, 300 });
 	startButton->AddComponent<Image>();
