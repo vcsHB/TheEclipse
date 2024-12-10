@@ -27,6 +27,11 @@
 #include "ChaseState.h"
 #include "WallThrowState.h"
 
+#include "ClearPanel.h"
+#include "OverPanel.h"
+#include "GameManager.h"
+#include "FadePanel.h"
+
 void GameScene_2::Init()
 {
 	HWND m_hWnd1;
@@ -96,6 +101,19 @@ void GameScene_2::Init()
 	expGauge->SetPos({ 250, 630 });
 	expGauge->AddComponent<ExpGauge>();
 
+	RectTransform* clearPanel = new RectTransform("ClearPanel");
+	clearPanel->AddComponent <ClearPanel>();
+
+	RectTransform* overPanel = new RectTransform("OverPanel");
+	clearPanel->AddComponent <OverPanel>();
+	GET_SINGLE(GameManager)->Initialize(clearPanel, overPanel);
+
+
+	RectTransform* fadePanel = new RectTransform("FadePanel");
+	fadePanel->AddComponent<FadePanel>();
+	fadePanel->GetComponent<FadePanel>();
+	fadePanel->GetComponent < FadePanel>()->SetDefault(true);
+
 
 
 	canvas->AddRectPanel(healthEdgeUI);
@@ -110,6 +128,9 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(upgradeButton_1);
 	canvas->AddRectPanel(upgradeButton_2);
 	canvas->AddRectPanel(expGauge);
+
+
+	canvas->AddRectPanel(fadePanel);
 
 
 	canvas->Initialize();
@@ -176,11 +197,13 @@ void GameScene_2::Init()
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	fadePanel->GetComponent<FadePanel>()->Fade(false);
 }
 
 void GameScene_2::Update()
 {
 	Scene::Update();
+	GET_SINGLE(GameManager)->Update(); // ฒ๛ย๏วั.
 }
 
 void GameScene_2::Release()

@@ -13,6 +13,7 @@ private:
 public:
 
 	void OnEnable() override;
+	void SetDefault(bool onOff);
 	void Update() override;
 public:
 

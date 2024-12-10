@@ -69,6 +69,7 @@ void TitleScene::Init()
 	RectTransform* fadePanel = new RectTransform("FadePanel");
 	fadePanel->AddComponent<FadePanel>();
 	fadePanel->GetComponent<FadePanel>();
+	fadePanel->GetComponent < FadePanel>()->SetDefault(false);
 
 
 	canvas->AddRectPanel(titleBg);
