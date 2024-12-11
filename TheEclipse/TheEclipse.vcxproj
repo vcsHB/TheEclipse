@@ -173,16 +173,20 @@
     <ClInclude Include="CanvasComponent.h" />
     <ClInclude Include="ChaseState.h" />
     <ClInclude Include="ClampingState.h" />
+    <ClInclude Include="ClearPanel.h" />
     <ClInclude Include="CrackLine.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="ExpGauge.h" />
     <ClInclude Include="FadePanel.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene_2.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="HealthGauge.h" />
+    <ClInclude Include="IControlablePanel.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="IPoolable.h" />
+    <ClInclude Include="OverPanel.h" />
     <ClInclude Include="ParticleCell.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PlayerSkill.h" />
@@ -249,6 +253,7 @@
     <ClCompile Include="CanvasComponent.cpp" />
     <ClCompile Include="ChaseState.cpp" />
     <ClCompile Include="ClampingState.cpp" />
+    <ClCompile Include="ClearPanel.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -259,6 +264,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="ExpGauge.cpp" />
     <ClCompile Include="FadePanel.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameScene_2.cpp" />
     <ClCompile Include="GDISelector.cpp" />
@@ -269,6 +275,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OverPanel.cpp" />
     <ClCompile Include="ParticleCell.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />

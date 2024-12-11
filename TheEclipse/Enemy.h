@@ -25,6 +25,7 @@ public:
 	StateMachine* GetStateMachine();
 private:
 	void DoAnimation(wstring name, wstring path);
+	void HandleDieEvent(bool value);
 	void ChangeToAngryMode();
 public:
 	bool isAngry = false;

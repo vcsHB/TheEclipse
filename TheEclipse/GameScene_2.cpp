@@ -27,6 +27,11 @@
 #include "ChaseState.h"
 #include "WallThrowState.h"
 
+#include "ClearPanel.h"
+#include "OverPanel.h"
+#include "GameManager.h"
+#include "FadePanel.h"
+
 void GameScene_2::Init()
 {
 	HWND m_hWnd1;
@@ -97,6 +102,24 @@ void GameScene_2::Init()
 	expGauge->AddComponent<ExpGauge>();
 
 
+	RectTransform* clearPanel = new RectTransform("ClearPanel");
+	clearPanel->AddComponent<ClearPanel>();
+	clearPanel->SetPos({ 250, 300 });
+	RectTransform* overPanel = new RectTransform("OverPanel");
+	overPanel->AddComponent<OverPanel>();
+	overPanel->SetPos({ 250, 300 });
+
+
+	GET_SINGLE(GameManager)->Initialize(clearPanel, overPanel);
+
+
+	RectTransform* fadePanel = new RectTransform("FadePanel");
+	fadePanel->AddComponent<FadePanel>();
+	fadePanel->GetComponent<FadePanel>();
+	fadePanel->GetComponent < FadePanel>()->SetDefault(true);
+
+
+
 	canvas->AddRectPanel(healthEdgeUI);
 	canvas->AddRectPanel(healthFillUI);
 	canvas->AddRectPanel(healthText);
@@ -109,6 +132,11 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(upgradeButton_1);
 	canvas->AddRectPanel(upgradeButton_2);
 	canvas->AddRectPanel(expGauge);
+
+
+	canvas->AddRectPanel(clearPanel);
+	canvas->AddRectPanel(overPanel);
+	canvas->AddRectPanel(fadePanel);
 
 
 	canvas->Initialize();
@@ -154,7 +182,7 @@ void GameScene_2::Init()
 
 	for (int i = 0; i < 20; i++)
 	{
-		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", { 0,0 }, 0.2f, 4, 0.7f, 14.3f);
+		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", { 0,0 }, 0.2f, 4, 0.7f, 24.3f);
 		vfx->enabled = false;
 		PoolManager::AddPool(PoolingType::HitVFX, vfx);
 	}
@@ -173,11 +201,19 @@ void GameScene_2::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::CRACKLINE, LAYER::PLAYER);
 
 
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
+	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	fadePanel->GetComponent<FadePanel>()->Fade(false);
 }
 
 void GameScene_2::Update()
 {
 	Scene::Update();
+	GET_SINGLE(GameManager)->Update(); // ²ûÂïÇÑ.
+}
+
+void GameScene_2::Release()
+{
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	Scene::Release();
 }

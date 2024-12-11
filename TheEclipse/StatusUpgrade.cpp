@@ -15,6 +15,8 @@ StatusUpgrade::StatusUpgrade(wstring& name, wstring& description, wstring& textu
 void StatusUpgrade::ApplyUpgradeEffect()
 {
 	UpgradeData::ApplyUpgradeEffect();
+	if (_player == nullptr)
+		return;
 	switch (_upgradeStatType)
 	{
 

@@ -8,6 +8,7 @@ class HealthComponent :
 public:
 	Delegate<int, int> OnHealthChangedEvent = Delegate<int, int>({});;
 	Delegate<bool> OnHealthValueChangedEvent = Delegate<bool>({});;
+	Delegate<bool> OnDieEvent = Delegate<bool>({});;
 	HealthComponent();
 	~HealthComponent();
 public:

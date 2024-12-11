@@ -12,7 +12,7 @@ public:
 
 private:
 	bool _isExiting;
-	float _exitDuration = 0.5f;
+	float _exitDuration = 1.7f;
 	float _currentExitTime = 0.f;
 
 private :

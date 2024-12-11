@@ -19,6 +19,7 @@
 #include "HealthGauge.h"
 #include "Canvas.h"
 #include "RectTransform.h"
+#include "GameManager.h"
 
 Enemy::Enemy(WorldSpaceScene* scene, map<int, map<wstring, State*>>* states)
 {
@@ -26,13 +27,14 @@ Enemy::Enemy(WorldSpaceScene* scene, map<int, map<wstring, State*>>* states)
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Boss", L"Texture\\Boss.bmp");
 
-	status = new Status(150, 2, 3);
+	status = new Status(300, 2, 3);
 	AddComponent<Collider>();
 	AddComponent<Animator>();
 	AddComponent<HealthComponent>();
 	colliderComponent = GetComponent <Collider>();
 	colliderComponent->SetSize({ 100.f, 100.f });
 	healthComponent = GetComponent<HealthComponent>();
+	healthComponent->OnDieEvent.Add(std::bind(&Enemy::HandleDieEvent, this, std::placeholders::_1));
 	healthComponent->SetMaxHealth(status->healthStat->GetValue());
 	healthComponent->FillMaxHealth();
 	healthComponent->SetOwner(this);
@@ -115,7 +117,8 @@ void Enemy::EnterCollision(Collider* _other)
 	{
 		if (healthComponent->DecreaseHP(1))
 			GET_SINGLE(EventManager)->DeleteObject(this);
-
+		GET_SINGLE(ResourceManager)->LoadSound(L"BossHit", L"Sound\\BossHit.wav", false);
+		GET_SINGLE(ResourceManager)->Play(L"BossHit");
 		Blink(true);
 
 		if (healthComponent->GetHp() <= 50 && isAngry == false)
@@ -249,6 +252,11 @@ void Enemy::DoAnimation(wstring name, wstring path)
 	GetComponent<Animator>()->CreateAnimation(name, m_pTex, Vec2(0.f, 0.f),
 		Vec2(80.f, 80.f), Vec2(80.f, 0.f), 8, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(name, true);
+}
+
+void Enemy::HandleDieEvent(bool value)
+{
+	GET_SINGLE(GameManager)->GameClear();
 }
 
 
