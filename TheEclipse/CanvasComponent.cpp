@@ -5,6 +5,10 @@ void CanvasComponent::Initialize()
 {
 }
 
+void CanvasComponent::OnEnable()
+{
+}
+
 void CanvasComponent::Update()
 {
 }

@@ -7,6 +7,8 @@ public:
 	void Update();
 public:
 	const float& GetDT() const { return m_dT; }
+public:
+	float timeScale = 1.f;
 private:
 	// Delta time
 	LARGE_INTEGER m_llPrevCnt = {};

@@ -7,8 +7,10 @@ void EventManager::Update()
 	// 이전 프레임에서 등록해둔 
 	for (Object* obj : m_vecDead)
 	{
-		if (obj != nullptr)
+		if (obj != nullptr) {
  			delete obj;
+			obj = nullptr;
+		}
 	}
 	m_vecDead.clear();
 

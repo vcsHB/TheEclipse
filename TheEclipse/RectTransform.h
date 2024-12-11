@@ -11,18 +11,19 @@ public:
 
 private:
 	vector<CanvasComponent*> _components;
+	vector<RectTransform*> _activeGroup;
 public:
 	void Initialize();
 	void Update();
 	void Render(HDC hdc);
 
 public:
-	
 	template<typename T>
 	void AddComponent()
 	{
 		T* com = new T;
 		com->SetOwner(this);
+		com->OnEnable();
 		_components.push_back(com);
 	}
 	template<typename T>
@@ -38,6 +39,11 @@ public:
 		return component;
 	}
 
+	void AddActiveGroup(RectTransform* rectTrm)
+	{
+		_activeGroup.push_back(rectTrm);
+	}
+
 public:
 	bool enabled = true;
 
@@ -50,13 +56,12 @@ public:
 	RECT GetRect() 
 	{ 
 		_rect = RECT_MAKE((LONG)_position.x, (LONG)_position.y, (LONG)_size.x, (LONG)_size.y);
-
+		
 		return _rect; 
-	
 	}
 	const Vec2& GetPos() const { return _position; }
 	const Vec2& GetSize() const { return _size; }
-	const void SetActive(bool value) { enabled = value; }
+	const void SetActive(bool value);
 	const std::string GetName() { return _uiName; }
 private:
 	std::string _uiName;

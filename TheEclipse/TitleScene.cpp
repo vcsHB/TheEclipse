@@ -11,7 +11,9 @@
 #include "Canvas.h"
 #include "Image.h"
 #include "Button.h"
+#include "TimeManager.h"
 #include "TextPro.h"
+#include "FadePanel.h"
 
 void TitleScene::Init()
 {
@@ -24,41 +26,62 @@ void TitleScene::Init()
 
 	// 캔버스 만들어보리기...
 	Object* canvasObj = new Canvas;
-	canvasObj->SetName(L"Canvas");
+	canvasObj->SetName(L"TitleCanvas");
 	AddObject(canvasObj, LAYER::UI);
 	Canvas* canvas = dynamic_cast<Canvas*>(canvasObj);
 	SetCanvas(canvas);
-	RectTransform* testUI_1 = new RectTransform("Test");
+	RectTransform* testUI_1 = new RectTransform("Logo");
+	RectTransform* titleBg = new RectTransform("titleBg");
+
 	TextPro* textPro = new TextPro();
 
 	testUI_1->SetSize({ 500, 300 }); // Image넣는 순간 의미 없음
-	testUI_1->SetPos({ 150, 300 });
+	testUI_1->SetPos({ 250, 120 });
 	testUI_1->AddComponent<Image>();
-	testUI_1->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"test_Panel", L"Texture\\test_Panel.bmp"));
-	testUI_1->AddComponent<Button>();
-	testUI_1->AddComponent<TextPro>();
-	wstring msg = L"겜프밍";
-	testUI_1->GetComponent<TextPro>()->SetText(msg, 6, RGB(255,255,255), TA_CENTER);
+	testUI_1->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GameLogo", L"Texture\\GameLogo.bmp"));
 	
-	RectTransform* healthEdgeUI = new RectTransform("HealthGaugeEdge");
-	healthEdgeUI->SetPos({ 300, 50 });
-	healthEdgeUI->AddComponent<Image>();
-	healthEdgeUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeEdge", L"Texture\\Gauge_Edge.bmp"));
-	RectTransform* healthFillUI = new RectTransform("HealthGaugeFill");
-	healthFillUI->SetPos({ 300, 50 });
-	healthFillUI->AddComponent<Image>();
-	healthFillUI->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"GaugeFill", L"Texture\\Gauge_Fill.bmp"));
+	titleBg->SetSize({ 500, 300 }); // Image넣는 순간 의미 없음
+	titleBg->SetPos({ 250, 350 });
+	titleBg->AddComponent<Image>();
+	titleBg->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"BG", L"Texture\\TitleBG1.bmp"));
 
+
+	RectTransform* startButton = new RectTransform("quitButton");
+	startButton->SetPos({ 250, 300 });
+	startButton->AddComponent<Image>();
+	startButton->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Button", L"Texture\\Button_Panel.bmp"));
+	startButton->AddComponent<Button>();
+	startButton->GetComponent<Button>()->OnClickEvent.Add(std::bind(&TitleScene::HandleGameStart, this, std::placeholders::_1));
+	startButton->AddComponent<TextPro>();
+	wstring content = L" 시작";
+	startButton->GetComponent<TextPro>()->SetText(content, 15);
+
+	RectTransform* quitButton = new RectTransform("quitButton");
+	quitButton->SetPos({ 250, 400 });
+	quitButton->AddComponent<Image>();
+	quitButton->GetComponent<Image>()->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Button", L"Texture\\Button_Panel.bmp"));
+	quitButton->AddComponent<Button>();
+	quitButton->AddComponent<TextPro>();
+	content = L" 종료";
 	
+	quitButton->GetComponent<TextPro>()->SetText(content, 15);
 
+	RectTransform* fadePanel = new RectTransform("FadePanel");
+	fadePanel->AddComponent<FadePanel>();
+	fadePanel->GetComponent<FadePanel>();
+	fadePanel->GetComponent < FadePanel>()->SetDefault(false);
+
+
+	canvas->AddRectPanel(titleBg);
 	canvas->AddRectPanel(testUI_1);
-	canvas->AddRectPanel(healthEdgeUI);
-	canvas->AddRectPanel(healthFillUI);
+	canvas->AddRectPanel(startButton);
+	canvas->AddRectPanel(quitButton);
+	canvas->AddRectPanel(fadePanel);
+
 	canvas->Initialize();
 
-	
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	
 }
@@ -66,13 +89,28 @@ void TitleScene::Init()
 void TitleScene::Update()
 {
 	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::F))
-	{
-		ming -= 5;
-		_canvas->Find("HealthGaugeFill")->GetComponent<Image>()->SetHorizontalFillAmount(ming / 100.f);
-	}
 	
+	if (_isExiting)
+	{
+		_currentExitTime += fDT;
+		if (_currentExitTime >= _exitDuration)
+		{
+			_currentExitTime = 0;
+			_isExiting = false;
+			GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+			GET_SINGLE(SceneManager)->LoadScene(L"GameScene2");
 
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
+
+		}
+	}
+	/*if (GET_KEYDOWN(KEY_TYPE::ENTER))
+		GET_SINGLE(SceneManager)->LoadScene(L"GameScene2");*/
+}
+
+
+void TitleScene::HandleGameStart(bool value)
+{
+	if (_isExiting) return;
+	_canvas->Find("FadePanel")->GetComponent<FadePanel>()->Fade(true);
+	_isExiting = true;
 }

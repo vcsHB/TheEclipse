@@ -6,6 +6,7 @@ public:
 	Component();
 	virtual ~Component();
 public:
+	virtual void Start();
 	virtual void LateUpdate() abstract;
 	virtual void Render(HDC _hdc) abstract;
 public:

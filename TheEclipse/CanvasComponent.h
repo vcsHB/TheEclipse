@@ -5,7 +5,8 @@ class CanvasComponent
 {
 
 public :
- 	virtual void Initialize();
+	virtual void Initialize();;
+	virtual void OnEnable();
 	
 	virtual void Update();
 	virtual void Render(HDC hdc);

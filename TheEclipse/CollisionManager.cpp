@@ -126,6 +126,8 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 }
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
+	if (!_left->GetOwner()->enabled || !_right->GetOwner()->enabled) return false;
+
 	Vec2 vLeftPos = _left->GetLatedUpatedPos();
 	Vec2 vRightPos = _right->GetLatedUpatedPos();
 	Vec2 vLeftSize = _left->GetSize();

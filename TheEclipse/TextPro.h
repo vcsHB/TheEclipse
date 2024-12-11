@@ -13,10 +13,8 @@ private :
 	
 
 public :
-
-
 	void Initialize() override;
-	void SetText(wstring& content, float size, COLORREF color, UINT alignType);
+	void SetText(wstring& content, float size = 12, COLORREF color = RGB(255, 255, 255), UINT alignType = TA_CENTER);
 	void ChangeTextContent(wstring& content);
 	void Render(HDC hdc) override;
 	

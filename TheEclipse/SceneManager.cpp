@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "ResourceManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
@@ -9,12 +10,12 @@ void SceneManager::Init()
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene",std::make_shared<GameScene>());
-	RegisterScene(L"GameScene2",std::make_shared<GameScene_2>());
+	RegisterScene(L"TitleScene", std::make_shared<TitleScene>());
+	RegisterScene(L"GameScene", std::make_shared<GameScene>());
+	RegisterScene(L"GameScene2", std::make_shared<GameScene_2>());
 
 	// ¾À ·Îµå
-	LoadScene(L"GameScene2");
+	LoadScene(L"TitleScene");
 }
 
 void SceneManager::Update()
@@ -36,7 +37,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 {
 	if (_sceneName.empty() || _scene == nullptr)
 		return;
-	m_mapScenes.insert(m_mapScenes.end(), {_sceneName, _scene});
+	m_mapScenes.insert(m_mapScenes.end(), { _sceneName, _scene });
 }
 
 void SceneManager::LoadScene(const wstring& _sceneName)
@@ -44,6 +45,7 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	// ¾ÀÀÌ ÀÖÀ¸¸é
 	if (m_pCurrentScene != nullptr)
 	{
+		GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 		m_pCurrentScene->Release();
 		m_pCurrentScene = nullptr;
 	}
@@ -53,5 +55,6 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	{
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
+		m_pCurrentScene->StartObjects();
 	}
 }

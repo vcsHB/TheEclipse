@@ -15,6 +15,7 @@ RectTransform::~RectTransform()
 			delete com;
 	}
 	_components.clear();
+	_activeGroup.clear();
 }
 
 void RectTransform::Initialize()
@@ -50,5 +51,14 @@ void RectTransform::Render(HDC hdc)
 		{
 			com->Render(hdc);
 		}
+	}
+}
+
+const void RectTransform::SetActive(bool value)
+{
+	enabled = value;
+	for (RectTransform* rectTrm : _activeGroup)
+	{
+		rectTrm->SetActive(value);
 	}
 }

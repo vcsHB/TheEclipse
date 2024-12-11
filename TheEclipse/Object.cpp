@@ -19,6 +19,17 @@ Object::~Object()
 	m_vecComponents.clear();
 }
 
+void Object::Start()
+{
+	for (Component* com : m_vecComponents)
+	{
+		if (com)
+		{
+			com->Start();
+		}
+	}
+}
+
 void Object::LateUpdate()
 {
 	for (Component* com : m_vecComponents)
@@ -28,6 +39,11 @@ void Object::LateUpdate()
 			com->LateUpdate();
 		}
 	}
+}
+
+Vec2 Object::OriginPos()
+{
+	return Vec2();
 }
 
 void Object::ComponentRender(HDC _hdc)
