@@ -17,6 +17,7 @@
 #include "HealthGauge.h"
 #include "Canvas.h"
 #include "RectTransform.h"
+#include "GameManager.h"
 
 int dirX = 0;
 int dirY = 0;
@@ -234,5 +235,6 @@ Projectile* Player::GenerateProjectile(Vec2 position, Vec2 direction)
 
 void Player::HandlePlayerDie(bool value)
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
+	GET_SINGLE(GameManager)->GameOver();
+	//GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 }

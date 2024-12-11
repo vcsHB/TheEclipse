@@ -20,7 +20,8 @@ void OverPanel::Initialize()
 {
 	_panelImage->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Black_BG", L"Texture\\Black_BG_Panel.bmp"));
 	wstring content = L"패배 했습니다.";
-	_textCompo->SetText(content, 14.f, RGB(255,0, 0));
+	_textCompo->SetText(content, 20.f, RGB(255,1, 1));
+	_textCompo->Initialize();
 }
 
 void OverPanel::Open()

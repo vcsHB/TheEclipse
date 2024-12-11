@@ -101,11 +101,15 @@ void GameScene_2::Init()
 	expGauge->SetPos({ 250, 630 });
 	expGauge->AddComponent<ExpGauge>();
 
-	RectTransform* clearPanel = new RectTransform("ClearPanel");
-	clearPanel->AddComponent <ClearPanel>();
 
+	RectTransform* clearPanel = new RectTransform("ClearPanel");
+	clearPanel->AddComponent<ClearPanel>();
+	clearPanel->SetPos({ 250, 300 });
 	RectTransform* overPanel = new RectTransform("OverPanel");
-	clearPanel->AddComponent <OverPanel>();
+	overPanel->AddComponent<OverPanel>();
+	overPanel->SetPos({ 250, 300 });
+
+
 	GET_SINGLE(GameManager)->Initialize(clearPanel, overPanel);
 
 
@@ -130,6 +134,8 @@ void GameScene_2::Init()
 	canvas->AddRectPanel(expGauge);
 
 
+	canvas->AddRectPanel(clearPanel);
+	canvas->AddRectPanel(overPanel);
 	canvas->AddRectPanel(fadePanel);
 
 
@@ -176,7 +182,7 @@ void GameScene_2::Init()
 
 	for (int i = 0; i < 20; i++)
 	{
-		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", { 0,0 }, 0.2f, 4, 0.7f, 14.3f);
+		ParticleSystem* vfx = new ParticleSystem(L"HitVFX", { 0,0 }, 0.2f, 4, 0.7f, 24.3f);
 		vfx->enabled = false;
 		PoolManager::AddPool(PoolingType::HitVFX, vfx);
 	}
@@ -195,7 +201,7 @@ void GameScene_2::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::CRACKLINE, LAYER::PLAYER);
 
 
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
+	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\to-the-death.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	fadePanel->GetComponent<FadePanel>()->Fade(false);
 }

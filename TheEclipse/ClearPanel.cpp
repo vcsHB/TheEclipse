@@ -21,6 +21,7 @@ void ClearPanel::Initialize()
 	_panelImage->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Black_BG", L"Texture\\Black_BG_Panel.bmp"));
 	wstring content = L"집행관을 쓰러뜨렸습니다.";
 	_textCompo->SetText(content, 14.f);
+	_textCompo->Initialize();
 }
 
 void ClearPanel::Open()

@@ -107,9 +107,12 @@ void Projectile::EnterCollision(Collider* _other)
 	{
 		//std::cout << "Proj Enter" << std::endl;
 		PoolManager::Push(this);
+		GET_SINGLE(ResourceManager)->LoadSound(L"PlayerHit", L"Sound\\PlayerHit.wav", false);
+		GET_SINGLE(ResourceManager)->Play(L"PlayerHit");
 		HealthComponent* health = _other->GetOwner()->GetComponent<HealthComponent>();
 		health->DecreaseHP(_damage);
 		GenerateBreakVFX();
+
 
 	}
 	if (pOtherObj->GetName() == L"Enemy" && m_name == L"PlayerBullet")
